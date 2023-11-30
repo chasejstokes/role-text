@@ -31,9 +31,9 @@ Each study folder contains at least an analysis foler, a stimuli images folder, 
     - *[full study 2 analysis.Rmd](study%202/analysis/full%20study%202%20analysis.Rmd)*: analysis script for all of Study 2, including exploratory analysis
     - *[full-study-2-analysis.pdf](study%202/analysis/full-study-2-analysis.pdf)*: knit Rmd file containing all of Study 1 analysis
   - **[stimuli images/](study%202/stimuli%20images/)**: folder containing all stimuli images for Study 2. split into bar and line chart folders, each containing blue and green subfolders for high, low, and no-side bias
- - *[study 2 example.pdf](study%202/study%202%20example.pdf)*: example survey for Study 2, displaying a Green High Bias bar chart as the potential stimulus
-- - **/annotation collection**
-- - - **/analysis**: folder containing all data and anaysis files for the ratings of collected annotations
+  - *[study 2 example.pdf](study%202/study%202%20example.pdf)*: example survey for Study 2, displaying a Green High Bias bar chart as the potential stimulus
+  - **[annotation collection/](study%202/annotation%20collection/)**
+    - **[analysis/](study%202/annotation%20collection/analysis/)**: folder containing all data and anaysis files for the ratings of collected annotations
 - - - - *all_annotations.csv*: set of 102 annotations, their average ratings, prompt, chart type, and other data (e.g., standard error, no-side code)
 - - - - *annotations_text.csv*: set of 102 annotations, the prompt group, number in the survey, and other data (e.g., no-side code)
 - - - - *bar.csv*: survey output (wide) for each participant's ratings of the annotations for the bar charts
