@@ -27,12 +27,11 @@ Each study folder contains at least an analysis foler, a stimuli images folder, 
       - *[study 2 power analysis.Rmd](study%202/analysis/power%20analysis/study%202%20power%20analysis.Rmd)*: power analysis simulations for study 2 & exploration of potential outcomes
     - *[study 1 data.csv](study%202/analysis/study%201%20data.csv)*: survey output for Study 1 participants
     - *[study 2 data.csv](study%202/analysis/study%202%20data.csv)*: survey output for Study 2 participants
-    - *[study-2-response-visualization.pdf](study%202/analysis/study-2-response-visualization.pdf)*: streamlined file displaying visualizations of the  response count and spread
+    - *[study-2-response-visualizations.pdf](study%202/analysis/study-2-response-visualizations.pdf)*: streamlined file displaying visualizations of the  response count and spread
     - *[full study 2 analysis.Rmd](study%202/analysis/full%20study%202%20analysis.Rmd)*: analysis script for all of Study 2, including exploratory analysis
     - *[full-study-2-analysis.pdf](study%202/analysis/full-study-2-analysis.pdf)*: knit Rmd file containing all of Study 1 analysis
-  - **[stimuli images/](study%202/stimuli images/)**: folder containing all stimuli images for Study 2. split into bar and line chart folders, each containing blue and green subfolders for high, low, and no-side bias
-- - **/survey materials**: folder containing example survey for Study 2
-- - - *study 2 example.pdf*: example survey for Study 2, displaying a Green High Bias bar chart as the potential stimulus
+  - **[stimuli images/](study%202/stimuli%20images/)**: folder containing all stimuli images for Study 2. split into bar and line chart folders, each containing blue and green subfolders for high, low, and no-side bias
+ - *[study 2 example.pdf](study%202/study%202%20example.pdf)*: example survey for Study 2, displaying a Green High Bias bar chart as the potential stimulus
 - - **/annotation collection**
 - - - **/analysis**: folder containing all data and anaysis files for the ratings of collected annotations
 - - - - *all_annotations.csv*: set of 102 annotations, their average ratings, prompt, chart type, and other data (e.g., standard error, no-side code)
