@@ -34,15 +34,15 @@ Each study folder contains at least an analysis foler, a stimuli images folder, 
   - *[study 2 example.pdf](study%202/study%202%20example.pdf)*: example survey for Study 2, displaying a Green High Bias bar chart as the potential stimulus
   - **[annotation collection/](study%202/annotation%20collection/)**
     - **[analysis/](study%202/annotation%20collection/analysis/)**: folder containing all data and anaysis files for the ratings of collected annotations
-- - - - *all_annotations.csv*: set of 102 annotations, their average ratings, prompt, chart type, and other data (e.g., standard error, no-side code)
-- - - - *annotations_text.csv*: set of 102 annotations, the prompt group, number in the survey, and other data (e.g., no-side code)
-- - - - *bar.csv*: survey output (wide) for each participant's ratings of the annotations for the bar charts
-- - - - *line.csv*: survey output (wide) for each participant's ratings of the annotations for the line charts
-- - - - *annotation_ratings.Rmd*: analysis script for selecting the Study 2 annotations
-- - - **/survey materials**: folder containing example surveys for annotation collection and rating
-- - - - *annotation_collection_example.pdf*: example survey for the collection of the annotations
-- - - - *annotation_rating_example.pdf*: example survey for the rating of the annotations
-- [replicability stamp/](replicability%20stamp/): Files submitted for the [Replicability Stamp](http://www.replicabilitystamp.org/requirements.html)
+      - *[all_annotations.csv](study%202/annotation%20collection/analysis/all_annotations.csv)*: set of 102 annotations, their average ratings, prompt, chart type, and other data (e.g., standard error, no-side code)
+      - *[annotations_text.csv](study%202/annotation%20collection/analysis/annotations_text.csv)*: set of 102 annotations, the prompt group, number in the survey, and other data (e.g., no-side code)
+      - *[bar.csv](study%202/annotation%20collection/analysis/bar.csv)*: survey output (wide) for each participant's ratings of the annotations for the bar charts
+      - *[line.csv](study%202/annotation%20collection/analysis/line.csv)*: survey output (wide) for each participant's ratings of the annotations for the line charts
+      - *[annotation_ratings.Rmd](study%202/annotation%20collection/analysis/annotation_ratings.Rmd)*: analysis script for selecting the Study 2 annotations
+    - **[survey materials/](study%202/annotation%20collection/survey%20materials/)**: folder containing example surveys for annotation collection and rating
+      - *[annotation_collection_example.pdf](study%202/annotation%20collection/survey%20materials/annotation_collection_example.pdf)*: example survey for the collection of the annotations
+      - *[annotation_rating_example.pdf](study%202/annotation%20collection/survey%20materials/annotation_rating_example.pdf)*: example survey for the rating of the annotations
+- **[replicability stamp/](replicability%20stamp/)**: Files submitted for the [Replicability Stamp](http://www.replicabilitystamp.org/requirements.html)
 
 ## Supplementary Material References
 
