@@ -24,12 +24,12 @@ Each study folder contains at least an analysis foler, a stimuli images folder, 
   - **[analysis/](study%202/analysis/)**: folder containing all analysis files for Study 2
     - **[power analysis/](study%202/analysis/power%20analysis/)**: folder containing the power analysis files for Study 2
       - *[study 1 data.csv](study%202/analysis/power%20analysis/study%201%20data.csv)*: survey output for Study 1 participants
-- - - - *[study 2 power analysis.Rmd.csv](study%202/analysis/power%20analysis/study%202%20power%20analysis.Rmd)*: power analysis simulations for study 2 & exploration of potential outcomes
-- - - *study 1 data.csv*: survey output for Study 1 participants
-- - - *study 2 data.csv*: survey output for Study 2 participants
-- - - *study-2-response-visualizations.pdf*: streamlined file displaying visualizations of the  response count and spread
-- - - *full study 2 analysis.Rmd*: analysis script for all of Study 2, including exploratory analysis
-- - - *full-study-2-analysis.pdf*: knit Rmd file containing all of Study 1 analysis
+      - *[study 2 power analysis.Rmd](study%202/analysis/power%20analysis/study%202%20power%20analysis.Rmd)*: power analysis simulations for study 2 & exploration of potential outcomes
+    - *[study 1 data.csv](study%202/analysis/study%201%20data.csv)*: survey output for Study 1 participants
+    - *[study 2 data.csv](study%202/analysis/study%202%20data.csv)*: survey output for Study 2 participants
+    - *[study-2-response-visualizations.pdf](study%202/analysis/study-2-response-visualizations.pdf)*: streamlined file displaying visualizations of the  response count and spread
+    - *[full study 2 analysis.Rmd](study%202/analysis/full%20study%202%20analysis.Rmd)*: analysis script for all of Study 2, including exploratory analysis
+- - - *[full-study-2-analysis.pdf](study%202/analysis/full-study-2-analysis.pdf)*: knit Rmd file containing all of Study 1 analysis
 - - **/stimuli images**: folder containing all stimuli images for Study 2. split into bar and line chart folders, each containing blue and green subfolders for high, low, and no-side bias
 - - **/survey materials**: folder containing example survey for Study 2
 - - - *study 2 example.pdf*: example survey for Study 2, displaying a Green High Bias bar chart as the potential stimulus
