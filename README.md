@@ -6,4 +6,6 @@ _Marti Hearst ([hearst@berkeley.edu](mailto:hearst@berkeley.edu))_<br>
 
 This repository contains supplementary materials for _The Role of Text in Visualizations: How Annotations Shape Perceptions of Bias and Influence Predictions_.
 
+## Repository contents
 
+Contact [Chase Stokes](mailto:cstokes@ischool.berkeley.edu) with any questions or requests for additional materials from this project.
