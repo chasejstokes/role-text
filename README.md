@@ -48,8 +48,8 @@ Each study folder contains at least an analysis foler, a stimuli images folder, 
 
 Below are all sections which reference the supplementary materials and which materials to look at to address these sections:
 
-- Section 3.3: The example study 1 survey can be found in study 1/survey materials/study 1 example.pdf
-- Section 3.4: Detailed study 1 analysis can be found in study 1/analysis/full study 1 analysis.Rmd or study 1/analysis/full-study-1-analysis.pdf. Model tables can be found in tables.pdf in the main directory.
+- Section 3.3: [Example study 1 survey](study%202/study%202%20example.pdf)
+- Section 3.4: [Detailed study 1 analysis code](study%201/analysis/full%20study%201%20analysis.Rmd) and [pdf](study%201/analysis/full%20study%201%20analysis.pdf); [Model tables](tables.pdf)
 - Section 3.4.2: Mixed effects model tables can be found in tables.pdf in the main directory. Analysis code can be found in study 1/analysis/full study 1 analysis.Rmd
 - Section 4.2: Study 2 stimuli information can be found in study 2/stimuli images
 - Section 4.3: The example study 2 survey can be found in study 2/survey materials/study 2 example.pdf
