@@ -12,7 +12,7 @@ Each study folder contains at least an analysis foler, a stimuli images folder, 
 
 - **[tables.pdf](tables.pdf)**: pdf file containing comparisons of baseline and fully saturated mixed effect models. Captions describe which study each table corresponds to. 
 - **[study 1/](study%201/)**: folder containing all files pertaining to Study 1
-  - **[study 1/analysis/](study%201/analysis/)**: folder containing all analysis files for Study 1
+  - **[analysis/](study%201/analysis/)**: folder containing all analysis files for Study 1
     - *[study 1 data.csv](study%201/analysis/study%201%20data.csv)*: survey output for Study 1 participants
     - *[study-1-response-visualizations.pdf](study%201/analysis/study-1-response-visualizations.pdf)*: streamlined file displaying visualizations of the  response count and spread
     - *[full study 1 analysis.Rmd](study%201/analysis/full%20study%201%20analysis.Rmd)*: analysis script for all of Study 1, including exploratory analysis
@@ -20,11 +20,11 @@ Each study folder contains at least an analysis foler, a stimuli images folder, 
   - **[stimuli images/](study%201/stimuli%20images/)**: folder containing all stimuli images for Study 1. split into bar and line chart folders, each containing control/L1, L2, L3, and L4 folders
   - *[study 1 example.pdf](study%201/study%201%20example.pdf)*: example survey for Study 1, displaying a Blue L2 bar chart as the potential stimulus
 
-- **/study 2**: folder containing all files pertaining to Study 2
-- - **/analysis**: folder containing all analysis files for Study 2
-- - - **/power analysis**: folder containing the power analysis files for Study 2
-- - - - *study 1 data.csv*: survey output for Study 1 participants
-- - - - *study 2 power analysis.Rmd*: power analysis simulations for study 2 & exploration of potential outcomes
+- **[study 2/](study%202/)**: folder containing all files pertaining to Study 2
+  - **[analysis/](study%202/analysis/)**: folder containing all analysis files for Study 2
+    - **[power analysis/](study%202/analysis/power%20analysis/)**: folder containing the power analysis files for Study 2
+      - *[study 1 data.csv](study%202/analysis/power%20analysis/study%201%20data.csv)*: survey output for Study 1 participants
+- - - - *[study 2 power analysis.Rmd.csv](study%202/analysis/power%20analysis/study%202%20power%20analysis.Rmd)*: power analysis simulations for study 2 & exploration of potential outcomes
 - - - *study 1 data.csv*: survey output for Study 1 participants
 - - - *study 2 data.csv*: survey output for Study 2 participants
 - - - *study-2-response-visualizations.pdf*: streamlined file displaying visualizations of the  response count and spread
