@@ -1,0 +1,1102 @@
+---
+title: "study1 vis"
+output: pdf_document
+date: "2023-02-06"
+---
+
+## Setup
+
+In the first section of this file, I upload and clean the data, including checks after data manipulation to ensure that the dataframe has updated properly. This section is omitted from the knit version but is present in the .Rmd file. 
+
+Language in this file may differ from that in the paper.
+
+```{r setup, echo = FALSE}
+
+knitr::opts_chunk$set(echo=FALSE)
+
+library(tidyverse)
+library(ggpubr)
+library(lme4)
+library(car)
+library(FSA)
+library(rstatix)
+library(pwr)
+
+theme_set(theme_minimal())
+set.seed(6062)
+
+#### import_and_clean_raw_data ####
+
+# read in raw data
+df <- read.csv('study 1 data.csv')
+
+#### merging columns ####
+
+# create single column for the outcome chosen by the participant to win (combining the counterbalancing for order)
+df$chosen_outcome <- 
+  str_remove_all(
+    paste0(df$winning_party, df$winning_party.1),
+    "NA")
+
+# create single column for the confidence rating provided by participants indicating how confident they were in the outcome they selected
+df$outcome_confidence <- 
+  as.numeric(
+    str_remove_all(
+      paste0(df$winning_scale_1, df$winning_scale_1.1),
+      "NA")
+  ) 
+
+# create single column for confidence rating for the likely author of the visualization
+df$author_confidence <- 
+  as.numeric(
+    str_remove_all(
+      paste0(df$bias_rating_1, df$bias_rating_1.1),
+      "NA")
+  )
+
+#### calculating categories ####
+
+# transform data to account for Order counterbalancing
+df$outcome_confidence <- ifelse(
+  df$Order == 'GreenLeft',
+  # if the Green responses were on the left (and Blue on the right)
+  df$outcome_confidence * -1,
+  # move the Green responses to the right (and Blue to the left)
+  df$outcome_confidence
+  # else stay the same
+)
+
+df$author_confidence <- ifelse(
+  df$Order == 'GreenLeft',
+  # if the Green responses were on the left (and Blue on the right)
+  df$author_confidence * -1,
+  # move the Green responses to the right (and Blue to the left)
+  df$author_confidence
+  # else stay the same
+)
+
+# create single column for the estimated author, based on the bias rating provided by participants indicating the likelihood of author leaning
+df$chosen_author <- ifelse(df$author_confidence < 0, 
+                           # negative values indicate blue
+                           'Blue',
+                           ifelse(df$author_confidence > 0, 
+                                  # positive values indicate green
+                                  'Green', 
+                                  'Neutral'
+                                  # else neutral
+                           ))
+
+# create column indicating whether the chosen outcome was aligned with the slant of the text displayed
+df$outcome_aligned <- ifelse(df$Level != 'Control',
+                             # control conditions cannot be aligned or unaligned
+                             ifelse(df$chosen_outcome == 'Blue',
+                                    # examine the responses which selected Blue
+                                    ifelse(df$Slant == 'Blue',
+                                           # if the slant was Blue, then aligned ("Aligned"), else not aligned ("Unaligned")
+                                           "Aligned", "Unaligned"),
+                                    # examine the responses which selected Green
+                                    ifelse(df$Slant == 'Green',
+                                           # if the slant was Green, then aligned ("Aligned"), else not aligned ("Unaligned")
+                                           "Aligned", "Unaligned")),
+                             # control conditions receive 'N/A'
+                             'NA')
+
+# create column indicating whether the chosen author was aligned with the slant of the text displayed
+df$author_aligned <- ifelse(df$Level != 'Control',
+                            # control conditions cannot be aligned or unaligned,
+                            ifelse(df$chosen_author == 'Blue',
+                                   # examine the responses which selected Blue
+                                   ifelse(df$Slant == 'Blue',
+                                          # if the slant was Blue, then aligned ("Aligned"), else not aligned ("Unaligned")
+                                          "Aligned", "Unaligned"),
+                                   # else, examine the responses which selected Green
+                                   ifelse(df$Slant == 'Green',
+                                          # if the slant was Green, then aligned ("Aligned"), else not aligned ("Unaligned")
+                                          "Aligned", "Unaligned")),
+                            # control conditions receive 'N/A'
+                            'NA')
+
+# create column with the absolute value of the confidence rating for outcome
+df$outcome_confidence_abs <- abs(df$outcome_confidence)
+
+# create column with the absolute value of the confidence rating for author
+df$author_confidence_abs <- abs(df$author_confidence)
+
+# make categorical column to indicate the treatment or control groups
+df$treatment <- ifelse(df$Level == 'Control', 'Control', 'Treatment')
+
+# make categorical column to indicate the position comparisons
+df$full_condition <- paste(df$Position, df$treatment)
+
+# set factor orders
+df$Level <- factor(df$Level, levels = c(4, 3, 2, "Control"))
+
+## VIS FOR WHICH OPTIONS WERE CHOSEN
+ggplot(df, aes(x = chosen_outcome, fill = chosen_outcome))+
+  geom_bar(stat = "count")+
+  labs(x = "Chosen Outcome",
+       y = "Count",
+       title = "Overall Responses for Each Chart Type",
+       fill = "Group Chosen")+
+  scale_fill_manual(values = c("#1888ff", "#00cd59"))+
+  facet_grid(.~ChartType)
+
+df %>% group_by(ChartType, chosen_outcome) %>% 
+  summarise(
+    n= n()
+  )
+
+## VIS FOR CONFIDENCE DIST BY CHOSEN OPTION
+ggplot(df, aes(x = outcome_confidence_abs, fill = chosen_outcome))+
+  geom_bar(stat = "count")+
+  labs(x = "Perceived Likelihood of Outcome",
+       y = "Count",
+       title = "Perceived Likelihood for Each Chart Type",
+       fill = "Group Chosen")+
+  scale_fill_manual(values = c("#1888ff", "#00cd59"))+
+  facet_grid(chosen_outcome~ChartType)
+
+## VIS FOR COUNTERBALANCING
+ggplot(df, aes(x = Level))+
+  geom_bar(stat = "count")+
+  labs(x = "Level Shown",
+       y = "Count",
+       title = "Level Display Counterbalancing Check")+
+  facet_grid(Slant + Position ~ ChartType)
+
+ggplot(df, aes(x = Order))+
+  geom_bar(stat = "count")+
+  labs(
+    x = "Question Topic Shown First",
+    y = "Count",
+    title = "Survey Counterbalancing"
+  )
+
+## VIS FOR PARTICIPANT DEMOS
+# Age Distribution
+age <- ggplot(df, aes(x = age)) +
+  geom_bar(stat = "count", fill = "#c2c3c4") +
+  labs(x = "Age Range", 
+       y = "Count",
+       # title = "Age Distribution",
+       # subtitle = "Study 1"
+       ) +
+  scale_x_discrete(limits = rev(c("18 - 24", "25 - 34", "35 - 44", "45 - 54", "55 - 64", "65 - 74", "75 - 84", "Prefer not to answer")), 
+                   labels = rev(c("18-24", "25-34", "35-44", "45-54", "55-64", "65-74", "75-84", "Prefer not\nto answer"))) +
+  theme(axis.text = element_text(size = 8, color = "#545454"),
+        axis.title = element_text(size = 9, color = "#545454"),
+        plot.title = element_text(size = 12, color = "#333333"),
+        plot.subtitle = element_text(size = 9, color = "#545454"))+
+  coord_flip()
+
+# Education Distribution
+education <- ggplot(df, aes(x = education)) +
+  geom_bar(stat = "count" , fill = "#c2c3c4") +
+  labs(x = "Education Level\n", 
+       y = "Count",
+       # title = "Education Distribution",
+       # subtitle = "Study 1"
+       ) +
+  scale_x_discrete(limits = rev(c("Less than high school", "High school graduate", "2 year degree", "4 year degree", "Some college", "Professional degree","Doctorate", "Prefer not to answer")), 
+                   labels = rev(c("Less than\nhigh school", "High school\ngraduate", "2 year\ndegree", "4 year\ndegree", "Some\ncollege", "Professional\ndegree","Doctorate", "Prefer not\nto answer"))) +
+  theme(axis.text = element_text(size = 8, color = "#545454"),
+        axis.title = element_text(size = 9, color = "#545454"),
+        plot.title = element_text(size = 12, color = "#333333"),
+        plot.subtitle = element_text(size = 9, color = "#545454"))+
+  coord_flip()
+
+
+# select the columns of interest
+df <- 
+  select(df, 
+         pt,
+         age, 
+         education,
+         Order, 
+         # assigned value, 
+         # condition determining the sides of the screen on which each choice option was shown (BlueLeft, GreenLeft)
+         Level, 
+         # assigned value, 
+         # condition determining the semantic level of the text shown on the chart (Control, 2, 3, 4)
+         Position,
+         # assigned value
+         # condition determining the position of the text shown on the chart (Title, Annotation)
+         full_condition,
+         # calculated column,
+         # describes the position of the text, along with whether the text was control or a treatment condition 
+         # (Title Control, Title Treatment, Annotation Control, Annotation Treatment)
+         Slant, 
+         # assigned value, 
+         # condition determining which color the text referred to (Blue, Green)
+         ChartType, 
+         # chart type shown, indicates which experiment the data belong to (Bar, Line)
+         treatment,
+         # calculated column,
+         # indicates whether the participant viewed a control condition or saw text with a slant (Control, Treatment)
+         outcome_confidence_abs,
+         # calculated column, 
+         # absolute value of outcome_confidence response
+         outcome_aligned,
+         # calculated column,
+         # reports whether the outcome selected by a participant was aligned with the text presented to the participant (0, 1)
+         author_confidence_abs,
+         # calculated column,
+         # absolute value of author_confidence response (0, 25)
+         author_aligned
+         # calculated column,
+         # reports whether the author selected by a participant was aligned with the text presented to the participant (0, 1)
+  ) %>% 
+  mutate(
+    age = ifelse(age =="", "Prefer not to answer", age),
+    education = ifelse(education == "", "Prefer not to answer", education),
+    age = factor(age, levels = c("18 - 24", "25 - 34", "35 - 44", "45 - 54", "55 - 64", "65 - 74", "75 - 84", "Prefer not to answer")),
+    education = factor(education, levels = c("Less than high school", "High school graduate", "Some college", "2 year degree", "4 year degree", "Professional degree", "Doctorate", "Prefer not to answer"))
+  )
+
+#### experiment subset ####
+
+bar <- subset(df, ChartType == 'Bar')
+line <- subset(df, ChartType == 'Line')
+
+# bootstrapping variable
+B <- 10000
+
+# color variables
+a = "#8267BE"
+a1 = "#c9bce3"
+u = "#FFBD35"
+u1 = "#f2d496"
+c = "#a3acb9"
+
+```
+
+In this dataset, we have 8 columns to examine: 
+
+1. `Order` = randomly assigned order of the options displayed
+2. `Level` = the level of text displayed to the participant
+3. `Position` = the position of text displayed to the participant
+4. `full_condition` = the level & position of text displayed to the participant
+5. `Slant` = group supported by the randomly assigned annotation
+6. `ChartType` = the chart type displayed to the participant
+7. `treatment` = indication of whether the participant viewed a treatment or control variant
+8. `outcome_confidence_abs` = absolute value of the participant's confidence rating in the outcome, transformed to account for counterbalancing in the survey conditions
+9. `outcome_aligned` = indication of whether the participants' response was aligned with the outcome indicated in the text provided
+10. `author_confidence_abs` = absolute value of the participant's confidence rating in the author's leading, transformed to account for counterbalancing in the survey conditions
+11. `author_aligned` = indication of whether the participants' response was aligned with the outcome (and therefore author leaning) indicated in the text provided
+
+# Test for Normal Distribution
+
+The first thing to do with the data is to determine whether the distributions, adjusted to account for counterbalancing in the survey conditions (e.g., Order and Slant), are normally distributed. This will indicate the kind of statistical testing we can perform to determine the effect of viewing the text.
+
+First, we will plot the distributions. To fully determine if these distributions are normal, we also conduct a series of Shapiro-Wilk tests for normality (S-W tests). These subsets are as follows, organized according to the comparisons which will be made in statistical analysis:
+
+Comparison Set 1: 
+
+- Bar Chart, Outcome Aligned, Treatment Condition
+- Bar Chart, Outcome Unaligned, Treatment Condition
+- Bar Chart, Control Condition
+
+Comparison Set 2: 
+
+- Line Chart, Outcome Aligned, Treatment Condition
+- Line Chart, Outcome Unaligned, Treatment Condition
+- Line Chart, Control Condition
+
+Comparison Set 3: 
+
+- Bar Chart, Author Aligned, Treatment Condition
+- Bar Chart, Author Unaligned, Treatment Condition
+- Bar Chart, Control Condition
+
+Comparison Set 4: 
+
+- Line Chart, Author Aligned, Treatment Condition
+- Line Chart, Author Unaligned, Treatment Condition
+- Line Chart, Control Condition
+
+We check each of these distributions for normality. If any of the distributions within a comparison set fail the normal distribution check, we will use non-parametric testing for all comparisons made within that set.
+
+```{r normal_outcome}
+
+# - Bar Chart, Outcome Aligned, Treatment Condition
+bar_aligned_treatment_outcome = subset(bar, outcome_aligned == "Aligned" & treatment == "Treatment")
+bar_aligned_treatment_outcome_plot = 
+  ggplot(bar_aligned_treatment_outcome, aes(x = outcome_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = a)+
+  labs(
+    #title = "Outcome Confidence: Bar Chart, Treatment Condition, Aligned with Slant"
+    title = "Outcome Confidence:\n Bar, Aligned"
+  )
+shapiro.test(bar_aligned_treatment_outcome$outcome_confidence_abs)
+
+# - Bar Chart, Outcome Unaligned, Treatment Condition
+bar_unaligned_treatment_outcome = subset(bar, outcome_aligned == "Unaligned" & treatment == "Treatment")
+bar_unaligned_treatment_outcome_plot = 
+  ggplot(bar_unaligned_treatment_outcome, aes(x = outcome_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = u)+
+  labs(
+    #title = "Outcome Confidence: Bar Chart, Treatment Condition, Unaligned with Slant"
+    title = "Bar, Unaligned"
+  )
+shapiro.test(bar_unaligned_treatment_outcome$outcome_confidence_abs)
+
+# - Bar Chart, Control Condition
+bar_control = subset(bar, treatment == "Control")
+bar_control_outcome_plot = 
+  ggplot(bar_control, aes(x = outcome_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = c)+
+  labs(
+    #title = "Outcome Confidence: Bar Chart, Control Condition"
+    title = "Bar, Control"
+  )
+shapiro.test(bar_control$outcome_confidence_abs)
+
+# - Line Chart, Outcome Aligned, Treatment Condition
+line_aligned_treatment_outcome = subset(line, outcome_aligned == "Aligned" & treatment == "Treatment")
+line_aligned_treatment_outcome_plot = 
+  ggplot(line_aligned_treatment_outcome, aes(x = outcome_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = a)+
+  labs(
+    #title = "Outcome Confidence: Line Chart, Treatment Condition, Aligned with Slant"
+    title = "Outcome Confidence:\n Line, Aligned"
+  )
+shapiro.test(line_aligned_treatment_outcome$outcome_confidence_abs)
+
+# - Line Chart, Outcome Unaligned, Treatment Condition
+line_unaligned_treatment_outcome = subset(line, outcome_aligned == "Unaligned" & treatment == "Treatment")
+line_unaligned_treatment_outcome_plot = 
+  ggplot(line_unaligned_treatment_outcome, aes(x = outcome_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = u)+
+  labs(
+    #title = "Outcome Confidence: Line Chart, Treatment Condition, Unaligned with Slant"
+    title = "Line, Unaligned"
+  )
+shapiro.test(line_unaligned_treatment_outcome$outcome_confidence_abs)
+
+# - Line Chart, Control Condition
+line_control = subset(line, treatment == "Control")
+line_control_outcome_plot = 
+  ggplot(line_control, aes(x = outcome_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = c)+
+  labs(
+    #title = "Outcome Confidence: Line Chart, Control Condition"
+    title = "Line, Control"
+  )
+shapiro.test(line_control$outcome_confidence_abs)
+
+ggarrange(bar_aligned_treatment_outcome_plot,
+          bar_unaligned_treatment_outcome_plot,
+          bar_control_outcome_plot,
+          line_aligned_treatment_outcome_plot,
+          line_unaligned_treatment_outcome_plot,
+          line_control_outcome_plot,
+          ncol = 3, nrow = 2, 
+          align = "h")
+```
+
+
+```{r normal_author}
+
+# - Bar Chart, Author Aligned, Treatment Condition
+bar_aligned_treatment_author = subset(bar, author_aligned == "Aligned" & treatment == "Treatment")
+bar_aligned_treatment_author_plot = 
+  ggplot(bar_aligned_treatment_author, aes(x = author_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = a)+
+  labs(
+    #title = "Author Confidence: Bar Chart, Treatment Condition, Aligned with Slant"
+    title = "Author Confidence:\n Bar, Aligned"
+  )
+shapiro.test(bar_aligned_treatment_author$author_confidence_abs)
+
+# - Bar Chart, Author Unaligned, Treatment Condition
+bar_unaligned_treatment_author = subset(bar, author_aligned == "Unaligned" & treatment == "Treatment")
+bar_unaligned_treatment_author_plot = 
+  ggplot(bar_unaligned_treatment_author, aes(x = author_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = u)+
+  labs(
+    #title = "Author Confidence: Bar Chart, Treatment Condition, Unaligned with Slant"
+    title = "Bar, Unaligned"
+  )
+shapiro.test(bar_unaligned_treatment_author$author_confidence_abs)
+
+# - Bar Chart, Control Condition
+bar_control = subset(bar, treatment == "Control")
+bar_control_author_plot = 
+  ggplot(bar_control, aes(x = author_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = c)+
+  labs(
+    #title = "Author Confidence: Bar Chart, Control Condition"
+    title = "Bar, Control"
+  )
+shapiro.test(bar_control$author_confidence_abs)
+
+# - Line Chart, Author Aligned, Treatment Condition
+line_aligned_treatment_author = subset(line, author_aligned == "Aligned" & treatment == "Treatment")
+line_aligned_treatment_author_plot = 
+  ggplot(line_aligned_treatment_author, aes(x = author_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = a)+
+  labs(
+    #title = "Author Confidence: Line Chart, Treatment Condition, Aligned with Slant"
+    title = "Line, Aligned"
+  )
+shapiro.test(line_aligned_treatment_author$author_confidence_abs)
+
+# - Line Chart, Author Unaligned, Treatment Condition
+line_unaligned_treatment_author = subset(line, author_aligned == "Unaligned" & treatment == "Treatment")
+line_unaligned_treatment_author_plot = 
+  ggplot(line_unaligned_treatment_author, aes(x = author_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = u)+
+  labs(
+    # title = "Author Confidence: Line Chart, Treatment Condition, Unaligned with Slant"
+    title = "Line, Unaligned"
+  )
+shapiro.test(line_unaligned_treatment_author$author_confidence_abs)
+
+# - Line Chart, Control Condition
+line_control = subset(line, treatment == "Control")
+line_control_author_plot = 
+  ggplot(line_control, aes(x = author_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = c)+
+  labs(
+    #title = "Author Confidence: Line Chart, Control Condition"
+    title = "Line, Control"
+  )
+shapiro.test(line_control$author_confidence_abs)
+
+ggarrange(bar_aligned_treatment_author_plot,
+          bar_unaligned_treatment_author_plot,
+          bar_control_author_plot,
+          line_aligned_treatment_author_plot,
+          line_unaligned_treatment_author_plot,
+          line_control_author_plot,
+          ncol = 3, nrow = 2, 
+          align = "h")
+
+
+```
+
+### Outcome of testing: 
+
+None of the distributions pass the test for a normal distribution. For this reason, we continue with non-parametric tests only.
+
+# Tests for Combining Responses
+
+## Control Conditions
+
+In this study, we used two different kinds of control conditions. The baseline control condition consisted of only a title. The annotation control condition contained an annotation with the title repeated in the position of the treatment annotations. We now compare these control conditions to evaluate any differences in confidence ratings due to the presence of an unbiased annotation. In other words, does a neutral annotation have an effect in comparison to no text? If we see an effect, we would expect to see that annotations increase the confidence in comparison to the no-annotation condition, in line with what we would expect to a greater extent for more biased or slanted conditions. 
+
+```{r controls_outcome}
+
+bar_control_title <- 
+  ggplot(subset(bar_control, Position == "Title"), aes(x = outcome_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = c)+
+  labs(
+    title = "Outcome Confidence: Bar Chart, Control Condition, Title"
+  )
+
+bar_control_annot <- 
+  ggplot(subset(bar_control, Position == "Annotation"), aes(x = outcome_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = c)+
+  labs(
+    title = "Outcome Confidence: Bar Chart, Control Condition, Annotation"
+  )
+
+ggarrange(bar_control_title + geom_vline(xintercept = median(subset(bar_control, Position == "Title")$outcome_confidence_abs)),
+          bar_control_annot + geom_vline(xintercept = median(subset(bar_control, Position == "Annotation")$outcome_confidence_abs)),
+          ncol = 1)
+
+wilcox.test(outcome_confidence_abs ~ as.factor(Position), data = bar_control)
+
+
+
+line_control_title <- 
+  ggplot(subset(line_control, Position == "Title"), aes(x = outcome_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = c)+
+  labs(
+    title = "Outcome Confidence: Line Chart, Control Condition, Title"
+  )
+
+line_control_annot <- 
+  ggplot(subset(line_control, Position == "Annotation"), aes(x = outcome_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = c)+
+  labs(
+    title = "Outcome Confidence: Line Chart, Control Condition, Annotation"
+  )
+
+ggarrange(line_control_title + geom_vline(xintercept = median(subset(line_control, Position == "Title")$outcome_confidence_abs)),
+          line_control_annot + geom_vline(xintercept = median(subset(line_control, Position == "Annotation")$outcome_confidence_abs)),
+          ncol = 1)
+
+wilcox.test(outcome_confidence_abs ~ as.factor(Position), data = line_control)
+
+```
+
+
+```{r controls_author}
+
+bar_control_title <- 
+  ggplot(subset(bar_control, Position == "Title"), aes(x = author_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = c)+
+  labs(
+    title = "Author Confidence: Bar Chart, Control Condition, Title"
+  )
+
+bar_control_annot <- 
+  ggplot(subset(bar_control, Position == "Annotation"), aes(x = author_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = c)+
+  labs(
+    title = "Author Confidence: Bar Chart, Control Condition, Annotation"
+  )
+
+ggarrange(bar_control_title + geom_vline(xintercept = median(subset(bar_control, Position == "Title")$author_confidence_abs)),
+          bar_control_annot + geom_vline(xintercept = median(subset(bar_control, Position == "Annotation")$author_confidence_abs)),
+          ncol = 1)
+
+wilcox.test(author_confidence_abs ~ as.factor(Position), data = bar_control)
+
+
+
+line_control_title <- 
+  ggplot(subset(line_control, Position == "Title"), aes(x = author_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = c)+
+  labs(
+    title = "Author Confidence: Line Chart, Control Condition, Title"
+  )
+
+line_control_annot <- 
+  ggplot(subset(line_control, Position == "Annotation"), aes(x = author_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = c)+
+  labs(
+    title = "Author Confidence: Line Chart, Control Condition, Annotation"
+  )
+
+ggarrange(line_control_title + geom_vline(xintercept = median(subset(line_control, Position == "Title")$author_confidence_abs)),
+          line_control_annot + geom_vline(xintercept = median(subset(line_control, Position == "Annotation")$author_confidence_abs)),
+          ncol = 1)
+
+wilcox.test(author_confidence_abs ~ as.factor(Position), data = line_control)
+
+```
+
+We do *not* see any difference between confidence ratings for control conditions with additional neutral text placed on the chart. For this reason, in our following analyses, we can determine that the slanted content of the text we added is a contributor to any effect found. Additionally, we combine control conditions for future analyses. 
+
+## Positions
+
+We also wanted to examine the role of the control position, since we used two positions for the annotations. In this analysis, we compare the two positions of control annotations to see if either led to significantly greater confidence in ratings than the other. We make this comparison for both the outcome ratings and the author leaning rating for bar charts and line charts.
+
+```{r control_position_outcome}
+
+bar_control_positionCheck <- subset(bar_control, Position == "Annotation")
+
+
+bar_control_outcome_positionLeft <- 
+  ggplot(subset(bar_control_positionCheck, Slant == "Blue"), aes(x = outcome_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = c)+
+  labs(
+    title = "Outcome Confidence: Bar Chart, Control, Position Left"
+  )
+
+bar_control_outcome_positionRight <- 
+  ggplot(subset(bar_control_positionCheck, Slant == "Green"), aes(x = outcome_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = c)+
+  labs(
+    title = "Outcome Confidence: Bar Chart, Control, Position Right"
+  )
+
+ggarrange(bar_control_outcome_positionLeft + geom_vline(xintercept = median(subset(bar_control_positionCheck, 
+                                                                                   Slant == "Blue")$outcome_confidence_abs)),
+          bar_control_outcome_positionRight + geom_vline(xintercept = median(subset(bar_control_positionCheck, 
+                                                                                    Slant == "Green")$outcome_confidence_abs)),
+          ncol = 1)
+
+wilcox.test(outcome_confidence_abs ~ as.factor(Slant), data = bar_control_positionCheck)
+
+
+line_control_positionCheck <- subset(line_control, Position == "Annotation")
+
+line_control_outcome_positionLeft <- 
+  ggplot(subset(line_control_positionCheck, Slant == "Blue"), aes(x = outcome_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = c)+
+  labs(
+    title = "Outcome Confidence: Line Chart, Control, Position Left"
+  )
+
+line_control_outcome_positionRight <- 
+  ggplot(subset(line_control_positionCheck, Slant == "Green"), aes(x = outcome_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = c)+
+  labs(
+    title = "Outcome Confidence: Line Chart, Control, Position Right"
+  )
+
+ggarrange(line_control_outcome_positionLeft + geom_vline(xintercept = median(subset(line_control_positionCheck, 
+                                                                                    Slant == "Blue")$outcome_confidence_abs)),
+          line_control_outcome_positionRight + geom_vline(xintercept = median(subset(line_control_positionCheck, 
+                                                                                     Slant == "Green")$outcome_confidence_abs)),
+          ncol = 1)
+
+wilcox.test(outcome_confidence_abs ~ as.factor(Slant), data = line_control_positionCheck)
+
+```
+
+```{r control_position_author}
+
+bar_control_author_positionLeft <- 
+  ggplot(subset(bar_control_positionCheck, Slant == "Blue"), aes(x = author_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = c)+
+  labs(
+    title = "Author Confidence: Bar Chart, Control, Position Left"
+  )
+
+bar_control_author_positionRight <- 
+  ggplot(subset(bar_control_positionCheck, Slant == "Green"), aes(x = author_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = c)+
+  labs(
+    title = "Author Confidence: Bar Chart, Control, Position Right"
+  )
+
+ggarrange(bar_control_author_positionLeft + geom_vline(xintercept = median(subset(bar_control_positionCheck, 
+                                                                                  Slant == "Blue")$author_confidence_abs)),
+          bar_control_author_positionRight + geom_vline(xintercept = median(subset(bar_control_positionCheck, 
+                                                                                   Slant == "Green")$author_confidence_abs)),
+          ncol = 1)
+
+wilcox.test(author_confidence_abs ~ as.factor(Slant), data = bar_control_positionCheck)
+
+line_control_author_positionLeft <- 
+  ggplot(subset(line_control_positionCheck, Slant == "Blue"), aes(x = author_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = c)+
+  labs(
+    title = "Author Confidence: Line Chart, Control, Position Left"
+  )
+
+line_control_author_positionRight <- 
+  ggplot(subset(line_control_positionCheck, Slant == "Green"), aes(x = author_confidence_abs, y = after_stat(count)))+
+  geom_histogram(binwidth = 1, fill = c)+
+  labs(
+    title = "Author Confidence: Line Chart, Control, Position Right"
+  )
+
+ggarrange(line_control_author_positionLeft + geom_vline(xintercept = median(subset(line_control_positionCheck, 
+                                                                                   Slant == "Blue")$author_confidence_abs)),
+          line_control_author_positionRight + geom_vline(xintercept = median(subset(line_control_positionCheck, 
+                                                                                    Slant == "Green")$author_confidence_abs)),
+          ncol = 1)
+
+wilcox.test(author_confidence_abs ~ as.factor(Slant), data = line_control_positionCheck)
+
+```
+
+We do *not* see any difference between confidence ratings for control conditions with different annotation positions. 
+
+
+## Chart Types
+
+We also conduct an analysis to compare overall confidence ratings between the chart types we displayed. We do not expect to see a difference between the chart types. If we see an effect in the control conditions, that indicates that something about our tasks functions differently between chart types (e.g., people are more confident overall in their estimations for one chart type than another). If we see an effect in the treatment conditions, that indicates that something about text on different chart types functions differently (e.g., text is more impactful when placed on one chart type than another).
+
+```{r outcome_comparisons}
+
+ggarrange(bar_aligned_treatment_outcome_plot, 
+          line_aligned_treatment_outcome_plot, 
+          nrow = 2)
+
+wilcox.test(outcome_confidence_abs ~ as.factor(ChartType), data = subset(df, outcome_aligned == "Aligned"))
+
+ggarrange(bar_unaligned_treatment_outcome_plot,
+          line_unaligned_treatment_outcome_plot,
+          nrow = 2)
+
+wilcox.test(outcome_confidence_abs ~ as.factor(ChartType), data = subset(df, outcome_aligned == "Unaligned"))
+
+
+ggarrange(bar_control_outcome_plot,
+          line_control_outcome_plot,
+          nrow = 2)
+
+wilcox.test(outcome_confidence_abs ~ as.factor(ChartType), data = subset(df, outcome_aligned == "NA"))
+
+
+```
+
+```{r author_comparisons}
+
+ggarrange(bar_aligned_treatment_author_plot, 
+          line_aligned_treatment_author_plot, 
+          nrow = 2)
+
+wilcox.test(author_confidence_abs ~ as.factor(ChartType), data = subset(df, author_aligned == "Aligned"))
+
+ggarrange(bar_unaligned_treatment_author_plot,
+          line_unaligned_treatment_author_plot,
+          nrow = 2)
+
+wilcox.test(author_confidence_abs ~ as.factor(ChartType), data = subset(df, author_aligned == "Unaligned"))
+
+
+ggarrange(bar_control_author_plot,
+          line_control_author_plot,
+          nrow = 2)
+
+wilcox.test(author_confidence_abs ~ as.factor(ChartType), data = subset(df, author_aligned == "NA"))
+
+
+```
+
+The chart types do not differ significantly between their overall confidence ratings. We don't combine these responses, however, since we want to keep chart type analyses separate.
+
+# Test for Categorical Differences
+
+If there were an effect of viewing the text, we would expect to see the following: 
+
+1. It is more likely to report predictions in alignment with the group supported in the text.
+2. Predictions aligned with the group supported in the text are more confident than predictions unaligned with the group supported and control responses. Control responses are more confident than predictions unaligned.
+
+These hypotheses refer to overall differences between treatment and control conditions and do not account for possible differences between treatment conditions of position and content. We expect these hypotheses to hold for both outcome prediction and bias appraisals. We first examine outcome prediction for both bar and line charts.
+
+In these charts, we use a subset of the overall data to examine only the treatment conditions. We're examining the key question here: Were people more likely to respond categorically aligned with the chart or was there no difference between the frequency of unaligned and aligned responses? To capture this effect statistically, we use Chi-squared testing using Yates' continuity correction. Respective tests are completed below the charts which visualize the difference being examined.
+
+```{r outcome_counts}
+
+study1 <- ggplot(subset(df, treatment == "Treatment"), aes(x = outcome_aligned, y = after_stat(count), fill = outcome_aligned))+
+  geom_bar()+
+  scale_fill_manual(values = c(a, u, c))+
+  labs(
+    title = "Study 1: Prediction Alignment Frequency",
+    y = "Count",
+    x = "Prediction Alignment"
+  )+ 
+  facet_grid (.~ChartType)+
+  theme(legend.position = 'none',
+  panel.grid.major = element_line(color = "grey85", size = 0.1),  # Lighten and thin major gridlines
+  panel.grid.minor = element_line(color = "grey85", size = 0.05))  # Lighten and thin minor gridlines
+ggsave("study1.png", study1, height = 5, width = 7, dpi = 320)
+
+df %>% 
+  group_by(ChartType, outcome_aligned) %>% 
+  summarise(
+    n = n()
+  )
+
+t.outcome.bar <- table(subset(bar, treatment == "Treatment")$outcome_aligned)
+chisq.test(t.outcome.bar)
+p.outcome.bar <- t.outcome.bar / sum(t.outcome.bar)
+dimnames(p.outcome.bar) <- NULL
+ES.h(p.outcome.bar[1], p.outcome.bar[2])
+
+t.outcome.line <- table(subset(line, treatment == "Treatment")$outcome_aligned)
+chisq.test(t.outcome.line)
+p.outcome.line <- t.outcome.line / sum(t.outcome.line)
+dimnames(p.outcome.line) <- NULL
+ES.h(p.outcome.line[1], p.outcome.line[2])
+
+```
+
+We now go on to conduct these same tests for the author leaning response. We're examining the key question here: Were people more likely to respond *that the author was* categorically aligned with the chart? We continue to use Chi-squared testing using Yates' continuity correction and provide tests below the charts which visualize the difference being examined.
+
+```{r author_counts}
+
+study1 <- ggplot(subset(df, treatment == "Treatment"), aes(x = author_aligned, y = after_stat(count), fill = author_aligned))+
+  geom_bar()+
+  scale_fill_manual(values = c(a, u, c), labels= c("Matched", "Unmatched"))+
+  labs(
+    title = "Study 1: Appraisal Match Frequency",
+    y = "Count",
+    x = "Appraisal Match"
+  )+ 
+  facet_grid (.~ChartType)+
+  theme(legend.position = 'none',
+  panel.grid.major = element_line(color = "grey85", size = 0.1),  # Lighten and thin major gridlines
+  panel.grid.minor = element_line(color = "grey85", size = 0.05))  # Lighten and thin minor gridlines
+ggsave("study1.png", study1, height = 5, width = 7, dpi = 320)
+
+df %>% 
+  group_by(ChartType, author_aligned) %>% 
+  summarise(
+    n = n()
+  )
+
+t.author.bar <- table(subset(bar, treatment == "Treatment")$author_aligned)
+chisq.test(t.author.bar)
+p.author.bar <- t.author.bar / sum(t.author.bar)
+dimnames(p.author.bar) <- NULL
+ES.h(p.author.bar[1], p.author.bar[2])
+
+t.author.line <- table(subset(line, treatment == "Treatment")$author_aligned)
+chisq.test(t.author.line)
+p.author.line <- t.author.line / sum(t.author.line)
+dimnames(p.author.line) <- NULL
+ES.h(p.author.line[1], p.author.line[2])
+
+
+
+```
+
+### Outcome of testing:
+
+Bar charts exhibited a significant effect of presenting slanted text on categorical outcome predictions (p = `r round(chisq.test(table(subset(bar, treatment == "Treatment")$outcome_aligned))$p.value, 3)`). Line charts did not (p = `r round(chisq.test(table(subset(line, treatment == "Treatment")$outcome_aligned))$p.value, 3)`).
+
+Bar charts and line charts both exhibited a significant effect of presenting slanted text on categorical author leaning ratings (p = `r round(chisq.test(table(subset(bar, treatment == "Treatment")$author_aligned))$p.value, 3)`, p = `r round(chisq.test(table(subset(line, treatment == "Treatment")$author_aligned))$p.value, 3)`).
+
+
+### Hypothesis Evaluation:
+
+*It is more likely to report outcome and author leaning in alignment with the slant presented in the chart.*
+
+In most contexts, this hypothesis was supported. However, line charts did not exhibit a significant effect for outcome responses. This indicates that the effect of text on a chart may differ depending on the chart type. The author leaning response effect was also less for the line chart than the bar chart, although both were significant in that regard.
+
+# Test for Quantitative Differences
+
+## Treatment Conditions
+
+We now go on to evaluate H2, examining the differences in confidence ratings between aligned responses in treatment conditions, unaligned responses in treatment conditions, and the control responses. To do this, we will use the nonparametric Kruskal-Wallis test with Dunn post-hoc pairwise testing with Bonferroni correction. We're examining the key question here: Were people more or less confident in their responses relative to control depending on whether their response aligned with the slant in the chart? Respective tests are completed below the charts which visualize the difference being examined.
+
+We use the same charts as shown above, but placed directly above each other in order to facilitate comparison between shifts in distributions. The y-axes are adjusted to provide a full view of each distribution, as the control condition had overall fewer responses than the treatment conditions combined.
+
+```{r value summary tables}
+
+df %>% 
+  group_by(ChartType, outcome_aligned) %>% 
+  summarise(
+    median_outcome_conf = median(outcome_confidence_abs),
+    mean_outcome_conf = mean(outcome_confidence_abs)
+  )
+
+df %>% 
+  group_by(ChartType, author_aligned) %>% 
+  summarise(
+    median_author_conf = median(author_confidence_abs),
+    mean_author_conf = mean(author_confidence_abs)
+  )
+
+
+```
+
+
+```{r outcome_ratings}
+
+ggarrange(bar_aligned_treatment_outcome_plot + geom_vline(xintercept = median(bar_aligned_treatment_outcome$outcome_confidence_abs)),
+          bar_unaligned_treatment_outcome_plot + geom_vline(xintercept = median(bar_unaligned_treatment_outcome$outcome_confidence_abs)),
+          bar_control_outcome_plot + geom_vline(xintercept = median(bar_control$outcome_confidence_abs)), 
+          ncol = 1)
+
+kruskal.test(outcome_confidence_abs ~ as.factor(outcome_aligned), data = bar)
+kruskal_effsize(outcome_confidence_abs ~ as.factor(outcome_aligned), data = bar)
+
+dunnTest(outcome_confidence_abs ~ as.factor(outcome_aligned), data = bar, method = "bonferroni")
+
+ggarrange(line_aligned_treatment_outcome_plot + geom_vline(xintercept = median(line_aligned_treatment_outcome$outcome_confidence_abs)),
+          line_unaligned_treatment_outcome_plot + geom_vline(xintercept = median(line_unaligned_treatment_outcome$outcome_confidence_abs)),
+          line_control_outcome_plot + geom_vline(xintercept = median(line_control$outcome_confidence_abs)), 
+          ncol = 1)
+
+kruskal.test(outcome_confidence_abs ~ as.factor(outcome_aligned), data = line)
+kruskal_effsize(outcome_confidence_abs ~ as.factor(outcome_aligned), data = line)
+
+dunnTest(outcome_confidence_abs ~ as.factor(outcome_aligned), data = line, method = "bonferroni")
+
+```
+
+```{r author_ratings}
+
+ggarrange(bar_aligned_treatment_author_plot + geom_vline(xintercept = median(bar_aligned_treatment_author$author_confidence_abs)),
+          bar_unaligned_treatment_author_plot + geom_vline(xintercept = median(bar_unaligned_treatment_author$author_confidence_abs)),
+          bar_control_author_plot + geom_vline(xintercept = median(bar_control$author_confidence_abs)), 
+          ncol = 1)
+
+kruskal.test(author_confidence_abs ~ as.factor(author_aligned), data = bar)
+kruskal_effsize(author_confidence_abs ~ as.factor(author_aligned), data = bar)
+
+dunnTest(author_confidence_abs ~ as.factor(author_aligned), data = bar, method = "bonferroni")
+
+ggarrange(line_aligned_treatment_author_plot + geom_vline(xintercept = median(line_aligned_treatment_author$author_confidence_abs)),
+          line_unaligned_treatment_author_plot + geom_vline(xintercept = median(line_unaligned_treatment_author$author_confidence_abs)),
+          line_control_author_plot + geom_vline(xintercept = median(line_control$author_confidence_abs)), 
+          ncol = 1)
+
+kruskal.test(author_confidence_abs ~ as.factor(author_aligned), data = line)
+kruskal_effsize(author_confidence_abs ~ as.factor(author_aligned), data = line)
+
+dunnTest(author_confidence_abs ~ as.factor(author_aligned), data = line, method = "bonferroni")
+
+```
+
+### Outcome of testing:
+
+Bar charts did not exhibit a significant effect of presenting slanted text on quantitative outcome predictions. Specifically  (p = `r round(kruskal.test(outcome_confidence_abs ~ as.factor(outcome_aligned), data = bar)$p.value, 3)`). Line charts did exhibit a significant effect in this context (p = `r round(kruskal.test(outcome_confidence_abs ~ as.factor(outcome_aligned), data = line)$p.value, 3)`). Follow up testing indicates that responses which were aligned with the outcome presented in the text were more confident than those which were unaligned (p = `r round(dunnTest(outcome_confidence_abs ~ as.factor(outcome_aligned), data = line, method = "bonferroni")$res$P.adj[2], 3)`). There were no significant differences between aligned responses and control (p = `r round(dunnTest(outcome_confidence_abs ~ as.factor(outcome_aligned), data = line, method = "bonferroni")$res$P.adj[1], 3)`) nor unaligned responses and control (p = `r round(dunnTest(outcome_confidence_abs ~ as.factor(outcome_aligned), data = line, method = "bonferroni")$res$P.adj[3], 3)`).
+
+Bar charts exhibited a significant effect of presenting slanted text on quantitative author leaning ratings (p = `r round(kruskal.test(author_confidence_abs ~ as.factor(author_aligned), data = bar)$p.value, 3)`. Follow up testing indicates that responses which aligned the author with the slant presented in the text were more confident than those in the control condition (p = `r round(dunnTest(author_confidence_abs ~ as.factor(author_aligned), data = bar, method = "bonferroni")$res$P.adj[1], 3)`). Additionally, these aligned responses were more confident than responses which categorized the author in opposition to the slant presented (p = `r round(dunnTest(author_confidence_abs ~ as.factor(author_aligned), data = bar, method = "bonferroni")$res$P.adj[2], 3)`). There was no difference between unaligned responses and control (p =`r round(dunnTest(author_confidence_abs ~ as.factor(author_aligned), data = bar, method = "bonferroni")$res$P.adj[3], 3)`)
+
+Line charts exhibited a similar effect (p = `r round(kruskal.test(author_confidence_abs ~ as.factor(author_aligned), data = line)$p.value, 3)`). Follow up testing indicates that responses which aligned the author with the slant presented in the text were more confident than those in the control condition (p = `r round(dunnTest(author_confidence_abs ~ as.factor(author_aligned), data = line, method = "bonferroni")$res$P.adj[1], 3)`). Additionally, these aligned responses were more confident than responses which categorized the author in opposition to the slant presented (p = `r round(dunnTest(author_confidence_abs ~ as.factor(author_aligned), data = line, method = "bonferroni")$res$P.adj[2], 3)`). There was no difference between unaligned responses and control (p = `r round(dunnTest(author_confidence_abs ~ as.factor(author_aligned), data = bar, method = "bonferroni")$res$P.adj[3], 3)`)
+
+
+### Hypothesis Evaluation:
+
+*Responses aligned with the group supported in the text are more confident than responses unaligned with the group supported*
+
+This part of the hypothesis was not supported in the context of outcome predictions in bar charts. However, for outcome predictions in line charts, this hypothesis was supported. This difference sheds light on the previous finding - line charts did not exhibit categorical change for outcome prediction when faced with text which supported one outcome over another, while bar charts did. The influence of text for bar charts seems to be more likely to shift readers categorically, but does not change the confidence ratings for readers who disagree witht the outcome. The effect is the opposite in line charts: the text does not move readers from one side to the other, but it does affect their overall confidence in their judgement. Additionally, this hypothesis was supported in the context of author leaning ratings for both chart types.
+
+*Responses aligned with the group supported in the text are more confident than control responses*
+
+This part of the hypothesis was not supported in the context of outcome predictions. However, for both chart types, this hypothesis was supported in the context of author leaning ratings.
+
+*Control responses are more confident than responses unaligned.*
+
+This part of the hypothesis was not supported in either context for either chart type.
+
+## Evaluation of Levels & Positions
+
+As a further examination of the effect found, we wanted to conduct an analysis of the different text *content* and *position*. To do this, we focus on the difference between aligned and unaligned responses specifically, as most contexts did not find differences between control conditions and the aligned/unaligned responses. To determine differences in effect between content and positions, we directly compare the difference between aligned and unaligned respones. More influential text will have a larger value (more differentiation between readers who agree and disagree with the text provided), and vice versa.
+
+Specifically, we evaluate the following hypotheses:
+
+4. Responses aligned with the group supported are more confident when viewing L4 than when viewing other semantic levels. 
+5. Responses unaligned with the group supported are less confident when viewing L4 than when viewing other semantic levels. 
+6. Text in the title will have greater influence on judgments than text positioned by the data. OR Text positioned by the data will have greater influence on judgments than text in the title.
+
+```{r chi sqared 2 and 3}
+
+chisq.test(table(subset(df, treatment == "Treatment")$outcome_aligned, subset(df, treatment == "Treatment")$Level)[,1:3])
+table(subset(df, treatment == "Treatment")$outcome_aligned, subset(df, treatment == "Treatment")$Level)[,1:3]
+
+chisq.test(table(subset(df, treatment == "Treatment")$outcome_aligned, subset(df, treatment == "Treatment")$Position))
+table(subset(df, treatment == "Treatment")$outcome_aligned, subset(df, treatment == "Treatment")$Position)
+
+chisq.test(table(subset(df, treatment == "Treatment")$author_aligned, subset(df, treatment == "Treatment")$Level)[,1:3])
+table(subset(df, treatment == "Treatment")$author_aligned, subset(df, treatment == "Treatment")$Level)[,1:3]
+
+chisq.test(table(subset(df, treatment == "Treatment")$author_aligned, subset(df, treatment == "Treatment")$Position))
+table(subset(df, treatment == "Treatment")$author_aligned, subset(df, treatment == "Treatment")$Position)
+
+
+```
+
+
+```{r mixed effects models}
+
+#### prediction ####
+
+model0_outcome <- lmer(outcome_confidence_abs ~ ChartType + (1|Order) + (1|Slant), data = df)
+
+model1_outcome <- lmer(outcome_confidence_abs ~ ChartType + outcome_aligned + (1|Order) + (1|Slant), data = df)
+
+model2_outcome <- lmer(outcome_confidence_abs ~ ChartType + outcome_aligned + Level + Position + (1|Order) + (1|Slant), data = df)
+
+model3_outcome <- lmer(outcome_confidence_abs ~ ChartType + outcome_aligned + Level * Position + (1|Order) + (1|Slant), data = df)
+
+model4_outcome <- lmer(outcome_confidence_abs ~ ChartType + outcome_aligned * Level + Position + (1|Order) + (1|Slant), data = df)
+
+model5_outcome <- lmer(outcome_confidence_abs ~ ChartType + outcome_aligned * Position + Level + (1|Order) + (1|Slant), data = df)
+
+model6_outcome <- lmer(outcome_confidence_abs ~ ChartType + (outcome_aligned * Level) + (outcome_aligned * Position) + (1|Order) + (1|Slant), data = df)
+
+model7_outcome <- lmer(outcome_confidence_abs ~ ChartType + (outcome_aligned * Level) + (outcome_aligned * Position) + author_aligned + (1|Order) + (1|Slant), data = df)
+
+model7_outcome <- lmer(outcome_confidence_abs ~ ChartType + (outcome_aligned * Level) + (outcome_aligned * Position) + author_aligned + (1|Order) + (1|Slant), data = df)
+
+model8_outcome <- lmer(outcome_confidence_abs ~ ChartType + (outcome_aligned * Level) + (outcome_aligned * Position) + author_aligned + age + education + (1|Order) + (1|Slant), data = df)
+
+anova(model0_outcome, model1_outcome, model2_outcome, model3_outcome, model4_outcome, model5_outcome, model6_outcome, model7_outcome, model8_outcome)
+
+summary(model1_outcome)
+
+#### appraisal ####
+
+model0_author <- lmer(author_confidence_abs ~ ChartType + (1|Order) + (1|Slant), data = df)
+
+model1_author <- lmer(author_confidence_abs ~ ChartType + author_aligned + (1|Order) + (1|Slant), data = df)
+
+model2_author <- lmer(author_confidence_abs ~ ChartType + author_aligned + Level + Position + (1|Order) + (1|Slant), data = df)
+
+model3_author <- lmer(author_confidence_abs ~ ChartType + author_aligned + Level * Position + (1|Order) + (1|Slant), data = df)
+
+
+model4_author <- lmer(author_confidence_abs ~ ChartType + author_aligned * Level + Position + (1|Order) + (1|Slant), data = df)
+
+model5_author <- lmer(author_confidence_abs ~ ChartType + author_aligned * Position + Level + (1|Order) + (1|Slant), data = df)
+
+model6_author <- lmer(author_confidence_abs ~ ChartType + (author_aligned * Level) + (author_aligned * Position) + (1|Order) + (1|Slant), data = df)
+
+model7_author <- lmer(author_confidence_abs ~ ChartType + (author_aligned * Level) + (author_aligned * Position) + outcome_aligned + (1|Order) + (1|Slant), data = df)
+
+model8_author <- lmer(author_confidence_abs ~ ChartType + (author_aligned * Level) + (author_aligned * Position) + outcome_aligned + age + education + (1|Order) + (1|Slant), data = df)
+
+anova(model0_author, model1_author, model2_author, model3_author, model4_author, model5_author, model6_author, model7_author, model8_author)
+
+summary(model7_author)
+
+```
+
+
+# Exploratory Analysis
+
+## Author and Outcome Rating Relation
+
+After evaluating these hypotheses, we were interested in the possible relationship between the belief in author bias and the rating of the confidence in outcome. In other words, if the reader disagreed with the outcome presented by the author, did they perceive the author as more biased? Were those readers more confident in their ratings if they perceived the author as more biased (i.e., ignoring the text in their rating due to author bias)? And vice versa (i.e., more confident because author bias is low)?
+
+If this were the case, we would expect to see: 
+
+- higher average ratings for author leaning for unaligned outcome responses
+- positive correlation between author leaning and outcome ratings for unaligned responses
+- negative correlation between author leaning and outcome ratings for aligned responses
+
+```{r author_and_outcome}
+
+study1 <- ggplot(subset(df, treatment == "Treatment"), aes(x = outcome_aligned, y = author_confidence_abs, fill = outcome_aligned, color = outcome_aligned))+
+  stat_halfeye(size = 2)+
+  scale_fill_manual(values = c(a1, u1))+
+  scale_color_manual(values = c(a, u))+
+  labs(
+    title = "Study 1: Bias Appraisal by Prediction Alignment",
+    # subtitle = "Did people perceive the author as having a more extreme position\nif they disagreed with them?",
+    y = "Scalar Bias Appraisal",
+    x = "Alignment of Prediction"
+  )+
+  facet_grid(. ~ChartType)+
+  theme(legend.position = 'none',
+  panel.grid.major = element_line(color = "grey85", size = 0.1),  # Lighten and thin major gridlines
+  panel.grid.minor = element_line(color = "grey85", size = 0.05))  # Lighten and thin minor gridlines
+ggsave("study1.png", study1, height = 5, width = 7, dpi = 320)
+
+
+
+ggplot(subset(df, treatment == "Treatment"), aes(x = outcome_aligned, y = author_confidence_abs, fill = outcome_aligned))+
+  geom_bar(stat = "summary", fun = "mean")+
+  scale_fill_manual(values = c(a, u))+
+  labs(
+    title = "Mean Author Position Rating by Outcome Alignment",
+    subtitle = "Did people perceive the author as having a more extreme position\nif they disagreed with them?",
+    y = "Perceived Likelihood of Author Position",
+    x = "Alignment of Response",
+    fill = "Response Alignment"
+  )+
+  facet_grid(. ~ChartType)
+
+
+```
+
+Without significance testing, we can observe that ratings seem overall higher for author bias when the response is unaligned with the message presented by the author. However, there is not a correlation between bias ratings and outcome ratings for either of the potential hypotheses laid out.
+
+We then go to look further at how bias ratings may have varied according to whether the participant agreed (or was aligned with) the outcome presented in the text.
+
+```{r interaction_ratings}
+
+subset(bar, treatment == "Treatment") %>% 
+  group_by(outcome_aligned) %>% 
+  summarise(
+    median = median(author_confidence_abs),
+    mean = mean(author_confidence_abs)
+  )
+
+subset(line, treatment == "Treatment") %>% 
+  group_by(outcome_aligned) %>% 
+  summarise(
+    median = median(author_confidence_abs),
+    mean(author_confidence_abs)
+  )
+
+```
+For bar charts, we find evidence that participants rated author bias as higher if they disagreed (were unaligned) with the outcome presented by the text in the chart. We do not find this effect for line charts, however. 
+
+
+No significant differences are found between specific conditions for author leaning ratings.
+
+

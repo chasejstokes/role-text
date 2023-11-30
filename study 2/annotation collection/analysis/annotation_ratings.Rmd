@@ -1,0 +1,323 @@
+---
+title: "Pilot Ratings"
+output: pdf_document
+date: "2023-03-08"
+---
+
+```{r load data, include=FALSE}
+
+library(tidyverse)
+library(FSA)
+
+
+theme_set(theme_minimal())
+set.seed(6062)
+
+#### bar ####
+
+# read in raw data
+bar_ratings <- read.csv('bar.csv')
+bar_ratings <- subset(bar_ratings, Exclude == 0)
+
+# read in annotations data
+annotations <- read.csv("annotations_text.csv")
+bar_annotations <- subset(annotations, chart_type == "bar")
+line_annotations <- subset(annotations, chart_type == "line")
+
+# get column names to select
+bar_select <- bar_ratings %>% 
+  select(contains("blue") | contains("green") | contains("neutral") | contains("original"), -contains("elab"), -contains("_re"))
+
+# update the values with the averages for the double-rated before gathering
+# get column names to select
+bar_rerated_names <- colnames(bar_ratings %>% 
+                                select(contains("_re") & -contains("reason")))
+bar_rerated_names <- colnames(bar_ratings %>% 
+                                select(bar_rerated_names, substr(bar_rerated_names, 1, nchar(bar_rerated_names) - 3), -contains("elab")))
+# take the mean of the columns for rating and rerating
+bar_rerated <- bar_ratings %>% select(pt, bar_rerated_names)
+bar_ratings <- bar_ratings %>% 
+  mutate(
+    # had to hard code this for now - may come back if time
+    original_1_bl2 = rowMeans(bar_rerated[,c('original_1_bl2', 'original_1_bl2_re')], na.rm=TRUE),
+    neutral_1 = rowMeans(bar_rerated[,c('neutral_1', 'neutral_1_re')], na.rm=TRUE),
+    green_4 = rowMeans(bar_rerated[,c('green_4', 'green_4_re')], na.rm=TRUE),
+    blue_5 = rowMeans(bar_rerated[,c('blue_5', 'blue_5_re')], na.rm=TRUE)
+  )
+
+# gather the columns
+bar_gathered <- gather(bar_ratings, key = "annotation", value = "rating", colnames(bar_select)) %>% 
+  select(pt, annotation, rating) %>% 
+  drop_na() %>% 
+  mutate(
+    pt = as.numeric(pt),
+    rating = as.numeric(rating)
+  ) 
+
+# extract mean & sd
+bar_avgs <- aggregate(.~annotation, data=bar_gathered, mean) %>% 
+  mutate(rating_mean = rating,
+         rating_sd = aggregate(.~annotation, data=bar_gathered, sd)$rating, 
+         n = aggregate(.~annotation, data=bar_gathered, length)$rating,
+         rating_se = rating_sd / sqrt(n)) %>% 
+  select(-pt, -rating)
+
+# match the columns to the annotation text
+bar <- bar_avgs %>% 
+  left_join(bar_annotations, by = "annotation") %>% 
+  select(annotation, annotation_text, prompt, rating_mean, rating_sd, n, rating_se, chart_type, noside) %>% 
+  arrange(rating_mean) %>% 
+  mutate(annotation_text=factor(annotation_text, levels=annotation_text),
+         annotation = factor(annotation, levels = annotation)) %>% 
+  drop_na()
+
+
+#### line ####
+
+# read in raw data
+line_ratings <- read.csv('line.csv')
+line_ratings <- subset(line_ratings, Exclude == 0)
+
+# read in annotations data
+annotations <- read.csv("annotations_text.csv")
+line_annotations <- subset(annotations, chart_type == "line")
+
+# get column names to select
+line_select <- line_ratings %>% 
+  select(contains("blue") | contains("green") | contains("neutral") | contains("original"), -contains("elab"), -contains("_re"))
+
+# update the values with the averages for the double-rated before gathering
+# get column names to select
+line_rerated_names <- colnames(line_ratings %>% 
+                                 select(contains("_re") & -contains("reason")))
+line_rerated_names <- colnames(line_ratings %>% 
+                                 select(line_rerated_names, substr(line_rerated_names, 1, nchar(line_rerated_names) - 3), -contains("elab")))
+# take the mean of the columns for rating and rerating
+line_rerated <- line_ratings %>% select(pt, line_rerated_names)
+line_ratings <- line_ratings %>% 
+  mutate(
+    # had to hard code this for now - may come back if time
+    original_2_bl3 = rowMeans(line_rerated[,c('original_2_bl3', 'original_2_bl3_re')], na.rm=TRUE),
+    neutral_8 = rowMeans(line_rerated[,c('neutral_8', 'neutral_8_re')], na.rm=TRUE),
+    green_4 = rowMeans(line_rerated[,c('green_4', 'green_4_re')], na.rm=TRUE),
+    blue_3 = rowMeans(line_rerated[,c('blue_3', 'blue_3_re')], na.rm=TRUE)
+  )
+
+# gather the columns
+line_gathered <- gather(line_ratings, key = "annotation", value = "rating", colnames(line_select)) %>% 
+  select(pt, annotation, rating) %>% 
+  drop_na() %>% 
+  mutate(
+    pt = as.numeric(pt),
+    rating = as.numeric(rating)
+  )
+
+# extract mean & sd
+line_avgs <- aggregate(.~annotation, data=line_gathered, mean) %>% 
+  mutate(rating_mean = rating,
+         rating_sd = aggregate(.~annotation, data=line_gathered, sd)$rating, 
+         n = aggregate(.~annotation, data=line_gathered, length)$rating,
+         rating_se = rating_sd / sqrt(n)) %>% 
+  select(-pt, -rating) 
+
+# match the columns to the annotation text
+line <- line_avgs %>% 
+  left_join(line_annotations, by = "annotation") %>% 
+  select(annotation, annotation_text, prompt, rating_mean, rating_sd, n, rating_se, chart_type, noside) %>% 
+  arrange(rating_mean) %>% 
+  mutate(annotation_text=factor(annotation_text, levels=annotation_text),
+         annotation = factor(annotation, levels = annotation))%>% 
+  drop_na()
+
+```
+
+```{r compare annotations, include=FALSE}
+
+# are line chart annotations longer than bar chart annotations?
+# in number of characters and words
+annotations %>% 
+  group_by(chart_type) %>% 
+  summarise(
+    "Avg. Character" = mean(nchar(annotation_text)),
+    "SD Character" = sd(nchar(annotation_text)),
+    "Avg. Word Count" = mean(str_count(str_replace(annotation_text, 
+                                                   pattern = "'",
+                                                   replacement = ""),
+                                       pattern = "\\w+")),
+    "SD Word Count" = sd(str_count(str_replace(annotation_text, 
+                                               pattern = "'",
+                                               replacement = ""),
+                                   pattern = "\\w+"))
+  )
+#Line chart annotations have longer words, but not more. Likely due to the presence of the word "Company," rather than "group." Bar chart annotations have a greater variation in length, both for character length and word count.
+
+```
+
+# Collecting and Rating Annotations
+
+In the prior set of experiments, the content of the annotations were varied using semantic levels. However, semantic levels were originally categorized based on alternative text descriptions of visualizations and were previously applied to takeaways, rather than the context of outcome predictions or bias perceptions. There were no significant differences between the different semantic levels and the outcome predictions or bias perceptions from the first study. Similarly, there were no differences between the three positions tested in the prior experiments (title and two annotation positions). In the second set of experiments, the stimuli were condensed to use only one position, a left-positioned annotation. 
+
+In the second set of experiments, annotations provided varied in the degree of perceived bias. To create these stimuli, 20 Prolific participants with a background in English Language, English Literature, Communications, or Education wrote a set of 120 total annotations providing slanted and neutral annotations. Specifically, they were prompted to write annotations from the perspective of a publicist for Blue or Green or from a neutral perspective. Certain annotations written were excluded due to lack of context or low effort for a resulting set of 90 annotations (42 bar, 48 line). These responses were collected during the piloting stage and provide insight into what kinds of language visualization readers assume to be more or less biased and expand our overall dataset of annotations to evaluate. The Study 1 annotations were also added to the overall set, resulting in 102 annotations (48 bar, 54 line).
+
+A set of 30 participants (15 bar, 15 line) rated these annotations in addition to the annotations from Study 1. On average, each annotation received about 10 (bar = `r round(mean(bar$n), 2)`, line = `r round(mean(line$n), 2)`) ratings. These ratings used a single question based on the following definition of bias: language favoring one side or idea without sufficient justification. Participants rated annotations on a scale from 0 to 10 in response to the question “To what extent does the annotation favor one side without sufficient justification?”
+
+Each participant rated 32  annotations for the bar chart and 36 for the line chart. Halfway through the survey, participants reported their general strategy for making their ratings. At the end of each survey, 4 annotations were repeated from the overall pool to test for internal validity. They also provided elaboration on their reasonings for their ratings. The four annotations were selected due to a wide spread of ratings - both in average rating between the annotations and in the individual ratings within annotations - in pilot testing. Additionally, one Study 1 annotation was selected to be re-rated and elaborated on, as well as one “Blue” annotation, one “Green” annotation, and one annotation written from the perspective of a “Neutral” party. These annotations were also selected to represent a range of average ratings, from low bias to high bias. After completing the survey, participants were asked to reflect if their rating strategy had changed over the course of the survey.
+
+Exclusions were made based on the differences between the first and second responses to the same annotation. If a participant had an average difference in their responses greater than or equal to 2.5 points, their response was excluded. Additional data was collected to ensure that each annotation had, on average, 10 ratings. This resulted in 19 total participant for the bar chart annotations (4 exclusions) and 18 total participants for the line charts (3 exclusions).
+
+```{r check re-rated, echo=FALSE}
+
+# correlation between original rating and re-rating (scatter + lm)
+bar_rerated_corr <- bar_rerated %>% 
+  gather(key = "original", value = "first_rating", original_1_bl2, green_4, neutral_1, blue_5) %>% 
+  gather(key = "re", value = "second_rating", original_1_bl2_re, green_4_re, neutral_1_re, blue_5_re) %>% 
+  mutate(re = str_sub(re, end = -4),
+         prompt = map_chr(str_split(original, "_"), first),
+         chart_type = "bar"
+  ) %>% 
+  drop_na()
+bar_rerated_corr <- bar_rerated_corr[(bar_rerated_corr$original == bar_rerated_corr$re),]
+
+line_rerated_corr <- line_rerated %>% 
+  gather(key = "original", value = "first_rating", original_2_bl3, green_4, neutral_8, blue_3) %>% 
+  gather(key = "re", value = "second_rating", original_2_bl3_re, green_4_re, neutral_8_re, blue_3_re) %>% 
+  mutate(re = str_sub(re, end = -4),
+         prompt = map_chr(str_split(original, "_"), first),
+         chart_type = "line"
+  ) %>% 
+  drop_na()
+line_rerated_corr <- line_rerated_corr[(line_rerated_corr$original == line_rerated_corr$re),]
+
+rerated_corr <- rbind(bar_rerated_corr, line_rerated_corr) %>% 
+  mutate(
+    difference = first_rating - second_rating
+  )
+
+type.labs <- c(
+  `bar` = "Bar",
+  `line` = "Line"
+)
+ggplot(rerated_corr, aes(y = abs(difference), x = as.factor(pt), color = "red"))+
+  geom_bar(stat = "summary", fun = "mean")+
+  geom_hline(yintercept = 2.5)+
+  facet_grid(rows = vars(chart_type), labeller = as_labeller(c(`bar` = "Bar", `line` = "Line")))+
+  labs(title = "Average Within-Response Difference for Re-Rated Annotations\nPost-Exclusions", 
+       x = "Participant", 
+       y = "Average Difference in\nFirst and Second Reponses")+
+  theme(panel.spacing=unit(2,"lines"), 
+        legend.position = "none")
+
+ggplot(rerated_corr, aes(x = first_rating, y = second_rating))+
+  geom_point(aes(color = prompt))+
+  #geom_text(data = subset(rerated_corr, pt > 18), aes(label = pt), vjust = -0.25, hjust = -0.25)+
+  geom_abline(slope = 1, intercept = 0)+
+  scale_color_manual(values=c("#237eff", "#00ae00", "#aaaaaa", "#fe8b00"), labels=c("Blue", "Green", "Neutral", "Study 1"))+
+  labs(x = "First Rating of the Annotation", 
+       y = "Second Rating of the Annotation",
+       title = "Comparison of Rerated Annotations, Post-Exclusions")+
+  facet_grid(rows = vars(chart_type))+
+  geom_smooth(method = "lm", color = "black", formula = y~ x)+
+  guides(fill = guide_legend((title = "Category")))+
+  theme(panel.spacing=unit(2,"lines"), 
+        legend.position = "none")
+
+# differences between original rating and re-rating (jitter + mean line)
+
+```
+
+After collecting these ratings, average ratings were compared between annotations and annotation prompts/origin (Blue Perspective, Green Perspective, Neutral Perspective, Study 1). 
+
+```{r visualize ratings, echo = FALSE, fig.width = 14, fig.height = 14}
+
+text_size <- 7.5
+title_size <- 13
+h <- 2400
+w <- 2000
+point_size = 1
+line_size = 0.7
+
+bar_annots <- ggplot(bar, aes(y = annotation_text, x = rating_mean, color = prompt))+
+  geom_point(size = point_size)+
+  geom_errorbar(aes(xmin = rating_mean - rating_se, xmax = rating_mean + rating_se), linewidth = line_size)+
+  scale_color_manual(values=c("#237eff", "#00ae00", "#aaaaaa", "#976943"), labels=c("Blue Prompt", "Green Prompt", "Neutral Prompt", "Study 1"))+
+  scale_x_continuous(limits = c(0, 10))+
+  labs(x = "Average Appraisal", y = "Annotation", title = "Bar Chart Annotations", 
+       # subtitle = "Average Appraisals and Spread for Annotations"
+  )+
+  theme(legend.position = "none",
+        axis.text = element_text(size = text_size, color = "#545454"),
+        axis.title = element_text(size =text_size, color = "#545454"),
+        plot.title = element_text(size = title_size, color = "#333333"),
+        plot.subtitle = element_text(size = text_size, color = "#545454"), 
+        panel.grid.major = element_line(colour = "lightgrey", size = 0.1),
+        panel.grid.minor = element_line(colour = "lightgrey", size = 0.1))
+# path_and_filename <- paste0("bar_annots.png")
+# ggsave(path_and_filename,
+#        plot = bar_annots,
+#        height = h, width = w, units = "px")
+# dir.create(dirname(path_and_filename), showWarnings = FALSE)
+
+line_annots <- ggplot(line, aes(y = annotation_text, x = rating_mean, color = prompt))+
+  geom_point(size = point_size)+
+  geom_errorbar(aes(xmin = rating_mean - rating_se, xmax = rating_mean + rating_se), linewidth = line_size)+
+  scale_x_continuous(limits = c(0, 10))+
+  scale_color_manual(values=c("#237eff", "#00ae00", "#aaaaaa", "#976943"), labels=c("Blue Prompt", "Green Prompt", "Neutral Prompt", "Study 1"))+
+  labs(x = "Average Appraisal", y = "", title = "Line Chart Annotations", 
+       # subtitle = "Average Appraisals and Spread for Annotations"
+  )+
+  theme(legend.position = "none",
+        axis.text = element_text(size = text_size, color = "#545454"),
+        axis.title = element_text(size = text_size, color = "#545454"),
+        plot.title = element_text(size = title_size, color = "#333333"),
+        plot.subtitle = element_text(size = text_size, color = "#545454"),
+        panel.grid.major = element_line(colour = "lightgrey", size = 0.1),
+        panel.grid.minor = element_line(colour = "lightgrey", size = 0.1))
+# path_and_filename <- paste0("line_annots.png")
+# ggsave(path_and_filename,
+#        plot = line_annots,
+#        height = h, width = w, units = "px")
+# dir.create(dirname(path_and_filename), showWarnings = FALSE)
+
+```
+
+Overall, the spread of annotation ratings demonstrates a distinction between annotations with relatively high bias and those with relatively low bias. Annotations written from a neutral perspective have a lower rating on average (`r round(mean(subset(rbind(bar, line), prompt == "neutral")$rating_mean), 2)`) than those written from a Blue or Green perspective (`r round(mean(subset(rbind(bar, line), prompt == "green" | prompt == "blue")$rating_mean), 2)`), The annotations for Study 1 received a relatively wide spread of ratings.
+
+For line charts, most of the high-rated annotations support the Blue company and most of the low-rated annotations support the Green company. For this reason, additional counterbalancing measures are taken in Study 2. 
+
+## Study 2
+
+The follow-up experiment examining outcome predictions and confidence. Specifically, we created three conditions: High-Bias, Low-Bias, No-Side (official names tbd). High-Bias used annotations which were rated as highly favor one side without sufficient justification and supported to a single side (Blue or Green). Low-Bias used annotations which were rated to not favor one side without sufficient justification but still supported to a single side (Blue or Green). No-Side used annotations which did not support a single side but rather referred to both sides in a neutral fashion or did not refer to sides at all. Of these subsets of annotations, four were selected for use in each condition to ensure variety in annotation content and linguistic features. These annotations were additionally counterbalanced to provide support for the other group (i.e., if an annotation supported Green, an additional annotation was created with the same language to support Blue). In the no-side condition, this counterbalancing was not necessary. The full set of annotations is listed below.
+
+High-Bias
+
+1. [Bar] Blue will double down this year to keep the lead! // Green will double down this year to take the lead!
+2. [Bar] This is Green's year! // This is Blue's year!
+3. [Bar] Blue will continue to win! // Green will continue to rise!
+4. [Bar] Blue group students highly involved in clubs on campus // Green group students highly involved in clubs on campus
+5. [Line] Blue offers most advanced products and technology // Green offers most advanced products and technology
+6. [Line] Blue Company is sure to win. // Green Company is sure to win
+7. [Line] Blue constantly increasing market share // Green constantly increasing market share 
+8. [Line] With above information, Blue Company will win. // With below information, Green Company will win.
+
+Low-Bias
+
+1. [Bar] Votes for Blue greater than Green in Years 1, 2, and 3 // Votes for Green greater in Year 3 than Years 1 and 2
+2. [Bar] Blue has won the past three years // Green has risen the past three years
+3. [Bar] Green group is rising slowly // Blue group is winning by a few
+4. [Bar] Green always falls short, but is slowly rising // Blue always wins, but only by a few
+5. [Line] Green is approaching the Blue Company rapidly // Blue is consistently above Green
+6. [Line] Green up 30% in just 7 months // Blue steady at 50% for 7 months
+7. [Line] Blue greater than Green from Feb-Sept // Green greater on Sept 1st than Feb 11th
+8. [Line] Green market share increases steadily // Blue has been consistently above Green
+
+No-Side
+
+1. [Bar] It will be interesting to see results for Year 4
+2. [Bar] Keep an eye on the election this year.
+3. [Bar] It is unpredictable who will win.
+4. [Bar] The gap continues to close, slowly.
+5. [Line] The gap between the two companies is growing small
+6. [Line] Tie projected 
+7. [Line] The chance to win is the same with both companies. 
+8. [Line] Both companies fluctuate.
+

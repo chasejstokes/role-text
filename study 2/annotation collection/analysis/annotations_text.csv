@@ -1,0 +1,103 @@
+﻿annotation_text,prompt,annot_num,chart_type,annotation,noside
+Blue has won the past three years,blue,1,bar,blue_1,0
+Blue group is consistent,blue,2,bar,blue_2,0
+Blue group goes strong!,blue,3,bar,blue_3,0
+Blue has been pulling in more votes every year!,blue,4,bar,blue_4,0
+Blue group has the most experience leading,blue,5,bar,blue_5,0
+Blue group wins three years in a row.,blue,6,bar,blue_6,0
+Blue won by few votes,blue,7,bar,blue_7,0
+Blue needs to keep reaching voters!,blue,8,bar,blue_8,0
+Blue's performance is consistent and likely unchanged,blue,9,bar,blue_9,0
+Blue group's margin is larger,blue,10,bar,blue_10,0
+Blue will continue to win!,blue,11,bar,blue_11,0
+A majority of people support the blue group,blue,12,bar,blue_12,0
+Blue group continues to be favored by voters.,blue,13,bar,blue_13,0
+Blue beat green by a few,blue,14,bar,blue_14,0
+Blue will double down this year to keep the lead!,blue,15,bar,blue_15,0
+Green has consistent increase over the past three years,green,1,bar,green_1,0
+Green group is the underdog,green,2,bar,green_2,0
+Green will have their year!,green,3,bar,green_3,0
+Green is getting more votes every year!,green,4,bar,green_4,0
+This is Green's year!,green,5,bar,green_5,0
+Support for Green group continues to grow.,green,6,bar,green_6,0
+Green is almost there to win!,green,7,bar,green_7,0
+The trend the past few years supports Green!,green,8,bar,green_8,0
+Green group is rising slowly,green,9,bar,green_9,0
+This year is for the Green!,green,10,bar,green_10,0
+Green only needs a few more votes to win!,green,11,bar,green_11,0
+Green group has grown more than Blue every year,green,12,bar,green_12,0
+Green group closes the gap.,green,13,bar,green_13,0
+Green is coming up on Blue's votes,green,14,bar,green_14,0
+Green is getting so close! A little farther to go!,green,15,bar,green_15,0
+A considerable gap in votes. ,neutral,1,bar,neutral_1,1
+The elections are getting closer every year,neutral,2,bar,neutral_2,1
+Voters split between Blue and Green.,neutral,3,bar,neutral_3,1
+Keep an eye on the election this year.,neutral,4,bar,neutral_4,1
+It is unpredictable who will win,neutral,5,bar,neutral_5,1
+"Green always falls short, but is slowly rising ",neutral,6,bar,neutral_6,0
+"The gap continues to close, slowly. ",neutral,7,bar,neutral_7,1
+Blue and Green are in a close race.,neutral,8,bar,neutral_8,1
+Year 4 might be the year of either group,neutral,9,bar,neutral_9,1
+Wide support for both groups.,neutral,10,bar,neutral_10,1
+Blue and green close to each other,neutral,11,bar,neutral_11,1
+It will be interesting to see results for year 4. ,neutral,12,bar,neutral_12,1
+"Votes for Blue greater than Green in Years 1, 2, and 3",original,1,bar,original_1_bl2,0
+"Year after year, Blue has received more votes",original,2,bar,original_2_bl3,0
+Blue group students highly involved in clubs on campus,original,3,bar,original_3_bl4,0
+Votes for Green greater in Year 3 than Years 1 and 2,original,4,bar,original_4_gl2,0
+"Year after year, votes for Green have increased",original,5,bar,original_5_gl3,0
+Green group students increasingly involved in clubs on campus,original,6,bar,original_6_gl4,0
+Blue has the largest % market share,blue,1,line,blue_1,0
+Blue Company has been consistently higher.,blue,2,line,blue_2,0
+Blue has been consistently above Green,blue,3,line,blue_3,0
+Blue Company is sure to win. ,blue,4,line,blue_4,0
+Blue has consistent market shares,blue,5,line,blue_5,0
+Blue constantly increasing market share,blue,6,line,blue_6,0
+Blue company consistently holds higher shares,blue,7,line,blue_7,0
+Blue Company outperforms again in eighth month,blue,8,line,blue_8,0
+Blue has maintained at around 50% the last 7 months,blue,9,line,blue_9,0
+Blue company has dominated all year.,blue,10,line,blue_10,0
+Blue will continue to be above Green,blue,11,line,blue_11,0
+"With above information, Blue Company will win. ",blue,12,line,blue_12,0
+Blue has over 50% percent!,blue,13,line,blue_13,0
+Blue company is steadfast,blue,14,line,blue_14,0
+Blue Company projected to win contest by 10 points,blue,15,line,blue_15,0
+Green exceeds expectations,green,1,line,green_1,0
+Green has experienced a steady increase in % market share,green,2,line,green_2,0
+Green Company has been consistently growing,green,3,line,green_3,0
+Green company has been steadily increasing ,green,4,line,green_4,0
+Green Company winning is possible. ,green,5,line,green_5,0
+Green up 30% in just 7 months,green,6,line,green_6,0
+Green shows more steady improvement,green,7,line,green_7,0
+Green company is constantly improving,green,8,line,green_8,0
+Green Company's momentum continues to grow,green,9,line,green_9,0
+Green had better growth in late phase,green,10,line,green_10,0
+Green has upward trend in the last quarter,green,11,line,green_11,0
+Green is approaching the Blue Company rapidly,green,12,line,green_12,0
+Green has been seeing growth all year,green,13,line,green_13,0
+"No surprises, just progress for Green",green,14,line,green_14,0
+Green's line upwards is less variable,green,15,line,green_15,0
+Green company has increased market shares,green,16,line,green_16,0
+Blue Company's share declines in recent months,green,17,line,green_17,0
+Both companies have similar trajectory,neutral,1,line,neutral_1,1
+Both Companies have a positive future,neutral,2,line,neutral_2,1
+The gap between the two companies is growing small,neutral,3,line,neutral_3,1
+Both companies have seen growth,neutral,4,line,neutral_4,1
+Both companies have capacity to win.,neutral,5,line,neutral_5,1
+Both groups seem to be increasing at the same rate,neutral,6,line,neutral_6,1
+Both companies are nearing the same market shares,neutral,7,line,neutral_7,1
+Blue and Green Companies nearly tied in September,neutral,8,line,neutral_8,1
+Tie projected,neutral,9,line,neutral_9,1
+Both provide a service that is progressive in tech,neutral,10,line,neutral_10,1
+Both companies fluctuate.,neutral,11,line,neutral_11,1
+Both companies have a good shot as of September,neutral,12,line,neutral_12,1
+The chance to win is the same with both companies. ,neutral,13,line,neutral_13,1
+Both show steady improvement over time,neutral,14,line,neutral_14,1
+Both companies are almost equal,neutral,15,line,neutral_15,1
+Both companies on track for 40% share in October,neutral,16,line,neutral_16,1
+Blue greater than Green from Feb-Sept,original,1,line,original_1_bl2,0
+Blue holds a higher share percent continuously,original,2,line,original_2_bl3,0
+Blue offers most advanced products and technology,original,3,line,original_3_bl4,0
+Green greater on Sept 1st than Feb 11th,original,4,line,original_4_gl2,0
+Green market share increases steadily,original,5,line,original_5_gl3,0
+Green updated products and improved marketing,original,6,line,original_6_gl4,0

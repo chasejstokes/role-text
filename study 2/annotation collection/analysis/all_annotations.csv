@@ -1,0 +1,103 @@
+annotation,annotation_text,prompt,rating_mean,rating_sd,n,rating_se,chart_type,noside
+neutral_12,It will be interesting to see results for year 4. ,neutral,1.4,3.098386676965933,10,0.9797958971132711,bar,1
+neutral_4,Keep an eye on the election this year.,neutral,2.2727272727272725,3.466724941235145,11,1.0452568983130772,bar,1
+neutral_5,It is unpredictable who will win,neutral,2.5555555555555554,3.6094013046179523,9,1.2031337682059842,bar,1
+original_4_gl2,Votes for Green greater in Year 3 than Years 1 and 2,original,2.5555555555555554,4.0034707164881045,9,1.3344902388293682,bar,0
+original_1_bl2,"Votes for Blue greater than Green in Years 1, 2, and 3",original,2.566666666666667,3.2175116087406668,15,0.8307579251254424,bar,0
+neutral_7,"The gap continues to close, slowly. ",neutral,2.7,2.359378449224852,10,0.7461009761866464,bar,1
+neutral_9,Year 4 might be the year of either group,neutral,2.8181818181818183,3.400534717310847,11,1.0252997948997589,bar,1
+neutral_10,Wide support for both groups.,neutral,2.9,3.2812599206199233,10,1.0376254944182253,bar,1
+neutral_3,Voters split between Blue and Green.,neutral,3,2.958039891549808,9,0.9860132971832694,bar,1
+blue_1,Blue has won the past three years,blue,3.3636363636363638,3.6131074512869743,11,1.0893928857414723,bar,0
+neutral_2,The elections are getting closer every year,neutral,3.6,4.033195589934446,10,1.2754084313139327,bar,1
+green_9,Green group is rising slowly,green,3.7,2.79085809185793,10,0.8825468196582483,bar,0
+neutral_8,Blue and Green are in a close race.,neutral,3.909090909090909,3.6456699097572027,11,1.0992108363775883,bar,1
+neutral_6,"Green always falls short, but is slowly rising ",neutral,4.3,2.869378562220979,10,0.9073771725877465,bar,0
+neutral_11,Blue and green close to each other,neutral,4.454545454545455,3.4745830358083647,11,1.0476262029736678,bar,1
+green_8,The trend the past few years supports Green!,green,5,2.8284271247461903,10,0.8944271909999159,bar,0
+neutral_1,A considerable gap in votes. ,neutral,5.066666666666666,3.3587129054077223,15,0.8672159431557357,bar,1
+blue_14,Blue beat green by a few,blue,5.2727272727272725,3.101319367330914,11,0.9350829724090031,bar,0
+blue_10,Blue group's margin is larger,blue,5.3,2.8303906287138374,10,0.8950481054731702,bar,0
+original_5_gl3,"Year after year, votes for Green have increased",original,5.333333333333333,4.092676385936225,9,1.3642254619787417,bar,0
+original_2_bl3,"Year after year, Blue has received more votes",original,5.363636363636363,2.203303305163739,11,0.6643209420525497,bar,0
+green_6,Support for Green group continues to grow.,green,5.454545454545454,1.916436086262016,11,0.5778272211662074,bar,0
+green_14,Green is coming up on Blue's votes,green,5.555555555555555,3.5039660069381062,9,1.1679886689793688,bar,0
+green_1,Green has consistent increase over the past three years,green,5.666666666666667,3.570714214271425,9,1.1902380714238083,bar,0
+blue_4,Blue has been pulling in more votes every year!,blue,5.888888888888889,3.2188679859713276,9,1.072955995323776,bar,0
+blue_7,Blue won by few votes,blue,5.909090909090909,3.238967287718277,11,0.9765853819633299,bar,0
+blue_2,Blue group is consistent,blue,6.181818181818182,2.227921983292136,11,0.6717437527967698,bar,0
+blue_13,Blue group continues to be favored by voters.,blue,6.2727272727272725,1.618079669911781,11,0.487869376909045,bar,0
+blue_12,A majority of people support the blue group,blue,6.3,2.7100635498903793,10,0.856997342145496,bar,0
+blue_6,Blue group wins three years in a row.,blue,6.333333333333333,3.7749172176353745,9,1.2583057392117916,bar,0
+green_13,Green group closes the gap.,green,6.333333333333333,3.3166247903554,9,1.1055415967851332,bar,0
+green_12,Green group has grown more than Blue every year,green,6.555555555555555,2.650995620097811,9,0.8836652066992703,bar,0
+green_4,Green is getting more votes every year!,green,6.633333333333333,2.628597308361212,15,0.678700906611241,bar,0
+green_2,Green group is the underdog,green,6.666666666666667,1.7320508075688772,9,0.5773502691896257,bar,0
+blue_9,Blue's performance is consistent and likely unchanged,blue,6.777777777777778,2.4888640871780128,9,0.8296213623926709,bar,0
+blue_3,Blue group goes strong!,blue,7,2.211083193570267,10,0.6992058987801011,bar,0
+blue_5,Blue group has the most experience leading,blue,7.033333333333333,2.6353819638219607,15,0.6804526971185234,bar,0
+green_7,Green is almost there to win!,green,7.2,2.780887148615228,10,0.8793937305515279,bar,0
+green_11,Green only needs a few more votes to win!,green,7.454545454545454,1.5075567228888183,11,0.4545454545454546,bar,0
+original_6_gl4,Green group students increasingly involved in clubs on campus,original,7.454545454545454,3.3574882386580707,11,1.0123207932418221,bar,0
+green_15,Green is getting so close! A little farther to go!,green,7.777777777777778,1.9860625479688307,9,0.6620208493229436,bar,0
+blue_8,Blue needs to keep reaching voters!,blue,8.222222222222221,1.481365736219265,9,0.49378857873975496,bar,0
+green_10,This year is for the Green!,green,8.555555555555555,1.4240006242195884,9,0.4746668747398628,bar,0
+green_3,Green will have their year!,green,8.6,1.8973665961010278,10,0.6,bar,0
+original_3_bl4,Blue group students highly involved in clubs on campus,original,8.6,1.9550504398153572,10,0.6182412330330468,bar,0
+blue_11,Blue will continue to win!,blue,8.9,1.852925614624973,10,0.5859465277082315,bar,0
+green_5,This is Green's year!,green,8.909090909090908,2.0714509627092528,11,0.6245659649933697,bar,0
+blue_15,Blue will double down this year to keep the lead!,blue,9.272727272727273,0.7862453931068965,11,0.23706190564373267,bar,0
+neutral_3,The gap between the two companies is growing small,neutral,1.3333333333333335,2.179449471770337,9,0.726483157256779,line,1
+neutral_9,Tie projected,neutral,1.6666666666666665,2.0615528128088303,9,0.6871842709362768,line,1
+neutral_13,The chance to win is the same with both companies. ,neutral,1.6666666666666667,2.179449471770337,9,0.726483157256779,line,1
+neutral_11,Both companies fluctuate.,neutral,2,2.5,9,0.8333333333333334,line,1
+neutral_10,Both provide a service that is progressive in tech,neutral,2.090909090909091,2.5477262590217755,11,0.7681683699737312,line,1
+neutral_15,Both companies are almost equal,neutral,2.4,2.5473297566057065,10,0.8055363982396381,line,1
+neutral_5,Both companies have capacity to win.,neutral,2.4,3.339993346633426,10,1.0561986345169905,line,1
+neutral_7,Both companies are nearing the same market shares,neutral,2.4,3.0983866769659336,10,0.9797958971132712,line,1
+neutral_12,Both companies have a good shot as of September,neutral,2.7,3.683295625749672,10,1.1647603473104098,line,1
+green_12,Green is approaching the Blue Company rapidly,green,2.7272727272727275,2.370270410350224,11,0.7146634184375836,line,0
+neutral_2,Both Companies have a positive future,neutral,2.9,3.7549966711037173,10,1.1874342087037917,line,1
+neutral_8,Blue and Green Companies nearly tied in September,neutral,2.933333333333333,2.993246366326001,15,0.7728528885250978,line,1
+neutral_1,Both companies have similar trajectory,neutral,3.1818181818181817,3.4588489940493736,11,1.0428822108872717,line,1
+green_6,Green up 30% in just 7 months,green,3.2222222222222223,2.6352313834736494,9,0.8784104611578831,line,0
+neutral_16,Both companies on track for 40% share in October,neutral,3.2727272727272725,3.437758254761643,11,1.036523113726489,line,1
+original_1_bl2,Blue greater than Green from Feb-Sept,original,3.3636363636363638,3.2022719207689803,11,0.965521312534673,line,0
+original_5_gl3,Green market share increases steadily,original,3.3636363636363638,2.693426341028366,11,0.8120985976046288,line,0
+green_16,Green company has increased market shares,green,3.4,2.875181153713043,10,0.9092121131323903,line,0
+green_7,Green shows more steady improvement,green,3.4444444444444446,2.185812841434,9,0.7286042804780001,line,0
+green_17,Blue Company's share declines in recent months,green,3.5454545454545454,3.4165373220158557,11,1.0301247617611125,line,0
+blue_3,Blue has been consistently above Green,blue,3.6,2.6199781896584016,15,0.6764754597315764,line,0
+green_4,Green company has been steadily increasing ,green,3.6333333333333333,2.393940763877081,15,0.6181128473535331,line,0
+green_13,Green has been seeing growth all year,green,3.6363636363636362,2.9076701075853593,11,0.8766955237266323,line,0
+green_10,Green had better growth in late phase,green,3.666666666666667,3.427827300200522,9,1.1426091000668406,line,0
+green_3,Green Company has been consistently growing,green,3.7,2.94580681270476,10,0.931545907498808,line,0
+neutral_4,Both companies have seen growth,neutral,3.7272727272727275,3.349355433241121,11,1.0098686601453684,line,1
+original_4_gl2,Green greater on Sept 1st than Feb 11th,original,3.8,3.521363372331802,10,1.1135528725660042,line,0
+green_9,Green Company's momentum continues to grow,green,3.888888888888889,3.100179206289712,9,1.0333930687632373,line,0
+blue_1,Blue has the largest % market share,blue,4,3.63318042491699,11,1.0954451150103321,line,0
+original_2_bl3,Blue holds a higher share percent continuously,original,4.166666666666667,3.0860669992418384,15,0.7968190728895957,line,0
+green_15,Green's line upwards is less variable,green,4.181818181818182,3.311138227805714,11,0.9983457391485342,line,0
+blue_7,Blue company consistently holds higher shares,blue,4.363636363636363,2.9418608829354005,11,0.8870044303745794,line,0
+blue_9,Blue has maintained at around 50% the last 7 months,blue,4.4,3.470510689285432,10,1.0974718422102885,line,0
+blue_8,Blue Company outperforms again in eighth month,blue,4.444444444444445,2.455153310442706,9,0.8183844368142353,line,0
+green_11,Green has upward trend in the last quarter,green,4.545454545454546,2.7336289566668106,11,0.8242201423013192,line,0
+green_2,Green has experienced a steady increase in % market share,green,4.7,2.7908580918579307,10,0.8825468196582484,line,0
+blue_2,Blue Company has been consistently higher.,blue,4.7272727272727275,3.495451590021212,11,1.0539183088137773,line,0
+neutral_14,Both show steady improvement over time,neutral,4.777777777777778,3.6324157862838944,9,1.2108052620946315,line,1
+neutral_6,Both groups seem to be increasing at the same rate,neutral,4.818181818181818,3.5445220218862183,11,1.068713600704407,line,1
+blue_5,Blue has consistent market shares,blue,4.888888888888889,3.3333333333333335,9,1.1111111111111112,line,0
+green_5,Green Company winning is possible. ,green,5,3.018461712712472,10,0.9545214042184235,line,0
+green_8,Green company is constantly improving,green,5.5,2.5055493963954847,10,0.7923242882669808,line,0
+blue_10,Blue company has dominated all year.,blue,5.555555555555555,3.5394600969325505,9,1.17982003231085,line,0
+blue_14,Blue company is steadfast,blue,5.7,2.8693785622209793,10,0.9073771725877466,line,0
+original_6_gl4,Green updated products and improved marketing,original,5.818181818181818,3.027149874657078,11,0.9127200289462643,line,0
+blue_15,Blue Company projected to win contest by 10 points,blue,6,2.692582403567252,9,0.8975274678557507,line,0
+green_14,"No surprises, just progress for Green",green,6.444444444444445,2.7888667551135855,9,0.9296222517045285,line,0
+blue_13,Blue has over 50% percent!,blue,6.6,2.0110804171997807,10,0.6359594676112971,line,0
+green_1,Green exceeds expectations,green,7.444444444444445,2.455153310442706,9,0.8183844368142353,line,0
+blue_11,Blue will continue to be above Green,blue,7.5,2.3213980461973533,10,0.7340905181848414,line,0
+blue_12,"With above information, Blue Company will win. ",blue,7.545454545454546,2.6215886925159086,11,0.790438731610333,line,0
+blue_6,Blue constantly increasing market share,blue,8.222222222222221,1.986062547968831,9,0.6620208493229437,line,0
+blue_4,Blue Company is sure to win. ,blue,9.2,1.0327955589886446,10,0.32659863237109044,line,0
+original_3_bl4,Blue offers most advanced products and technology,original,9.555555555555555,1.0137937550497034,9,0.33793125168323446,line,0

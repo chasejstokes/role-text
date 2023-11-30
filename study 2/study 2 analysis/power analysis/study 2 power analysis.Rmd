@@ -1,0 +1,1347 @@
+---
+title: "Study 2 Prep"
+output: html_document
+date: "2023-02-16"
+---
+
+```{r setup, include = FALSE}
+
+knitr::opts_chunk$set(echo=FALSE)
+
+library(ggplot2)
+library(ggpubr)
+library(gridExtra)
+library(lme4)
+library(car)
+library(transport)
+library(dplyr)
+library(FSA)
+library(rcompanion)
+
+theme_set(theme_minimal())
+set.seed(6062)
+
+#### import_and_clean_raw_data ####
+
+# read in raw data
+df <- read.csv('VG_e1.csv')
+# sanity check the column names
+colnames(df)
+# sanity check the first set of values
+head(df)
+
+#### merging columns ####
+
+# create single column for the outcome chosen by the participant to win (combining the counterbalancing for order)
+df$chosen_outcome <- ifelse(df$winning_party == '',
+                          df$winning_party.1,
+                          df$winning_party)
+# sanity check for ensuring columns have combined properly
+matrix(c(df$winning_party[1:5], 
+       df$winning_party.1[1:5], 
+       df$chosen_outcome[1:5]), nrow = 5)
+
+# create single column for the confidence rating provided by participants indicating how confident they were in the outcome they selected
+df$outcome_confidence <- ifelse(is.na(df$winning_scale_1),
+                              df$winning_scale_1.1,
+                              df$winning_scale_1)
+# sanity check for ensuring columns have combined properly
+matrix(c(df$winning_scale_1[1:5],
+       df$winning_scale_1.1[1:5], 
+       df$outcome_confidence[1:5]), nrow = 5)
+
+# create single column for confidence rating for the likely author of the visualization
+df$author_confidence <- ifelse(is.na(df$bias_rating_1),
+                             df$bias_rating_1.1,
+                             df$bias_rating_1)
+# sanity check to ensure columns combined properly
+matrix(c(df$bias_rating_1[1:5], 
+       df$bias_rating_1.1[1:5],
+       df$author_confidence[1:5]), nrow = 5)
+
+# create single column for confidence rating for author for control condition
+df$author_confidence_control <- ifelse(df$Level != 'Control',
+                                     ifelse(is.na(df$bias_control_1),
+                                            df$bias_control_1.1,
+                                            df$bias_control_1),
+                                     df$author_confidence)
+# sanity check to ensure columns combined properly
+matrix(c(df$Level[1:10],
+       df$bias_control_1[1:10],
+       df$bias_control_1.1[1:10],
+       df$author_confidence_control[1:10]), nrow = 10)
+
+#### calculating categories ####
+
+# create single column for the estimated author, based on the bias rating provided by participants indicating the likelihood of author leaning
+df$chosen_author <- ifelse(df$Order == "BlueLeft",
+                         # if blue is on the left
+                         ifelse(df$author_confidence < 0, 
+                                # negative values indicate blue
+                                'Blue',
+                                ifelse(df$author_confidence > 0, 
+                                       # positive values indicate green
+                                       'Green', 
+                                       'Neutral'
+                                       # else neutral
+                                )),
+                         # else if green is on the left
+                         ifelse(df$author_confidence < 0, 
+                                # negative values indicate green
+                                'Green',
+                                ifelse(df$author_confidence > 0, 
+                                       # positive values indicate blue
+                                       'Blue',
+                                       'Neutral')))
+# sanity check to ensure the values were filled
+matrix(c(df$Order[1:5],
+       df$bias_rating_1[1:5],
+       df$bias_rating_1.1[1:5],
+       df$chosen_author[1:5]), nrow = 5)
+
+
+
+# create column indicating whether the chosen outcome was aligned with the slant of the text displayed
+df$outcome_aligned <- ifelse(df$Level != 'Control',
+                           # control conditions cannot be aligned or unaligned
+                           ifelse(df$chosen_outcome == 'Blue',
+                                  # examine the responses which selected Blue
+                                  ifelse(df$Slant == 'Blue',
+                                         # if the slant was Blue, then aligned ("Aligned"), else not aligned ("Unaligned")
+                                         "Aligned", "Unaligned"),
+                                  # examine the responses which selected Green
+                                  ifelse(df$Slant == 'Green',
+                                         # if the slant was Green, then aligned ("Aligned"), else not aligned ("Unaligned")
+                                         "Aligned", "Unaligned")),
+                           # control conditions receive 'N/A'
+                           'NA')
+# sanity check to ensure column created properly
+matrix(c(df$Level[1:5],
+       df$Slant[1:5],
+       df$chosen_outcome[1:5],
+       df$outcome_aligned[1:5]), nrow = 5)
+
+# create column indicating whether the chosen author was aligned with the slant of the text displayed
+df$author_aligned <- ifelse(df$Level != 'Control',
+                          # control conditions cannot be aligned or unaligned,
+                          ifelse(df$chosen_author == 'Blue',
+                                 # examine the responses which selected Blue
+                                 ifelse(df$Slant == 'Blue',
+                                        # if the slant was Blue, then aligned ("Aligned"), else not aligned ("Unaligned")
+                                        "Aligned", "Unaligned"),
+                                 # else, examine the responses which selected Green
+                                 ifelse(df$Slant == 'Green',
+                                        # if the slant was Green, then aligned ("Aligned"), else not aligned ("Unaligned")
+                                        "Aligned", "Unaligned")),
+                          # control conditions receive 'N/A'
+                          'NA')
+# sanity check to ensure column created properly
+matrix(c(df$Level[1:5],
+       df$Slant[1:5], 
+       df$chosen_author[1:5],
+       df$author_aligned[1:5]), nrow = 5)
+
+# transform data to account for Order counterbalancing
+df$outcome_confidence <- ifelse(
+df$Order == 'GreenLeft',
+# if the Green responses were on the left (and Blue on the right)
+df$outcome_confidence * -1,
+# move the Green responses to the right (and Blue to the left)
+df$outcome_confidence
+# else stay the same
+)
+ggplot(df, aes(x = outcome_confidence, y = after_stat(count), fill = chosen_outcome))+
+geom_bar(stat = 'count')+
+labs(title = 'Prediction Confidence, corrected for order', 
+     caption = 'Here, I check to ensure that all the "Green" outcomes are on \nthe right and all the "Blue" are on the right.')+
+xlab('Prediction Confidence Rating')+
+ylab('Count of Response')
+
+df$author_confidence <- ifelse(
+df$Order == 'GreenLeft',
+# if the Green responses were on the left (and Blue on the right)
+df$author_confidence * -1,
+# move the Green responses to the right (and Blue to the left)
+df$author_confidence
+# else stay the same
+)
+ggplot(df, aes(x = author_confidence, y = after_stat(count), fill = chosen_author))+
+geom_bar(stat = 'count')+
+labs(title = 'Appraisal  Confidence, corrected for order', 
+     caption = 'Here, I check to ensure that all the "Green" authors are on\nthe right and all the "Blue" are on the right.')+
+xlab('Appraisal  Confidence Rating')+
+ylab('Count of Response')
+
+# create column with the absolute value of the confidence rating for outcome
+df$outcome_confidence_abs <- abs(df$outcome_confidence)
+
+# create column with the absolute value of the confidence rating for author
+df$author_confidence_abs <- abs(df$author_confidence)
+
+# create column with the absolute value of the confidence rating for author, control condition
+df$author_confidence_control_abs <- abs(df$author_confidence_control)
+
+# make categorical column to indicate the treatment or control groups
+df$treatment <- ifelse(df$Level == 'Control', 'Control', 'Treatment')
+
+# make categorical column to indicate the position comparisons
+df$full_condition <- paste(df$Position, df$treatment)
+
+# exclude responses which do not demonstrate internal consistency (the chosen outcome in the binary choice and the scale response)
+df$Exclude <- ifelse(df$Exclude != 1,
+                   # only look at participants not already excluded 
+                   ifelse(df$chosen_outcome == 'Blue',
+                          # test for internal consistency for those who said Blue
+                          ifelse(df$outcome_confidence > 0, 1, 0),
+                          # Blue should be negative or 0
+                          # assign 1 if this is not true, else assign 0
+                          ifelse(df$outcome_confidence < 0, 1, 0)
+                          # Green should be positive or 0
+                          # assign 1 if this is not true, else assign 0
+                   ),
+                   df$Exclude)
+# if participant already excluded, do not change the value
+
+
+#### make_data_exclusions ####
+
+# exclude responses based on above filtering
+# also based on the coherent and relevant nature of text responses (examined prior to raw data upload)
+df <- subset(df, Exclude != 1)
+# sanity check on number of participants
+c(dim(subset(df, ChartType == "Bar"))[1], dim(subset(df, ChartType == "Line"))[1])
+
+#write.csv(df, 'VG_clean.csv')
+
+# select the columns of interest
+df <- select(df, 
+           # Order, 
+           # assigned value, 
+           # condition determining the sides of the screen on which each choice option was shown (BlueLeft, GreenLeft)
+           # NOTE TO SELF - EXCLUDED BECAUSE WE MAY NOT LOOK AT THEM
+           Level, 
+           # assigned value, 
+           # condition determining the semantic level of the text shown on the chart (Control, 2, 3, 4)
+           Position,
+           # assigned value
+           # condition determining the position of the text shown on the chart (Title, Annotation)
+           full_condition,
+           # calculated column,
+           # describes the position of the text, along with whether the text was control or a treatment condition 
+           # (Title Control, Title Treatment, Annotation Control, Annotation Treatment)
+           Slant, 
+           # assigned value, 
+           # condition determining which color the text referred to (Blue, Green)
+           ChartType, 
+           # chart type shown, indicates which experiment the data belong to (Bar, Line)
+           treatment,
+           # calculated column,
+           # indicates whether the participant viewed a control condition or saw text with a slant (Control, Treatment)
+           # chosen_outcome, 
+           # participant response, 
+           # which color they believed would be at a higher point at the given location (Blue, Green)
+           # NOTE TO SELF - EXCLUDED BECAUSE WE MAY NOT LOOK AT THEM
+           # outcome_confidence, 
+           # participant response,
+           # confidence rating of how likely the chosen_outcome is to win (-25, 25)
+           # NOTE TO SELF - EXCLUDED BECAUSE WE MAY NOT LOOK AT THEM
+           outcome_confidence_abs,
+           # calculated column, 
+           # absolute value of outcome_confidence response
+           outcome_aligned,
+           # calculated column,
+           # reports whether the outcome selected by a participant was aligned with the text presented to the participant (0, 1)
+           # chosen_author, 
+           # participant response,
+           # color leaning of the author believed to have created the visualization shown (Blue, Green)
+           # NOTE TO SELF - EXCLUDED BECAUSE WE MAY NOT LOOK AT THEM
+           ## author_confidence,
+           # participant response,
+           # confidence rating of how likely the author leaning response is (-25, 25)
+           # NOTE TO SELF - EXCLUDED BECAUSE WE MAY NOT LOOK AT THEM
+           author_confidence_abs,
+           # calculated column,
+           # absolute value of author_confidence response (0, 25)
+           ## author_confidence_control_abs,
+           # calculated column,
+           # absolute value of author_confidence response for the control condition, for those who viewed experimental conditions (0, 25)
+           # NOTE TO SELF - EXCLUDED BECAUSE WE MAY NOT LOOK AT THEM
+           ## treatment_effect_author,
+           # calculated column,
+           # calculates the difference between author ratings for treatment conditions and the ratings for the control condition (-25, 25)
+           # NOTE TO SELF - EXCLUDED BECAUSE WE MAY NOT LOOK AT THEM
+           author_aligned
+           # calculated column,
+           # reports whether the author selected by a participant was aligned with the text presented to the participant (0, 1)
+           ## blue_story_outcome, green_story_outcome, text_outcome, mention_text_outcome, uncertainty_outcome, motivate_both_outcome, mention_text_author
+           # codes used to examine text responses
+           # NOTE TO SELF: EXCLUDING THESE UNTIL WE ACTUALLY CODE THEM
+)
+
+#### experiment subset ####
+
+# bootstrapping variable
+B <- 10000
+
+# color variables
+a = "#8267BE"
+a1 = "#c9bce3"
+u = "#FFBD35"
+u1 = "#f2d496"
+c = "#a3acb9"
+
+```
+
+# Hypothesis Exploration
+
+## Prediction Responses
+
+```{r effect_visualization_outcome}
+
+df_condensed_outcome <- df %>% 
+group_by(outcome_aligned) %>% 
+summarize(
+  mean = mean(outcome_confidence_abs),
+  se = se(outcome_confidence_abs)
+)
+
+aligned_continue_outcome <- c("Blank Aligned", 13.8, 0.4)
+aligned_dissipate_outcome <- c("Blank Aligned", 12, 0.4)
+aligned_reverse_outcome <- c("Blank Aligned", 11.1, 0.4)
+
+unaligned_continue_outcome <- c("Blank Unaligned", 10.4, 0.4)
+unaligned_dissipate_outcome <- c("Blank Unaligned", 12, 0.4)
+unaligned_reverse_outcome <- c("Blank Unaligned", 13.0, 0.4)
+
+
+continue_continue_outcome <- df_condensed_outcome %>%  
+rbind(aligned_continue_outcome) %>% 
+rbind(unaligned_continue_outcome) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+continue_continue_plot_outcome <- ggplot(continue_continue_outcome, aes(y = mean, x = outcome_aligned, color = outcome_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(7, 19))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Continuation of Trend:",
+  subtitle = "Both sides continue"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+continue_dissipate_outcome <- df_condensed_outcome %>%  
+rbind(aligned_continue_outcome) %>% 
+rbind(unaligned_dissipate_outcome) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+continue_dissipate_plot_outcome <- ggplot(continue_dissipate_outcome, aes(y = mean, x = outcome_aligned, color = outcome_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(7, 19))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Change for Unaligned:",
+  subtitle = "Effect for aligned continues,\neffect for unaligned dissipates"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+continue_reverse_outcome <- df_condensed_outcome %>%  
+rbind(aligned_continue_outcome) %>% 
+rbind(unaligned_reverse_outcome) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+continue_reverse_plot_outcome <- 
+ggplot(continue_reverse_outcome, aes(y = mean, x = outcome_aligned, color = outcome_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(7, 19))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Rebound Effect for Unaligned:",
+  subtitle = "Effect for aligned continues,\neffect for unaligned reverses"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+dissipate_continue_outcome <- df_condensed_outcome %>%  
+rbind(aligned_dissipate_outcome) %>% 
+rbind(unaligned_continue_outcome) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+dissipate_continue_plot_outcome <- 
+ggplot(dissipate_continue_outcome, aes(y = mean, x = outcome_aligned, color = outcome_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(7, 19))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Change for Aligned:",
+  subtitle = "Effect for aligned dissipates,\neffect for unaligned continues"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+dissipate_dissipate_outcome <- df_condensed_outcome %>%  
+rbind(aligned_dissipate_outcome) %>% 
+rbind(unaligned_dissipate_outcome) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+dissipate_dissipate_plot_outcome <- 
+ggplot(dissipate_dissipate_outcome, aes(y = mean, x = outcome_aligned, color = outcome_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(7, 19))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Change for Both:",
+  subtitle = "Both effect dissipate"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+dissipate_reverse_outcome <- df_condensed_outcome %>%  
+rbind(aligned_dissipate_outcome) %>% 
+rbind(unaligned_reverse_outcome) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+dissipate_reverse_plot_outcome <- 
+ggplot(dissipate_reverse_outcome, aes(y = mean, x = outcome_aligned, color = outcome_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(7, 19))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Change for Both:",
+  subtitle = "Effect for aligned dissipates,\neffect for unaligned reverses"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+reverse_continue_outcome <- df_condensed_outcome %>%  
+rbind(aligned_reverse_outcome) %>% 
+rbind(unaligned_continue_outcome) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+reverse_continue_plot_outcome <- 
+ggplot(reverse_continue_outcome, aes(y = mean, x = outcome_aligned, color = outcome_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(7, 19))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Change for Aligned:",
+  subtitle = "Effect for aligned reverses,\neffect for unaligned continues"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+reverse_dissipate_outcome <- df_condensed_outcome %>%  
+rbind(aligned_reverse_outcome) %>% 
+rbind(unaligned_dissipate_outcome) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+reverse_dissipate_plot_outcome <- 
+ggplot(reverse_dissipate_outcome, aes(y = mean, x = outcome_aligned, color = outcome_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(7, 19))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Change for Both:",
+  subtitle = "Effect for aligned reverses,\neffect for unaligned dissipates"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+reverse_reverse_outcome <- df_condensed_outcome %>%  
+rbind(aligned_reverse_outcome) %>% 
+rbind(unaligned_reverse_outcome) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+reverse_reverse_plot_outcome <- 
+ggplot(reverse_reverse_outcome, aes(y = mean, x = outcome_aligned, color = outcome_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(7, 19))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Change for Both:",
+  subtitle = "Both effect reverse"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+
+future_arrangement_outcome <- ggarrange(
+continue_continue_plot_outcome, 
+continue_dissipate_plot_outcome, 
+continue_reverse_plot_outcome, 
+dissipate_continue_plot_outcome, 
+dissipate_dissipate_plot_outcome, 
+dissipate_reverse_plot_outcome,
+reverse_continue_plot_outcome, 
+reverse_dissipate_plot_outcome, 
+reverse_reverse_plot_outcome,
+ncol = 3, nrow = 3)
+
+future_arrangement_outcome
+
+```
+
+## Appraisal  Responses
+
+```{r effect_visualization_author}
+
+df_condensed_author <- df %>% 
+group_by(author_aligned) %>% 
+summarize(
+  mean = mean(author_confidence_abs),
+  se = se(author_confidence_abs)
+)
+
+aligned_continue_author <- c("Blank Aligned", 13, 0.4)
+aligned_dissipate_author <- c("Blank Aligned", 4, 0.4)
+aligned_reverse_author <- c("Blank Aligned", 3, 0.4)
+
+unaligned_continue_author <- c("Blank Unaligned", 2.5, 0.4)
+unaligned_dissipate_author <- c("Blank Unaligned", 3.5, 0.4)
+unaligned_reverse_author <- c("Blank Unaligned", 8.24, 0.4)
+
+
+continue_continue_author <- df_condensed_author %>%  
+rbind(aligned_continue_author) %>% 
+rbind(unaligned_continue_author) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+continue_continue_plot_author <- ggplot(continue_continue_author, aes(y = mean, x = author_aligned, color = author_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(0, 15))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Continuation of Trend:",
+  subtitle = "Both sides continue"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+continue_dissipate_author <- df_condensed_author %>%  
+rbind(aligned_continue_author) %>% 
+rbind(unaligned_dissipate_author) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+continue_dissipate_plot_author <- ggplot(continue_dissipate_author, aes(y = mean, x = author_aligned, color = author_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(0, 15))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Change for Unaligned:",
+  subtitle = "Effect for aligned continues,\neffect for unaligned dissipates"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+continue_reverse_author <- df_condensed_author %>%  
+rbind(aligned_continue_author) %>% 
+rbind(unaligned_reverse_author) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+continue_reverse_plot_author <- 
+ggplot(continue_reverse_author, aes(y = mean, x = author_aligned, color = author_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(0, 15))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Rebound Effect for Unaligned:",
+  subtitle = "Effect for aligned continues,\neffect for unaligned reverses"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+dissipate_continue_author <- df_condensed_author %>%  
+rbind(aligned_dissipate_author) %>% 
+rbind(unaligned_continue_author) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+dissipate_continue_plot_author <- 
+ggplot(dissipate_continue_author, aes(y = mean, x = author_aligned, color = author_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(0, 15))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Change for Aligned:",
+  subtitle = "Effect for aligned dissipates,\neffect for unaligned continues"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+dissipate_dissipate_author <- df_condensed_author %>%  
+rbind(aligned_dissipate_author) %>% 
+rbind(unaligned_dissipate_author) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+dissipate_dissipate_plot_author <- 
+ggplot(dissipate_dissipate_author, aes(y = mean, x = author_aligned, color = author_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(0, 15))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Change for Both:",
+  subtitle = "Both effect dissipate"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+dissipate_reverse_author <- df_condensed_author %>%  
+rbind(aligned_dissipate_author) %>% 
+rbind(unaligned_reverse_author) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+dissipate_reverse_plot_author <- 
+ggplot(dissipate_reverse_author, aes(y = mean, x = author_aligned, color = author_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(0, 15))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Change for Both:",
+  subtitle = "Effect for aligned dissipates,\neffect for unaligned reverses"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+reverse_continue_author <- df_condensed_author %>%  
+rbind(aligned_reverse_author) %>% 
+rbind(unaligned_continue_author) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+reverse_continue_plot_author <- 
+ggplot(reverse_continue_author, aes(y = mean, x = author_aligned, color = author_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(0, 15))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Change for Aligned:",
+  subtitle = "Effect for aligned reverses,\neffect for unaligned continues"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+reverse_dissipate_author <- df_condensed_author %>%  
+rbind(aligned_reverse_author) %>% 
+rbind(unaligned_dissipate_author) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+reverse_dissipate_plot_author <- 
+ggplot(reverse_dissipate_author, aes(y = mean, x = author_aligned, color = author_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(0, 15))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Change for Both:",
+  subtitle = "Effect for aligned reverses,\neffect for unaligned dissipates"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+reverse_reverse_author <- df_condensed_author %>%  
+rbind(aligned_reverse_author) %>% 
+rbind(unaligned_reverse_author) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+reverse_reverse_plot_author <- 
+ggplot(reverse_reverse_author, aes(y = mean, x = author_aligned, color = author_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(0, 15))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Change for Both:",
+  subtitle = "Both effect reverse"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+
+future_arrangement_author <- ggarrange(
+continue_continue_plot_author, 
+continue_dissipate_plot_author, 
+continue_reverse_plot_author, 
+dissipate_continue_plot_author, 
+dissipate_dissipate_plot_author, 
+dissipate_reverse_plot_author,
+reverse_continue_plot_author, 
+reverse_dissipate_plot_author, 
+reverse_reverse_plot_author,
+ncol = 3, nrow = 3)
+
+future_arrangement_author
+
+```
+
+## Interaction
+
+```{r effect_visualization_interaction}
+
+df_condensed_interaction <- df %>% 
+group_by(outcome_aligned) %>% 
+summarize(
+  mean = mean(author_confidence_abs),
+  se = se(author_confidence_abs)
+)
+
+aligned_continue_interaction <- c("Blank Aligned", 8.59, 0.4)
+aligned_dissipate_interaction <- c("Blank Aligned", 3.63, 0.4)
+aligned_reverse_interaction <- c("Blank Aligned", 2.48, 0.4)
+
+unaligned_continue_interaction <- c("Blank Unaligned", 10.21, 0.4)
+unaligned_dissipate_interaction <- c("Blank Unaligned", 3.63, 0.4)
+unaligned_reverse_interaction <- c("Blank Unaligned", 3.29, 0.4)
+
+
+continue_continue_interaction <- df_condensed_interaction %>%  
+rbind(aligned_continue_interaction) %>% 
+rbind(unaligned_continue_interaction) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+continue_continue_plot_interaction <- ggplot(continue_continue_interaction, aes(y = mean, x = outcome_aligned, color = outcome_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(0, 15))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Continuation of Trend:",
+  subtitle = "Both sides continue"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+continue_dissipate_interaction <- df_condensed_interaction %>%  
+rbind(aligned_continue_interaction) %>% 
+rbind(unaligned_dissipate_interaction) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+continue_dissipate_plot_interaction <- ggplot(continue_dissipate_interaction, aes(y = mean, x = outcome_aligned, color = outcome_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(0, 15))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Change for Unaligned:",
+  subtitle = "Effect for aligned continues,\neffect for unaligned dissipates"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+continue_reverse_interaction <- df_condensed_interaction %>%  
+rbind(aligned_continue_interaction) %>% 
+rbind(unaligned_reverse_interaction) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+continue_reverse_plot_interaction <- 
+ggplot(continue_reverse_interaction, aes(y = mean, x = outcome_aligned, color = outcome_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(0, 15))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Rebound Effect for Unaligned:",
+  subtitle = "Effect for aligned continues,\neffect for unaligned reverses"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+dissipate_continue_interaction <- df_condensed_interaction %>%  
+rbind(aligned_dissipate_interaction) %>% 
+rbind(unaligned_continue_interaction) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+dissipate_continue_plot_interaction <- 
+ggplot(dissipate_continue_interaction, aes(y = mean, x = outcome_aligned, color = outcome_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(0, 15))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Change for Aligned:",
+  subtitle = "Effect for aligned dissipates,\neffect for unaligned continues"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+dissipate_dissipate_interaction <- df_condensed_interaction %>%  
+rbind(aligned_dissipate_interaction) %>% 
+rbind(unaligned_dissipate_interaction) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+dissipate_dissipate_plot_interaction <- 
+ggplot(dissipate_dissipate_interaction, aes(y = mean, x = outcome_aligned, color = outcome_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(0, 15))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Change for Both:",
+  subtitle = "Both effect dissipate"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+dissipate_reverse_interaction <- df_condensed_interaction %>%  
+rbind(aligned_dissipate_interaction) %>% 
+rbind(unaligned_reverse_interaction) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+dissipate_reverse_plot_interaction <- 
+ggplot(dissipate_reverse_interaction, aes(y = mean, x = outcome_aligned, color = outcome_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(0, 15))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Change for Both:",
+  subtitle = "Effect for aligned dissipates,\neffect for unaligned reverses"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+reverse_continue_interaction <- df_condensed_interaction %>%  
+rbind(aligned_reverse_interaction) %>% 
+rbind(unaligned_continue_interaction) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+reverse_continue_plot_interaction <- 
+ggplot(reverse_continue_interaction, aes(y = mean, x = outcome_aligned, color = outcome_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(0, 15))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Change for Aligned:",
+  subtitle = "Effect for aligned reverses,\neffect for unaligned continues"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+reverse_dissipate_interaction <- df_condensed_interaction %>%  
+rbind(aligned_reverse_interaction) %>% 
+rbind(unaligned_dissipate_interaction) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+reverse_dissipate_plot_interaction <- 
+ggplot(reverse_dissipate_interaction, aes(y = mean, x = outcome_aligned, color = outcome_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(0, 15))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Change for Both:",
+  subtitle = "Effect for aligned reverses,\neffect for unaligned dissipates"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+reverse_reverse_interaction <- df_condensed_interaction %>%  
+rbind(aligned_reverse_interaction) %>% 
+rbind(unaligned_reverse_interaction) %>% 
+mutate(
+  mean = as.numeric(mean),
+  se = as.numeric(se)
+)
+reverse_reverse_plot_interaction <- 
+ggplot(reverse_reverse_interaction, aes(y = mean, x = outcome_aligned, color = outcome_aligned))+
+geom_point()+
+geom_errorbar(aes(ymin = mean - se, ymax = mean + se))+
+scale_color_manual(values = c(a, a1, u1, c, u))+
+ylim(c(0, 15))+
+scale_x_discrete(limits = c("Blank Aligned", "Aligned", "NA", "Unaligned", "Blank Unaligned"), labels = c("Strong\nAligned", "Weak\nAligned", "Control", "Weak\nUnaligned", "Strong\nUnaligned"))+
+labs(
+  y = "Average Likelihood",
+  x = "Condition & Response",
+  title = "Change for Both:",
+  subtitle = "Both effect reverse"
+)+
+theme(legend.position = "none",
+      axis.text = element_text(size = 5),
+      axis.title = element_text(size = 7),
+      plot.title = element_text(size = 10),
+      plot.subtitle = element_text(size = 7))
+
+
+future_arrangement_interaction <- ggarrange(
+continue_continue_plot_interaction, 
+continue_dissipate_plot_interaction, 
+continue_reverse_plot_interaction, 
+dissipate_continue_plot_interaction, 
+dissipate_dissipate_plot_interaction, 
+dissipate_reverse_plot_interaction,
+reverse_continue_plot_interaction, 
+reverse_dissipate_plot_interaction, 
+reverse_reverse_plot_interaction,
+ncol = 3, nrow = 3)
+
+future_arrangement_interaction
+
+```
+
+# Bootstrapping & Fake Analysis
+
+## Set up Data
+
+Add column to dataframe to indicate the strength of language used (Weak or Control).
+
+Add set of rows to the data frame that represent new participants. These participants get a value of Strong for strength of language. They get a value of "Test" for `Level`, `Position`, `full_condition`, `Slant`, `ChartType`, and `treatment.` A new set of 40 is generated for outcome_aligned & author_aligned combinations. 
+
+`outcome_confidence_abs`
+
+- Prediction Aligned, Appraisal  Aligned: mean = 13.5, sd = 0.5
+- Prediction Unaligned, Appraisal  Aligned: mean = 12.5, sd = 0.6
+- Prediction Aligned, Appraisal  Unaligned: mean = 13.2, sd = 0.7
+- Prediction Unaligned, Appraisal  Unaligned: mean = 12, sd = 0.6
+
+`author_confidence_abs`
+
+- Prediction Aligned, Appraisal  Aligned: mean = 8, sd = 0.5
+- Prediction Unaligned, Appraisal  Aligned: mean = 10, sd = 0.7
+- Prediction Aligned, Appraisal  Unaligned: mean = 2, sd = 0.4
+- Prediction Unaligned, Appraisal  Unaligned: mean = 4, sd = 0.7
+
+
+```{r make test df}
+
+test_df <- df %>% 
+mutate(strength = ifelse(treatment == "Treatment", "Weak", "Control"))
+
+n = 60
+
+oa_aa <- cbind(Level = rep("Test", n), 
+             Position = rep("Test", n),
+             full_condition = rep("Test", n),
+             Slant = rep("Test", n),
+             ChartType = rep("Test", n),
+             treatment = rep("Test", n),
+             outcome_confidence_abs = round(rnorm(n, mean = 13.5, sd = 0.5), 0),
+             outcome_aligned = "Aligned",
+             author_confidence_abs = round(rnorm(n, mean = 8, sd = 0.5), 0),
+             author_aligned = "Aligned",
+             strength = "Strong"
+             )
+
+ou_aa <- cbind(Level = rep("Test", n), 
+             Position = rep("Test", n),
+             full_condition = rep("Test", n),
+             Slant = rep("Test", n),
+             ChartType = rep("Test", n),
+             treatment = rep("Test", n),
+             outcome_confidence_abs = round(rnorm(n, mean = 12.5, sd = 0.6), 0),
+             outcome_aligned = "Unaligned",
+             author_confidence_abs = round(rnorm(n, mean = 10, sd = 0.7), 0),
+             author_aligned = "Aligned",
+             strength = "Strong"
+             )
+
+oa_au <- cbind(Level = rep("Test", n), 
+             Position = rep("Test", n),
+             full_condition = rep("Test", n),
+             Slant = rep("Test", n),
+             ChartType = rep("Test", n),
+             treatment = rep("Test", n),
+             outcome_confidence_abs = round(rnorm(n, mean = 13.2, sd = 0.7), 0),
+             outcome_aligned = "Aligned",
+             author_confidence_abs = round(rnorm(n, mean = 2, sd = 0.4), 0),
+             author_aligned = "Unaligned",
+             strength = "Strong"
+             )
+
+ou_au <- cbind(Level = rep("Test", n), 
+             Position = rep("Test", n),
+             full_condition = rep("Test", n),
+             Slant = rep("Test", n),
+             ChartType = rep("Test", n),
+             treatment = rep("Test", n),
+             outcome_confidence_abs = round(rnorm(n, mean = 12, sd = 0.6), 0),
+             outcome_aligned = "Unaligned",
+             author_confidence_abs = round(rnorm(n, mean = 4, sd = 0.7), 0),
+             author_aligned = "Unaligned",
+             strength = "Strong"
+             )
+
+test_df <- test_df %>% 
+rbind(oa_aa, ou_aa, oa_au, ou_au) %>% 
+mutate(outcome_confidence_abs = as.numeric(outcome_confidence_abs),
+       author_confidence_abs = as.numeric(author_confidence_abs))
+
+```
+
+
+## Prediction Responses
+
+```{r test_outcome analysis}
+
+ggplot(subset(test_df, author_aligned != "Unaligned"), aes(x = outcome_confidence_abs, y = after_stat(count)))+
+geom_histogram(binwidth = 1)+
+facet_grid(vars(strength))+
+ggtitle("Prediction Aligned Comparison")
+
+kruskal.test(outcome_confidence_abs ~ as.factor(strength), data = subset(test_df, author_aligned != "Unaligned"))
+
+dunnTest(outcome_confidence_abs ~ as.factor(strength), data = subset(test_df, outcome_aligned != "Unaligned"), method = "bonferroni")
+
+ggplot(subset(test_df, author_aligned != "Aligned"), aes(x = outcome_confidence_abs, y = after_stat(count)))+
+geom_histogram(binwidth = 1)+
+facet_grid(vars(strength))+
+ggtitle("Prediction Unaligned Comparison")
+
+kruskal.test(outcome_confidence_abs ~ as.factor(strength), data = subset(test_df, author_aligned != "Aligned"))
+
+dunnTest(outcome_confidence_abs ~ as.factor(strength), data = subset(test_df, outcome_aligned != "Aligned"), method = "bonferroni")
+
+
+```
+
+  
+  
+```{r power_analysis}
+
+ns <- seq(1, 80, 2)
+ks <- seq(0, 2, 0.25)
+reps = 1000
+power <- c()
+
+test_n <- c()
+test_k <- c()
+
+base_outcome <- mean(subset(df, outcome_aligned == "NA")$outcome_confidence_abs)
+base_author <- mean(subset(df, author_aligned == "NA")$author_confidence_abs)
+
+outcome_a_author_a <- subset(df, author_aligned == "Aligned" & outcome_aligned == "Aligned")
+outcome_a_author_u <- subset(df, author_aligned == "Aligned" & outcome_aligned == "Unaligned")
+outcome_u_author_a <- subset(df, author_aligned == "Unaligned" & outcome_aligned == "Aligned")
+outcome_u_author_u <- subset(df, author_aligned == "Unaligned" & outcome_aligned == "Unaligned")
+
+effect_aa_outcome <- mean(outcome_a_author_a$outcome_confidence_abs) - base_outcome
+effect_ua_outcome <- mean(outcome_u_author_a$outcome_confidence_abs) - base_outcome
+effect_au_outcome <- mean(outcome_a_author_u$outcome_confidence_abs) - base_outcome
+effect_uu_outcome <- mean(outcome_u_author_u$outcome_confidence_abs) - base_outcome
+
+effect_aa_author <- mean(outcome_a_author_a$author_confidence_abs) - base_author
+effect_ua_author <- mean(outcome_u_author_a$author_confidence_abs) - base_author
+effect_au_author <- mean(outcome_a_author_u$author_confidence_abs) - base_author
+effect_uu_author <- mean(outcome_u_author_u$author_confidence_abs) - base_author
+
+
+
+
+for (k in ks) {
+  
+  for (n in ns){
+    
+    p_values <- c()
+    
+    for (rep in range(reps)) {
+      
+      oa_aa <-  cbind(Level = rep("Test", n), 
+                      Position = rep("Test", n),
+                      full_condition = rep("Test", n),
+                      Slant = rep("Test", n),
+                      ChartType = rep("Test", n),
+                      treatment = rep("Test", n),
+                      outcome_confidence_abs = round(sample(outcome_a_author_a$outcome_confidence_abs, n, replace = TRUE) + (effect_aa_outcome * k), 2),
+                      outcome_aligned = "Aligned",
+                      author_confidence_abs = round(sample(outcome_a_author_a$author_confidence_abs, n, replace = TRUE) + (effect_aa_author * k), 2),
+                      author_aligned = "Aligned",
+                      strength = "Strong"
+      )
+      
+      ou_aa <- cbind(Level = rep("Test", n), 
+                     Position = rep("Test", n),
+                     full_condition = rep("Test", n),
+                     Slant = rep("Test", n),
+                     ChartType = rep("Test", n),
+                     treatment = rep("Test", n),
+                     outcome_confidence_abs = round(sample(outcome_u_author_a$outcome_confidence_abs, n, replace = TRUE) + (effect_ua_outcome * k), 2),
+                     outcome_aligned = "Unaligned",
+                     author_confidence_abs = round(sample(outcome_u_author_a$author_confidence_abs, n, replace = TRUE) + (effect_ua_author * k), 2),
+                     author_aligned = "Aligned",
+                     strength = "Strong"
+      )
+      
+      oa_au <- cbind(Level = rep("Test", n), 
+                     Position = rep("Test", n),
+                     full_condition = rep("Test", n),
+                     Slant = rep("Test", n),
+                     ChartType = rep("Test", n),
+                     treatment = rep("Test", n),
+                     outcome_confidence_abs = round(sample(outcome_a_author_u$outcome_confidence_abs, n, replace = TRUE) + (effect_au_outcome * k), 2),
+                     outcome_aligned = "Aligned",
+                     author_confidence_abs = round(sample(outcome_a_author_u$author_confidence_abs, n, replace = TRUE) + (effect_au_author * k), 2),
+                     author_aligned = "Unaligned",
+                     strength = "Strong"
+      )
+      
+      ou_au <- cbind(Level = rep("Test", n), 
+                     Position = rep("Test", n),
+                     full_condition = rep("Test", n),
+                     Slant = rep("Test", n),
+                     ChartType = rep("Test", n),
+                     treatment = rep("Test", n),
+                     outcome_confidence_abs = round(sample(outcome_u_author_u$outcome_confidence_abs, n, replace = TRUE) + (effect_uu_outcome * k), 2),
+                     outcome_aligned = "Unaligned",
+                     author_confidence_abs = round(sample(outcome_u_author_u$author_confidence_abs, n, replace = TRUE) + (effect_uu_author * k), 2),
+                     author_aligned = "Unaligned",
+                     strength = "Strong"
+      )
+      
+      test_df <- df %>% 
+        mutate(strength = ifelse(treatment == "Treatment", "Weak", "Control")) %>% 
+        rbind(oa_aa, ou_aa, oa_au, ou_au) %>% 
+        mutate(outcome_confidence_abs = as.numeric(outcome_confidence_abs),
+               author_confidence_abs = as.numeric(author_confidence_abs))
+      
+      p_value_outcome_aligned <-  kruskal.test(outcome_confidence_abs ~ as.factor(strength), data = subset(test_df, author_aligned != "Unaligned"))$p.value
+      p_value_outcome_unaligned <-  kruskal.test(outcome_confidence_abs ~ as.factor(strength), data = subset(test_df, author_aligned != "Aligned"))$p.value
+      
+      p_value_author_aligned <-  kruskal.test(author_confidence_abs ~ as.factor(strength), data = subset(test_df, author_aligned != "Unaligned"))$p.value
+      p_value_author_unaligned <-  kruskal.test(author_confidence_abs ~ as.factor(strength), data = subset(test_df, author_aligned != "Aligned"))$p.value
+      
+      p_values <-  append(p_values, c(p_value_outcome_aligned, p_value_outcome_unaligned, p_value_author_aligned, p_value_author_unaligned))
+      
+    }
+    
+    power <- append(power, mean(p_values < 0.05))
+    test_k <- append(test_k, k)
+    test_n <- append(test_n, n)
+  }
+}
+
+power_analysis <- t(rbind(power, test_k, test_n))
+
+
+ggplot(as.data.frame(power_analysis), aes(x = test_n, y = power, color = as.factor(test_k)))+
+  geom_line()+
+  ylim(c(0, 1))+
+  facet_grid(vars(test_k))+
+  geom_hline(yintercept = 0.8)
+
+
+
+```
+  
+  
