@@ -12,10 +12,10 @@ Each study folder contains at least an analysis foler, a stimuli images folder, 
 
 - **[tables.pdf](tables.pdf)**: pdf file containing comparisons of baseline and fully saturated mixed effect models. Captions describe which study each table corresponds to. 
 - **[study 1/](study%201/)**: folder containing all files pertaining to Study 1
-- - **[study 1/analysis/](study%201/analysis/)**: folder containing all analysis files for Study 1
-- - - *[study 1 data.csv](study%201/analysis/study%201%20data.csv)*: survey output for Study 1 participants
-- - - *[study-1-response-visualizations.pdf](study%201/analysis/study-1-response-visualizations.pdf)*: streamlined file displaying visualizations of the  response count and spread
-- - - *[full study 1 analysis.Rmd](full study 1 analysis.Rmd)*: analysis script for all of Study 1, including exploratory analysis
+  - **[study 1/analysis/](study%201/analysis/)**: folder containing all analysis files for Study 1
+    - *[study 1 data.csv](study%201/analysis/study%201%20data.csv)*: survey output for Study 1 participants
+    - *[study-1-response-visualizations.pdf](study%201/analysis/study-1-response-visualizations.pdf)*: streamlined file displaying visualizations of the  response count and spread
+    - *[full study 1 analysis.Rmd](full study 1 analysis.Rmd)*: analysis script for all of Study 1, including exploratory analysis
 - - - *[full-study-1-analysis.pdf](full-study-1-analysis.pdf)*: knit Rmd file containing all of Study 1 analysis
 - - **[stimuli images/](stimuli%20images/)**: folder containing all stimuli images for Study 1. split into bar and line chart folders, each containing control/L1, L2, L3, and L4 folders
 - - **[survey materials/](survey materialss/)**: folder containing example survey for Study 1
