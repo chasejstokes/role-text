@@ -1,0 +1,719 @@
+pt,winning_party,winning_party,winning_scale_1,winning_scale_1,pct chances_blue,pct chances_green,pct_tie,biasToward_1,biasToward_1,biasAgainst_1,biasAgainst_1,personalView_1,personalView_1,age,education,survey_about,comments,Order,Prime,Strength,ChartType,Slant,Stimulus
+1,,Green,,25,25,25,50,-25,,,25,,-25,25 - 34,Some college,,,BlueLeft,Outcome,High,Line,Blue,2
+2,Green,,-12,,25,75,0,,-1,1,,-1,,45 - 54,2 year degree,,,GreenLeft,Bias,High,Line,Blue,3
+3,,Green,,15,30,40,30,0,,,0,,0,35 - 44,2 year degree,,,BlueLeft,Outcome,High,Line,Blue,4
+4,,Green,,14,35,55,10,10,,,-8,,7,25 - 34,High school graduate,,,BlueLeft,Outcome,High,Line,Green,1
+5,Green,,-25,,5,90,5,,0,0,,0,,55 - 64,4 year degree,Seeing if participants can read a graph and determine future positioning on the graph based on past reality.,Interesting.,GreenLeft,Bias,High,Line,Green,4
+6,Blue,,1,,25,25,50,,-3,3,,-2,,18 - 24,Some college,,,GreenLeft,Outcome,High,Line,Blue,3
+7,,Green,,19,5,70,25,5,,,-2,,1,25 - 34,High school graduate,,,BlueLeft,Bias,High,Line,Green,3
+8,,Blue,,-20,70,20,10,10,,,-5,,1,25 - 34,4 year degree,,,BlueLeft,Outcome,High,Line,Green,1
+9,Green,,-13,,35,45,20,,8,6,,17,,18 - 24,Some college,,,GreenLeft,Bias,High,Line,Blue,1
+10,,Green,,13,20,60,20,14,,,-7,,8,18 - 24,Some college,,,BlueLeft,Outcome,High,Line,Green,2
+11,,Blue,,-13,60,30,10,-13,,,-10,,-12,18 - 24,High school graduate,,,BlueLeft,Outcome,High,Line,Blue,4
+12,Green,,-14,,45,0,55,,1,1,,1,,25 - 34,Some college,n/a,n/a,GreenLeft,Bias,High,Line,Green,4
+13,Blue,,25,,80,20,0,,25,-25,,25,,25 - 34,Professional degree,,,GreenLeft,Bias,High,Line,Blue,2
+14,,Green,,15,65,30,5,1,,,0,,0,25 - 34,Professional degree,,,BlueLeft,Outcome,High,Line,Green,2
+15,Blue,,10,,50,35,15,,20,-20,,20,,45 - 54,Professional degree,,,GreenLeft,Bias,High,Line,Blue,2
+16,,Green,,13,25,50,25,22,,,-14,,0,35 - 44,2 year degree,,,BlueLeft,Outcome,High,Line,Green,4
+17,Green,,-15,,35,55,10,,15,-20,,20,,18 - 24,High school graduate,,,GreenLeft,Bias,High,Line,Blue,3
+18,Blue,,19,,55,20,25,,15,-13,,13,,35 - 44,Some college,,,GreenLeft,Bias,High,Line,Blue,1
+19,,Blue,,-13,60,39,1,-9,,,-10,,-13,25 - 34,4 year degree,I'm not sure but the chart said with the above information blue will win so I thought it was biased towards blue or had a a design that was flawed.,,BlueLeft,Outcome,High,Line,Blue,4
+20,,Blue,,-16,61,10,29,-6,,,8,,-8,25 - 34,Some college,,,BlueLeft,Bias,High,Line,Blue,1
+21,,Blue,,-13,75,25,0,7,,,-3,,6,35 - 44,Professional degree,,,BlueLeft,Bias,High,Line,Green,3
+22,,Green,,13,40,60,0,0,,,0,,0,25 - 34,4 year degree,,,BlueLeft,Bias,High,Line,Green,3
+23,Blue,,13,,60,10,30,,4,5,,7,,35 - 44,4 year degree,Data analysis,,GreenLeft,Outcome,High,Line,Blue,3
+24,Green,,-12,,60,40,0,,5,25,,-25,,25 - 34,4 year degree,How an opinion on a graph might affect how we interpret the data on that graph.,,GreenLeft,Outcome,High,Line,Green,2
+25,Green,,-12,,35,65,0,,-8,2,,-6,,25 - 34,4 year degree,,,GreenLeft,Outcome,High,Line,Green,4
+26,Green,,-13,,30,60,10,,25,-25,,25,,25 - 34,4 year degree,,,GreenLeft,Outcome,High,Line,Blue,2
+27,,Green,,13,40,50,10,4,,,-5,,20,18 - 24,4 year degree,,,BlueLeft,Bias,High,Line,Green,1
+28,,Blue,,-5,65,35,0,25,,,-25,,25,25 - 34,4 year degree,,,BlueLeft,Bias,High,Line,Green,1
+29,,Blue,,-18,55,15,30,0,,,0,,0,25 - 34,Some college,,,BlueLeft,Bias,High,Line,Blue,4
+30,Green,,-10,,35,50,15,,7,-6,,0,,25 - 34,4 year degree,,,GreenLeft,Outcome,High,Line,Green,1
+31,Green,,-13,,40,50,10,,0,0,,0,,25 - 34,Some college,,,GreenLeft,Bias,High,Line,Green,3
+32,Green,,-18,,30,70,0,,-2,1,,-3,,35 - 44,2 year degree,,,GreenLeft,Outcome,High,Line,Blue,4
+33,,Green,,1,45,55,0,18,,,-19,,8,25 - 34,4 year degree,,,BlueLeft,Bias,High,Line,Green,2
+34,,Green,,10,25,25,50,-25,,,25,,-15,18 - 24,4 year degree,Seeing how likely I am to fall for bias,,BlueLeft,Bias,High,Line,Blue,2
+35,,Blue,,-15,60,40,0,-6,,,7,,-2,18 - 24,Some college,,,BlueLeft,Outcome,High,Line,Blue,1
+36,Blue,,25,,95,5,0,,5,-5,,8,,45 - 54,Professional degree,,,GreenLeft,Outcome,High,Line,Blue,1
+37,Green,,-12,,40,60,0,,-7,-5,,-3,,35 - 44,2 year degree,,,GreenLeft,Bias,High,Line,Green,2
+38,,Green,,12,40,60,0,-4,,,-6,,2,35 - 44,Professional degree,,,BlueLeft,Bias,High,Line,Green,4
+39,Green,,-17,,30,70,0,,0,0,,0,,25 - 34,2 year degree,,,GreenLeft,Outcome,High,Line,Green,2
+40,,Green,,13,40,60,0,10,,,-5,,15,25 - 34,Some college,,,BlueLeft,Outcome,High,Line,Green,1
+41,Green,,-13,,30,60,10,,0,0,,0,,45 - 54,Some college,,,GreenLeft,Outcome,High,Line,Blue,3
+42,,Green,,25,10,90,0,1,,,1,,1,35 - 44,Some college,no idea,,BlueLeft,Outcome,High,Line,Green,3
+43,Green,,-4,,46,52,2,,-8,8,,-20,,45 - 54,4 year degree,,,GreenLeft,Outcome,High,Line,Green,4
+44,Green,,-14,,30,50,20,,-8,7,,-7,,25 - 34,2 year degree,my thoughts about a chart,,GreenLeft,Bias,High,Line,Green,3
+45,,Blue,,-13,60,35,5,-10,,,13,,-13,25 - 34,4 year degree,,,BlueLeft,Bias,High,Line,Blue,3
+46,,Blue,,-21,85,15,0,-1,,,1,,1,25 - 34,4 year degree,,,BlueLeft,Bias,High,Line,Blue,4
+47,Green,,-13,,60,40,0,,5,4,,12,,25 - 34,4 year degree,,,GreenLeft,Bias,High,Line,Blue,2
+48,Blue,,12,,65,34,1,,0,0,,0,,45 - 54,4 year degree,my ability to read charts maybe,,GreenLeft,Outcome,High,Line,Blue,1
+49,Green,,-13,,30,40,30,,0,0,,0,,45 - 54,4 year degree,,,GreenLeft,Bias,High,Line,Green,4
+50,,Blue,,-13,60,38,2,25,,,20,,25,35 - 44,Some college,Whether chart bias affects the way a person regards data. ,,BlueLeft,Outcome,High,Line,Green,2
+51,Green,,-11,,35,40,25,,0,0,,-4,,45 - 54,High school graduate,,,GreenLeft,Bias,High,Line,Blue,4
+52,,Blue,,-13,55,44,1,14,,,-17,,17,25 - 34,Some college,,,BlueLeft,Outcome,High,Line,Green,3
+53,Blue,,17,,45,35,20,,2,0,,1,,35 - 44,2 year degree,,,GreenLeft,Bias,High,Line,Blue,1
+54,,Blue,,-13,35,45,20,-7,,,7,,-3,18 - 24,4 year degree,,,BlueLeft,Outcome,High,Line,Blue,3
+55,,Green,,20,20,80,0,22,,,-11,,11,25 - 34,High school graduate,,,BlueLeft,Outcome,High,Line,Green,1
+56,Blue,,8,,50,25,25,,25,-25,,25,,18 - 24,4 year degree,,,GreenLeft,Bias,High,Line,Blue,2
+57,Green,,-12,,40,55,5,,12,-10,,8,,35 - 44,Professional degree,,,GreenLeft,Bias,High,Line,Blue,3
+58,,Green,,13,30,70,0,1,,,0,,1,55 - 64,4 year degree,,,BlueLeft,Outcome,High,Line,Green,4
+59,Green,,3,,34,33,33,,-12,6,,-8,,35 - 44,Professional degree,,,GreenLeft,Outcome,High,Line,Green,3
+60,Green,,-13,,35,65,0,,-5,5,,-5,,35 - 44,High school graduate,,,GreenLeft,Bias,High,Line,Green,1
+61,,Blue,,-1,42,38,20,0,,,11,,-12,55 - 64,4 year degree,,,BlueLeft,Outcome,High,Line,Blue,1
+62,,Blue,,-17,70,30,0,-2,,,2,,-7,25 - 34,4 year degree,Identifying Bias in visuals and charts.,,BlueLeft,Bias,High,Line,Blue,4
+63,,Green,,2,35,35,30,-12,,,-19,,-6,45 - 54,4 year degree,,,BlueLeft,Bias,High,Line,Blue,3
+64,,Green,,18,37,49,14,9,,,-8,,8,35 - 44,2 year degree,,,BlueLeft,Bias,High,Line,Green,2
+65,Green,,-7,,35,45,20,,0,0,,0,,18 - 24,4 year degree,,,GreenLeft,Outcome,High,Line,Blue,2
+66,Green,,-13,,45,55,0,,1,-1,,0,,55 - 64,4 year degree,Guessing a future event,,GreenLeft,Outcome,High,Line,Blue,2
+67,,Green,,13,20,80,0,12,,,-16,,14,45 - 54,Professional degree,,,BlueLeft,Bias,High,Line,Green,3
+68,,Green,,6,40,60,0,4,,,1,,7,35 - 44,Prefer not to answer,,,BlueLeft,Bias,High,Line,Green,1
+69,Blue,,13,,70,25,5,,14,0,,17,,25 - 34,4 year degree,,,GreenLeft,Outcome,High,Line,Blue,1
+70,Blue,,5,,55,40,5,,-25,25,,-25,,25 - 34,Some college,,,GreenLeft,Outcome,High,Line,Green,2
+71,Green,,-13,,30,50,20,,0,0,,0,,25 - 34,4 year degree,Predicting based upon a chart,,GreenLeft,Outcome,High,Line,Green,4
+72,,Green,,15,25,50,25,-20,,,18,,5,25 - 34,4 year degree,,,BlueLeft,Outcome,High,Line,Blue,2
+73,,Green,,9,35,55,10,0,,,0,,0,18 - 24,,,,BlueLeft,Outcome,High,Line,Green,3
+74,,Green,,13,45,50,5,0,,,0,,0,35 - 44,4 year degree,reading a chart,,BlueLeft,Bias,High,Line,Blue,4
+75,Green,,-14,,30,45,25,,6,6,,15,,25 - 34,Some college,,,GreenLeft,Bias,High,Line,Blue,4
+76,,Blue,,-13,55,35,10,-10,,,10,,-10,25 - 34,Some college,,,BlueLeft,Bias,High,Line,Blue,3
+77,Green,,-13,,40,50,10,,23,-23,,18,,45 - 54,Some college,,,GreenLeft,Outcome,High,Line,Blue,1
+78,Blue,,4,,30,20,50,,-4,-3,,-3,,35 - 44,4 year degree,,,GreenLeft,Outcome,High,Line,Green,1
+79,,Green,,7,45,50,5,0,,,0,,0,25 - 34,4 year degree,,,BlueLeft,Bias,High,Line,Green,4
+80,Green,,-11,,40,55,5,,-3,3,,-10,,25 - 34,Some college,,,GreenLeft,Outcome,High,Line,Green,2
+81,,Green,,21,20,80,0,7,,,7,,9,35 - 44,Professional degree,,,BlueLeft,Outcome,High,Line,Green,1
+82,,Green,,4,33,33,34,25,,,-25,,25,35 - 44,4 year degree,,,BlueLeft,Bias,High,Line,Green,2
+83,Green,,-5,,40,45,15,,0,0,,-1,,25 - 34,Professional degree,,,GreenLeft,Bias,High,Line,Green,4
+84,,Green,,18,20,75,5,-15,,,-14,,-16,25 - 34,4 year degree,,,BlueLeft,Outcome,High,Line,Blue,1
+85,,Blue,,-21,75,25,0,-1,,,1,,0,18 - 24,Some college,,,BlueLeft,Outcome,High,Line,Blue,3
+86,Blue,,5,,55,40,5,,-17,18,,-18,,18 - 24,High school graduate,,,GreenLeft,Bias,High,Line,Green,4
+87,,Blue,,0,34,33,33,5,,,0,,0,25 - 34,Professional degree,,,BlueLeft,Outcome,High,Line,Blue,1
+88,,Green,,13,30,40,30,0,,,0,,0,25 - 34,High school graduate,,,BlueLeft,Outcome,High,Line,Green,4
+89,Green,,-6,,25,30,45,,-4,1,,-4,,18 - 24,4 year degree,,,GreenLeft,Bias,High,Line,Green,3
+90,Green,,-21,,40,50,10,,8,-12,,8,,25 - 34,High school graduate,,,GreenLeft,Bias,High,Line,Blue,3
+91,,Green,,25,0,100,0,25,,,25,,25,25 - 34,Some college,Perceptions regarding outcomes with a biased statement in the information. ,"I have no reason to doubt or mistrust the statement on the graph, so I went with the statement provided. ",BlueLeft,Outcome,High,Line,Green,2
+92,,Blue,,-12,80,20,0,5,,,4,,3,25 - 34,4 year degree,,,BlueLeft,Outcome,High,Line,Blue,3
+93,Blue,,13,,45,30,25,,-25,0,,-25,,25 - 34,2 year degree,,,GreenLeft,Bias,High,Line,Green,2
+94,,Green,,15,35,55,10,7,,,-4,,8,35 - 44,4 year degree,,,BlueLeft,Bias,High,Line,Green,3
+95,,Green,,2,45,49,6,-2,,,2,,-3,25 - 34,4 year degree,,,BlueLeft,Bias,High,Line,Blue,3
+96,Green,,0,,33,33,34,,25,-25,,25,,45 - 54,2 year degree,Our interpretations of charts,,GreenLeft,Outcome,High,Line,Blue,2
+97,Green,,-19,,10,60,30,,-11,11,,-11,,25 - 34,2 year degree,,Thanks,GreenLeft,Bias,High,Line,Green,1
+98,,Green,,11,45,50,5,0,,,0,,0,25 - 34,4 year degree,,,BlueLeft,Outcome,High,Line,Green,4
+99,Blue,,22,,85,5,10,,0,0,,0,,55 - 64,4 year degree,No idea.,Thank you.,GreenLeft,Outcome,High,Line,Green,1
+100,,Blue,,-25,51,49,0,-23,,,-25,,-25,25 - 34,High school graduate,,,BlueLeft,Outcome,High,Line,Blue,4
+101,Blue,,17,,70,30,0,,-18,13,,-16,,65 - 74,Professional degree,,,GreenLeft,Outcome,High,Line,Green,3
+102,Green,,-13,,30,60,10,,16,-19,,18,,35 - 44,4 year degree,,,GreenLeft,Bias,High,Line,Blue,1
+103,Blue,,13,,50,25,25,,-19,17,,-19,,35 - 44,High school graduate,Which company would make the highest on the chart on October 11th,Thank you,GreenLeft,Bias,High,Line,Green,2
+104,,Blue,,-22,50,25,25,-12,,,0,,-12,25 - 34,4 year degree,,,BlueLeft,Bias,High,Line,Blue,2
+105,Blue,,11,,65,35,0,,8,7,,14,,45 - 54,2 year degree,was it a fair charting?,none,GreenLeft,Bias,High,Line,Blue,1
+106,Blue,,7,,55,5,40,,0,0,,0,,65 - 74,High school graduate,,,GreenLeft,Bias,High,Line,Blue,4
+107,,Green,,0,20,30,50,-10,,,11,,-3,18 - 24,4 year degree,Bias in graphs,,BlueLeft,Outcome,High,Line,Blue,2
+108,Green,,-17,,40,60,0,,10,-10,,10,,65 - 74,4 year degree,How people interpret chart information,,GreenLeft,Bias,High,Line,Blue,4
+109,Green,,-10,,33,34,33,,-10,5,,-10,,18 - 24,4 year degree,,,GreenLeft,Bias,High,Line,Green,1
+110,,Green,,15,35,65,0,-10,,,8,,-5,25 - 34,Some college,,,BlueLeft,Outcome,High,Line,Blue,4
+111,,Green,,10,40,60,0,25,,,-25,,10,18 - 24,4 year degree,To see how words can affect what a chart shows. ,Great survey,BlueLeft,Outcome,High,Line,Green,3
+112,Green,,-22,,10,70,20,,-15,15,,-15,,25 - 34,4 year degree,None,None,GreenLeft,Bias,High,Line,Blue,2
+113,Green,,-7,,20,65,15,,-13,-12,,-20,,35 - 44,4 year degree,,,GreenLeft,Outcome,High,Line,Green,4
+114,,Green,,12,25,70,5,-25,,,-25,,-25,25 - 34,Some college,,,BlueLeft,Bias,High,Line,Blue,1
+115,,Blue,,-21,50,40,10,-5,,,5,,0,65 - 74,High school graduate,probability,,BlueLeft,Outcome,High,Line,Blue,4
+116,Green,,-13,,40,40,20,,12,-10,,11,,18 - 24,Some college,,,GreenLeft,Bias,High,Line,Blue,2
+117,Blue,,18,,75,20,5,,2,-2,,1,,35 - 44,4 year degree,,Easy to understand,GreenLeft,Bias,No-Side,Bar,None,1
+118,,Green,,10,35,45,20,0,,,0,,0,45 - 54,4 year degree,Ability to read a chart and guess future outcomes,"Good survey, everything worked well. Thank you!",BlueLeft,Outcome,No-Side,Bar,None,3
+119,,Blue,,-25,80,10,10,0,,,0,,0,35 - 44,4 year degree,,,BlueLeft,Bias,No-Side,Bar,None,4
+120,Green,,7,,40,60,0,,14,4,,25,,25 - 34,Professional degree,,,GreenLeft,Bias,No-Side,Bar,None,2
+121,,Green,,13,30,20,50,1,,,0,,0,25 - 34,Professional degree,,,BlueLeft,Outcome,No-Side,Bar,None,4
+122,,Green,,13,40,60,0,0,,,0,,0,35 - 44,Some college,,,BlueLeft,Bias,No-Side,Bar,None,1
+123,Green,,0,,50,50,0,,0,0,,25,,45 - 54,Some college,"Graph's, and a perception of outcomes in the future.","The survey was fun to take, I hope you have a good day.",GreenLeft,Outcome,No-Side,Bar,None,3
+124,Green,,0,,45,45,10,,0,0,,1,,18 - 24,Some college,,,GreenLeft,Outcome,No-Side,Bar,None,2
+125,,Green,,4,40,60,0,-8,,,2,,0,25 - 34,Some college,,,BlueLeft,Bias,No-Side,Bar,None,1
+126,Green,,-6,,40,50,10,,0,0,,0,,25 - 34,High school graduate,,,GreenLeft,Outcome,No-Side,Bar,None,2
+127,,Green,,10,60,40,0,0,,,0,,0,25 - 34,Some college,,,BlueLeft,Outcome,No-Side,Bar,None,2
+128,Green,,-5,,48,52,0,,0,0,,0,,18 - 24,2 year degree,,,GreenLeft,Outcome,No-Side,Bar,None,4
+129,Blue,,12,,51,48,1,,0,0,,0,,25 - 34,4 year degree,,,GreenLeft,Outcome,No-Side,Bar,None,3
+130,,Green,,19,49,49,2,0,,,0,,0,25 - 34,Professional degree,trustworthiness of government election results,,BlueLeft,Bias,No-Side,Bar,None,1
+131,Blue,,5,,50,15,35,,1,-1,,2,,35 - 44,4 year degree,,,GreenLeft,Bias,No-Side,Bar,None,4
+132,Blue,,7,,55,40,5,,-2,2,,-2,,25 - 34,4 year degree,,,GreenLeft,Outcome,No-Side,Bar,None,4
+133,,Blue,,-20,60,40,0,-2,,,-2,,-1,25 - 34,Some college,,,BlueLeft,Bias,No-Side,Bar,None,3
+134,,Green,,8,40,55,5,0,,,0,,0,18 - 24,Some college,,,BlueLeft,Bias,No-Side,Bar,None,3
+135,,Green,,13,50,25,25,0,,,0,,0,25 - 34,2 year degree,,,BlueLeft,Bias,No-Side,Bar,None,1
+136,Green,,-6,,45,55,0,,0,2,,-2,,18 - 24,4 year degree,,,GreenLeft,Outcome,No-Side,Bar,None,1
+137,Blue,,4,,55,45,0,,0,0,,0,,25 - 34,Professional degree,,,GreenLeft,Outcome,No-Side,Bar,None,3
+138,,Blue,,-19,85,15,0,0,,,0,,0,18 - 24,2 year degree,,,BlueLeft,Bias,No-Side,Bar,None,2
+139,Blue,,2,,52,46,2,,-1,1,,0,,25 - 34,4 year degree,,,GreenLeft,Outcome,No-Side,Bar,None,4
+140,,Blue,,-25,10,90,0,0,,,0,,0,55 - 64,Some college,,,BlueLeft,Outcome,No-Side,Bar,None,4
+141,,Blue,,-5,50,48,2,0,,,0,,-4,18 - 24,Some college,,,BlueLeft,Outcome,No-Side,Bar,None,3
+142,Green,,-13,,50,50,0,,0,0,,2,,25 - 34,4 year degree,I think the survey was about how people interpret charts and whether or not the information is presented in a certain way will sway someone's opinion.,None at this time - Thanks!,GreenLeft,Bias,No-Side,Bar,None,1
+143,,Green,,8,20,30,50,0,,,2,,-2,18 - 24,Some college,,,BlueLeft,Bias,No-Side,Bar,None,2
+144,Blue,,-12,,51,49,0,,0,0,,-10,,45 - 54,4 year degree,I think you wanted to see if the text would influence how we read the chart,,GreenLeft,Bias,No-Side,Bar,None,3
+145,Blue,,2,,35,32,33,,0,0,,0,,25 - 34,Some college,,,GreenLeft,Bias,No-Side,Bar,None,1
+146,,Green,,2,0,70,30,1,,,0,,1,25 - 34,4 year degree,Projecting scores,No. Thanks and have a great day! :),BlueLeft,Outcome,No-Side,Bar,None,2
+147,Blue,,20,,65,35,0,,0,0,,0,,35 - 44,Some college,,,GreenLeft,Outcome,No-Side,Bar,None,2
+148,,Green,,7,25,25,50,0,,,0,,0,18 - 24,High school graduate,,,BlueLeft,Bias,No-Side,Bar,None,4
+149,Green,,-2,,45,55,0,,1,1,,1,,25 - 34,4 year degree,,,GreenLeft,Bias,No-Side,Bar,None,3
+150,,Blue,,-2,40,35,25,15,,,-15,,22,18 - 24,Some college,,,BlueLeft,Outcome,No-Side,Bar,None,4
+151,,Blue,,-25,80,20,0,0,,,0,,0,45 - 54,Professional degree,,,BlueLeft,Bias,No-Side,Bar,None,3
+152,Blue,,9,,50,30,20,,4,-4,,0,,18 - 24,Some college,,,GreenLeft,Outcome,No-Side,Bar,None,1
+153,Green,,0,,20,30,50,,0,0,,0,,25 - 34,Some college,,,GreenLeft,Bias,No-Side,Bar,None,2
+154,,Green,,16,45,55,0,0,,,0,,0,55 - 64,High school graduate,,,BlueLeft,Outcome,No-Side,Bar,None,1
+155,Green,,-13,,15,35,50,,0,0,,0,,18 - 24,Less than high school,I think it was about statistical trends.,None,GreenLeft,Bias,No-Side,Bar,None,4
+156,Blue,,14,,65,30,5,,10,11,,13,,18 - 24,Some college,,,GreenLeft,Outcome,No-Side,Bar,None,1
+157,,Blue,,-2,50,45,5,0,,,0,,0,18 - 24,4 year degree,,,BlueLeft,Outcome,No-Side,Bar,None,3
+158,,Green,,13,10,20,70,-25,,,0,,-10,18 - 24,High school graduate,,,BlueLeft,Outcome,No-Side,Bar,None,2
+159,Blue,,13,,60,37,3,,1,1,,1,,25 - 34,4 year degree,,,GreenLeft,Outcome,No-Side,Bar,None,2
+160,Green,,-25,,25,75,0,,0,0,,0,,25 - 34,2 year degree,,,GreenLeft,Bias,No-Side,Bar,None,1
+161,,Blue,,-5,60,40,0,-5,,,3,,0,25 - 34,Professional degree,,,BlueLeft,Outcome,No-Side,Bar,None,4
+162,,Green,,17,40,60,0,1,,,0,,-8,35 - 44,High school graduate,SELECTIVE PREDITIONS,THANKS,BlueLeft,Bias,No-Side,Bar,None,4
+163,,Green,,3,48,52,0,0,,,-1,,0,35 - 44,4 year degree,,,BlueLeft,Bias,No-Side,Bar,None,4
+164,Blue,,20,,40,30,30,,11,-14,,11,,25 - 34,Some college,,,GreenLeft,Outcome,No-Side,Bar,None,3
+165,,Blue,,-13,75,20,5,0,,,0,,0,55 - 64,4 year degree,,,BlueLeft,Bias,No-Side,Bar,None,2
+166,,Blue,,-6,40,30,30,0,,,0,,0,25 - 34,Professional degree,,,BlueLeft,Bias,No-Side,Bar,None,2
+167,Blue,,18,,50,40,10,,11,-10,,-9,,55 - 64,4 year degree,,,GreenLeft,Bias,No-Side,Bar,None,3
+168,Blue,,25,,85,15,0,,15,-16,,17,,45 - 54,2 year degree,,,GreenLeft,Outcome,No-Side,Bar,None,2
+169,,Green,,9,31,33,36,0,,,0,,2,18 - 24,High school graduate,,,BlueLeft,Outcome,No-Side,Bar,None,1
+170,,Green,,0,40,45,15,3,,,0,,4,18 - 24,Some college,,,BlueLeft,Outcome,No-Side,Bar,None,3
+171,,Green,,6,5,15,80,0,,,0,,0,18 - 24,Some college,,,BlueLeft,Outcome,No-Side,Bar,None,4
+172,Blue,,14,,70,30,0,,6,-4,,13,,35 - 44,4 year degree,,,GreenLeft,Outcome,No-Side,Bar,None,1
+173,Blue,,14,,45,45,10,,-2,-8,,11,,35 - 44,4 year degree,not sure,N/A,GreenLeft,Bias,No-Side,Bar,None,4
+174,,Green,,8,40,60,0,0,,,0,,4,25 - 34,Professional degree,,,BlueLeft,Outcome,No-Side,Bar,None,1
+175,Green,,-10,,25,25,50,,0,0,,0,,45 - 54,4 year degree,,,GreenLeft,Bias,No-Side,Bar,None,1
+176,,Blue,,-13,75,25,0,14,,,14,,13,35 - 44,4 year degree,,,BlueLeft,Bias,No-Side,Bar,None,4
+177,,Green,,13,35,50,15,0,,,0,,2,35 - 44,4 year degree,,,BlueLeft,Bias,No-Side,Bar,None,2
+178,Green,,-12,,48,52,0,,0,0,,0,,45 - 54,4 year degree,The survey was about bias in the news and election coverage,,GreenLeft,Bias,No-Side,Bar,None,2
+179,,Blue,,-19,60,10,30,0,,,0,,0,25 - 34,Doctorate,,,BlueLeft,Bias,No-Side,Bar,None,2
+180,Blue,,25,,75,20,5,,10,-10,,10,,35 - 44,Professional degree,,,GreenLeft,Bias,No-Side,Bar,None,3
+181,Blue,,20,,80,15,5,,23,-10,,25,,18 - 24,High school graduate,,,GreenLeft,Outcome,No-Side,Bar,None,1
+182,,Green,,6,40,45,15,0,,,0,,0,18 - 24,High school graduate,,,BlueLeft,Outcome,No-Side,Bar,None,2
+183,Blue,,13,,65,35,0,,12,-10,,12,,35 - 44,Professional degree,,,GreenLeft,Bias,No-Side,Bar,None,3
+184,Blue,,13,,50,30,20,,25,-25,,18,,35 - 44,High school graduate,,,GreenLeft,Bias,No-Side,Bar,None,3
+185,Blue,,11,,55,35,10,,6,16,,6,,25 - 34,4 year degree,,,GreenLeft,Bias,No-Side,Bar,None,3
+186,,Green,,13,30,50,20,1,,,1,,1,18 - 24,,,,BlueLeft,Bias,No-Side,Bar,None,4
+187,Green,,0,,30,25,45,,-5,0,,0,,,Some college,,,GreenLeft,Outcome,No-Side,Bar,None,1
+188,Green,,-16,,40,55,5,,6,-5,,8,,25 - 34,Professional degree,,,GreenLeft,Outcome,No-Side,Bar,None,3
+189,,Blue,,13,30,30,40,0,,,0,,-11,45 - 54,4 year degree,What is your degree of skepticism vs. trust in factual information presented in charts?,,BlueLeft,Outcome,No-Side,Bar,None,4
+190,Blue,,18,,80,20,0,,18,-17,,1,,65 - 74,Some college,,,GreenLeft,Outcome,No-Side,Bar,None,4
+191,Green,,-12,,50,50,0,,13,-11,,14,,25 - 34,Professional degree,,,GreenLeft,Bias,No-Side,Bar,None,1
+192,,Blue,,-13,45,30,25,5,,,0,,5,25 - 34,4 year degree,,,BlueLeft,Bias,No-Side,Bar,None,4
+193,Blue,,9,,34,32,34,,0,0,,0,,35 - 44,4 year degree,,,GreenLeft,Outcome,No-Side,Bar,None,3
+194,,Blue,,-1,40,30,30,0,,,0,,0,25 - 34,4 year degree,,,BlueLeft,Outcome,No-Side,Bar,None,2
+195,,Blue,,-13,28,37,35,0,,,0,,0,55 - 64,Some college,,,BlueLeft,Bias,No-Side,Bar,None,1
+196,Blue,,15,,60,40,0,,-5,0,,-5,,35 - 44,Prefer not to answer,Extrapolating data from a graph,,GreenLeft,Outcome,No-Side,Bar,None,1
+197,,Green,,6,40,50,10,1,,,0,,0,35 - 44,Professional degree,,,BlueLeft,Bias,No-Side,Bar,None,1
+198,,Blue,,-3,55,45,0,0,,,0,,0,45 - 54,4 year degree,,,BlueLeft,Bias,No-Side,Bar,None,2
+199,,Green,,17,45,55,0,1,,,1,,1,35 - 44,4 year degree,,,BlueLeft,Bias,No-Side,Bar,None,2
+200,Green,,-12,,40,60,0,,-4,5,,-5,,25 - 34,High school graduate,N/A,N/A,GreenLeft,Outcome,No-Side,Bar,None,3
+201,Green,,-12,,46,52,2,,-3,-6,,-12,,55 - 64,Some college,,,GreenLeft,Outcome,No-Side,Bar,None,4
+202,Blue,,14,,55,45,0,,0,0,,0,,65 - 74,Professional degree,I'm not sure. ,:),GreenLeft,Outcome,No-Side,Bar,None,3
+203,,Blue,,-14,60,40,0,0,,,0,,0,35 - 44,4 year degree,,,BlueLeft,Bias,No-Side,Bar,None,3
+204,,Blue,,0,50,40,10,2,,,-1,,2,25 - 34,Professional degree,"Whether the bias presented in the chart (the statement ""the gap continues to close, slowly"") affects peoples' predictions of which party will win next year. I would guess some participants were shown the chart without that text on it, and the researchers are interested if they were more or less likely to predict a tie between parties than participants who did see the biased text.","My above comment is a complete guess as to what the survey was about, I'm not even that confident in it",BlueLeft,Bias,No-Side,Bar,None,4
+205,Green,,-15,,10,60,30,,-8,10,,-22,,25 - 34,High school graduate,,,GreenLeft,Outcome,No-Side,Bar,None,4
+206,Blue,,10,,0,46,54,,3,-4,,5,,25 - 34,4 year degree,,,GreenLeft,Bias,No-Side,Bar,None,1
+207,Blue,,14,,60,30,10,,17,1,,3,,18 - 24,Some college,,,GreenLeft,Outcome,No-Side,Bar,None,3
+208,Green,,-12,,45,55,0,,0,0,,0,,Prefer not to answer,Prefer not to answer,,,GreenLeft,Outcome,No-Side,Bar,None,1
+209,,Blue,,-6,50,45,5,3,,,3,,5,25 - 34,Professional degree,,,BlueLeft,Bias,No-Side,Bar,None,3
+210,,Green,,11,45,55,0,0,,,0,,0,18 - 24,Some college,,,BlueLeft,Bias,No-Side,Bar,None,2
+211,,Blue,,-19,54,45,1,0,,,0,,0,35 - 44,4 year degree,,,BlueLeft,Bias,No-Side,Bar,None,2
+212,,Blue,,-13,85,15,0,1,,,1,,-2,18 - 24,4 year degree,Bias in charts,,BlueLeft,Bias,No-Side,Bar,None,3
+213,,Blue,,13,55,30,15,0,,,0,,0,25 - 34,4 year degree,,,BlueLeft,Bias,No-Side,Bar,None,4
+214,,Blue,,-1,50,2,48,0,,,-4,,9,25 - 34,Some college,,,BlueLeft,Bias,No-Side,Bar,None,1
+215,,Blue,,-5,65,35,0,8,,,-4,,12,18 - 24,High school graduate,,,BlueLeft,Bias,No-Side,Bar,None,4
+216,Blue,,20,,70,20,10,,0,0,,0,,35 - 44,Professional degree,,,GreenLeft,Outcome,No-Side,Bar,None,2
+217,Blue,,8,,51,49,0,,-1,-1,,-1,,35 - 44,4 year degree,,,GreenLeft,Outcome,No-Side,Bar,None,4
+218,Blue,,5,,50,46,4,,3,-2,,2,,45 - 54,Professional degree,,,GreenLeft,Outcome,No-Side,Bar,None,2
+219,Green,,-15,,25,50,25,,0,0,,0,,25 - 34,High school graduate,,,GreenLeft,Outcome,No-Side,Bar,None,3
+220,Blue,,13,,5,75,20,,0,0,,0,,55 - 64,4 year degree,,,GreenLeft,Outcome,No-Side,Bar,None,4
+221,,Blue,,-10,34,33,33,1,,,0,,0,18 - 24,4 year degree,,,BlueLeft,Outcome,No-Side,Bar,None,2
+222,,Green,,13,33,34,33,0,,,0,,0,35 - 44,2 year degree,If green had a chance to win this year.,none,BlueLeft,Outcome,No-Side,Bar,None,2
+223,Blue,,16,,60,40,0,,0,0,,0,,35 - 44,4 year degree,,,GreenLeft,Bias,No-Side,Bar,None,4
+224,Blue,,13,,52,48,0,,10,-5,,5,,35 - 44,2 year degree,predicting future events based off charted history,,GreenLeft,Bias,No-Side,Bar,None,2
+225,,Green,,15,45,55,0,0,,,0,,0,25 - 34,Professional degree,,,BlueLeft,Outcome,No-Side,Bar,None,1
+226,,Blue,,-14,55,30,15,1,,,1,,2,35 - 44,Professional degree,,,BlueLeft,Outcome,No-Side,Bar,None,1
+227,Blue,,21,,60,40,0,,8,12,,13,,25 - 34,Some college,,,GreenLeft,Bias,No-Side,Bar,None,2
+228,,Blue,,-25,75,10,15,0,,,0,,0,18 - 24,High school graduate,,,BlueLeft,Outcome,No-Side,Bar,None,3
+229,Green,,-10,,32,55,13,,0,0,,0,,18 - 24,4 year degree,,,GreenLeft,Outcome,No-Side,Bar,None,1
+230,,Green,,5,40,45,15,0,,,0,,0,18 - 24,Some college,,,BlueLeft,Outcome,No-Side,Bar,None,2
+231,Green,,-9,,30,50,20,,-1,-1,,-2,,18 - 24,Some college,"Good survey, I always like taking surveys about voting",No comment,GreenLeft,Outcome,No-Side,Bar,None,4
+232,,Blue,,-10,40,20,40,-3,,,0,,0,18 - 24,2 year degree,Surveying for how people see bias in data,,BlueLeft,Bias,No-Side,Bar,None,4
+233,,Green,,18,29,70,1,-7,,,8,,-6,25 - 34,Some college,,,BlueLeft,Bias,No-Side,Bar,None,3
+234,Blue,,13,,33,33,34,,7,-8,,5,,18 - 24,Some college,,,GreenLeft,Bias,No-Side,Bar,None,4
+235,,Blue,,-5,40,30,30,8,,,-3,,3,25 - 34,Professional degree,"Assessment of trends or: which matters more, consistent increases or a consistent turnout (ie, one of the parties usually held 50% of the vote even when the other increased in % so, unless there's a shift in allegiance, they should always obtain a lsight majority of the vote)",N/A,BlueLeft,Outcome,No-Side,Bar,None,3
+236,,Green,,13,20,20,60,13,,,21,,25,35 - 44,Some college,if to who we'd think would win the election from the chart,none,BlueLeft,Bias,No-Side,Bar,None,1
+237,,Blue,,-12,55,25,20,0,,,0,,0,25 - 34,Some college,Chart and graph presentation bias,Chart could be a tiny bit larger.,BlueLeft,Outcome,No-Side,Bar,None,3
+238,Blue,,13,,85,15,0,,0,0,,0,,65 - 74,4 year degree,,,GreenLeft,Bias,No-Side,Bar,None,1
+239,Green,,-5,,44,55,1,,-3,-2,,-2,,25 - 34,Professional degree,,,GreenLeft,Outcome,No-Side,Line,None,4
+240,,Blue,,-12,70,30,0,0,,,0,,-2,35 - 44,4 year degree,,,BlueLeft,Bias,No-Side,Line,None,1
+241,,Green,,13,20,30,50,0,,,0,,0,35 - 44,Doctorate,,,BlueLeft,Outcome,No-Side,Line,None,3
+242,,Blue,,-1,25,20,55,0,,,0,,0,35 - 44,4 year degree,,,BlueLeft,Outcome,No-Side,Line,None,2
+243,Green,,-12,,20,45,35,,5,-3,,7,,25 - 34,Some college,,,GreenLeft,Bias,No-Side,Line,None,2
+244,Green,,-5,,45,55,0,,0,0,,0,,25 - 34,4 year degree,,,GreenLeft,Bias,No-Side,Line,None,3
+245,,Green,,13,25,70,5,1,,,1,,1,35 - 44,4 year degree,,,BlueLeft,Outcome,No-Side,Line,None,1
+246,Green,,-7,,33,36,31,,1,0,,0,,25 - 34,4 year degree,Information bias,None,GreenLeft,Bias,No-Side,Line,None,4
+247,,Green,,4,5,10,85,0,,,0,,0,25 - 34,4 year degree,,,BlueLeft,Bias,No-Side,Line,None,2
+248,Green,,-17,,35,60,5,,0,0,,0,,45 - 54,4 year degree,,"It is extremely difficult to tell the 2 colors apart. The colors need to be opposite on the color wheel to be able to have enough contrast to be able to tell the 2 apart. I am not color blind, but it would be impossible for someone that's even slightly colorblind to be able to tell the 2 colors apart. ",GreenLeft,Outcome,No-Side,Line,None,4
+249,,Green,,13,40,50,10,10,,,0,,1,18 - 24,High school graduate,,,BlueLeft,Outcome,No-Side,Line,None,1
+250,,Blue,,-1,20,20,60,0,,,0,,0,25 - 34,4 year degree,,,BlueLeft,Outcome,No-Side,Line,None,2
+251,Blue,,8,,40,30,30,,1,1,,1,,35 - 44,4 year degree,,,GreenLeft,Bias,No-Side,Line,None,3
+252,Blue,,13,,75,5,20,,12,-12,,0,,18 - 24,4 year degree,To see how people read information from a chart.,No comment,GreenLeft,Bias,No-Side,Line,None,1
+253,,Green,,18,20,80,0,0,,,0,,0,35 - 44,Professional degree,,,BlueLeft,Bias,No-Side,Line,None,4
+254,Blue,,14,,50,50,0,,2,4,,9,,25 - 34,Professional degree,,,GreenLeft,Outcome,No-Side,Line,None,3
+255,,Green,,20,10,80,10,-10,,,5,,-12,35 - 44,4 year degree,,,BlueLeft,Bias,No-Side,Line,None,4
+256,Blue,,5,,50,45,5,,0,0,,0,,35 - 44,Doctorate,,,GreenLeft,Outcome,No-Side,Line,None,3
+257,,Blue,,-2,10,5,85,0,,,0,,0,25 - 34,2 year degree,,,BlueLeft,Bias,No-Side,Line,None,2
+258,Blue,,8,,55,45,0,,-4,1,,-7,,25 - 34,Professional degree,,,GreenLeft,Outcome,No-Side,Line,None,1
+259,,Blue,,-5,52,46,2,0,,,0,,0,35 - 44,Doctorate,,,BlueLeft,Bias,No-Side,Line,None,2
+260,Blue,,-3,,40,45,15,,-12,-13,,3,,18 - 24,Some college,,,GreenLeft,Bias,No-Side,Line,None,4
+261,Green,,-18,,40,35,25,,-1,1,,0,,25 - 34,Some college,,,GreenLeft,Outcome,No-Side,Line,None,3
+262,,Green,,14,35,60,5,25,,,25,,25,18 - 24,4 year degree,,,BlueLeft,Outcome,No-Side,Line,None,1
+263,Blue,,-6,,35,45,20,,-2,4,,0,,25 - 34,4 year degree,How people interpret charts and trends based on information given.,N/A,GreenLeft,Outcome,No-Side,Line,None,3
+264,,Blue,,-13,50,10,40,-14,,,-18,,-21,18 - 24,Some college,unsure,,BlueLeft,Bias,No-Side,Line,None,2
+265,Blue,,17,,75,24,1,,0,0,,0,,18 - 24,Some college,understanding bias,none,GreenLeft,Outcome,No-Side,Line,None,4
+266,,Blue,,-5,50,10,40,-2,,,2,,-2,25 - 34,High school graduate,,,BlueLeft,Outcome,No-Side,Line,None,1
+267,Blue,,14,,30,70,0,,5,-3,,4,,25 - 34,Professional degree,perception,none,GreenLeft,Bias,No-Side,Line,None,3
+268,Blue,,9,,35,30,35,,2,-1,,1,,18 - 24,Some college,,,GreenLeft,Bias,No-Side,Line,None,3
+269,,Blue,,-13,40,30,30,2,,,0,,1,25 - 34,4 year degree,Presentation bias in graphical and other data visualizations,,BlueLeft,Outcome,No-Side,Line,None,4
+270,,Green,,12,30,70,0,0,,,1,,1,35 - 44,Some college,,,BlueLeft,Bias,No-Side,Line,None,1
+271,,Green,,5,35,55,10,0,,,0,,0,18 - 24,Some college,,,BlueLeft,Outcome,No-Side,Line,None,1
+272,Green,,-12,,40,60,0,,-12,0,,0,,25 - 34,Professional degree,,,GreenLeft,Bias,No-Side,Line,None,4
+273,,Green,,13,25,40,35,-15,,,5,,-10,55 - 64,Some college,,,BlueLeft,Outcome,No-Side,Line,None,2
+274,,Green,,13,20,50,30,12,,,-11,,12,35 - 44,Some college,,,BlueLeft,Outcome,No-Side,Line,None,3
+275,Green,,-13,,40,50,10,,-5,5,,-3,,25 - 34,4 year degree,,,GreenLeft,Bias,No-Side,Line,None,2
+276,Blue,,13,,60,40,0,,0,0,,0,,18 - 24,4 year degree,,,GreenLeft,Bias,No-Side,Line,None,3
+277,Green,,-19,,29,70,1,,0,0,,0,,45 - 54,4 year degree,what do i imagine that blue and green company lines will do between the last data point given and event day and how that predicts who i think will win?,,GreenLeft,Bias,No-Side,Line,None,2
+278,,Green,,2,50,50,0,0,,,0,,0,18 - 24,4 year degree,,,BlueLeft,Outcome,No-Side,Line,None,1
+279,,Blue,,-15,60,40,0,1,,,1,,1,35 - 44,Some college,,,BlueLeft,Bias,No-Side,Line,None,1
+280,Green,,-12,,40,50,10,,1,1,,-5,,35 - 44,4 year degree,,,GreenLeft,Bias,No-Side,Line,None,3
+281,Green,,-12,,40,50,10,,1,1,,1,,45 - 54,2 year degree,,,GreenLeft,Outcome,No-Side,Line,None,4
+282,,Blue,,-25,100,0,0,-25,,,-25,,-25,25 - 34,Some college,,,BlueLeft,Outcome,No-Side,Line,None,4
+283,,Green,,13,25,25,50,0,,,0,,0,25 - 34,Some college,,,BlueLeft,Bias,No-Side,Line,None,2
+284,Green,,-17,,20,80,0,,0,0,,1,,18 - 24,Some college,,,GreenLeft,Outcome,No-Side,Line,None,1
+285,Blue,,7,,34,33,33,,0,0,,0,,25 - 34,Some college,How people read and interpret data,fun,GreenLeft,Bias,No-Side,Line,None,2
+286,Green,,-13,,10,70,20,,0,0,,1,,25 - 34,Professional degree,,,GreenLeft,Outcome,No-Side,Line,None,1
+287,,Blue,,-13,35,15,50,0,,,0,,0,45 - 54,Some college,If normal people can comprehend charts and predict the outcomes,no thank you,BlueLeft,Bias,No-Side,Line,None,2
+288,,Blue,,13,60,40,0,22,,,-4,,-5,55 - 64,2 year degree,Different opinions of different folks to make up the majority,The study was user-friendly; thank you.,BlueLeft,Outcome,No-Side,Line,None,4
+289,Green,,-13,,30,60,10,,-10,7,,1,,25 - 34,4 year degree,Whether there is an unconscious bias when making causal observations from data presented,,GreenLeft,Bias,No-Side,Line,None,3
+290,,Green,,13,30,40,30,0,,,0,,0,25 - 34,Professional degree,,,BlueLeft,Outcome,No-Side,Line,None,4
+291,,Blue,,-25,90,5,5,0,,,0,,0,35 - 44,High school graduate,Bias in the way data is presented. ,Thank you,BlueLeft,Outcome,No-Side,Line,None,4
+292,,Blue,,-19,40,20,40,0,,,0,,0,35 - 44,High school graduate,I'm not sure,,BlueLeft,Bias,No-Side,Line,None,3
+293,Blue,,20,,85,15,0,,0,0,,0,,55 - 64,Some college,How people interpret data in chart form,"Good survey. It made me think of the outcome. Green was definitely on the way up, but blue was high and held steady. Based on the percentage green was rising, I felt like they would come close to blue, but would fall slightly short based on their performance so far. I didn't say it with 100% certainty though, because I believe their is a certain 'X' factor these companies would experience as they approach the deadline that might not be accounted for in the way they performed the previous months.",GreenLeft,Bias,No-Side,Line,None,1
+294,Blue,,5,,50,40,10,,0,0,,0,,35 - 44,Some college,,,GreenLeft,Outcome,No-Side,Line,None,2
+295,,Green,,14,15,35,50,8,,,10,,17,25 - 34,4 year degree,,,BlueLeft,Bias,No-Side,Line,None,2
+296,,Green,,14,33.4,34.3,32.3,1,,,1,,25,35 - 44,Some college,,,BlueLeft,Bias,No-Side,Line,None,2
+297,,Green,,13,40,50,10,0,,,0,,0,18 - 24,4 year degree,How we extrapolate from graphical data.,,BlueLeft,Bias,No-Side,Line,None,3
+298,Green,,-7,,50,50,0,,3,-4,,-2,,35 - 44,High school graduate,,,GreenLeft,Bias,No-Side,Line,None,3
+299,,Blue,,-25,75,20,5,0,,,0,,0,25 - 34,Doctorate,,,BlueLeft,Outcome,No-Side,Line,None,4
+300,Blue,,12,,58,40,2,,0,0,,0,,25 - 34,Professional degree,,,GreenLeft,Outcome,No-Side,Line,None,1
+301,Green,,-15,,30,50,20,,-8,-5,,-10,,18 - 24,High school graduate,decision making when proposed with data that is seemingly unbiased,,GreenLeft,Outcome,No-Side,Line,None,4
+302,Blue,,7,,50,30,20,,5,-5,,10,,25 - 34,High school graduate,,Had no issues. Thanks!,GreenLeft,Bias,No-Side,Line,None,3
+303,Blue,,10,,60,39,1,,-1,0,,0,,25 - 34,2 year degree,,,GreenLeft,Outcome,No-Side,Line,None,1
+304,Green,,-18,,20,80,0,,-14,8,,-10,,25 - 34,4 year degree,,,GreenLeft,Bias,No-Side,Line,None,4
+305,Green,,-12,,40,45,15,,5,5,,5,,18 - 24,Some college,,,GreenLeft,Bias,No-Side,Line,None,2
+306,Green,,-6,,33,57,10,,0,0,,4,,18 - 24,Less than high school,data analysis and one's ability to predict the outcome based on limited information,,GreenLeft,Bias,No-Side,Line,None,3
+307,Blue,,7,,55,45,0,,0,0,,-5,,25 - 34,4 year degree,,,GreenLeft,Bias,No-Side,Line,None,1
+308,,Green,,5,30,30,40,0,,,0,,0,25 - 34,4 year degree,,,BlueLeft,Bias,No-Side,Line,None,2
+309,Green,,-7,,30,55,15,,-5,9,,-10,,45 - 54,High school graduate,,,GreenLeft,Outcome,No-Side,Line,None,1
+310,,Green,,10,30,50,20,0,,,0,,-1,18 - 24,4 year degree,,,BlueLeft,Outcome,No-Side,Line,None,4
+311,,Blue,,-7,30,20,50,0,,,0,,0,45 - 54,4 year degree,,,BlueLeft,Outcome,No-Side,Line,None,2
+312,,Blue,,-13,55,40,5,0,,,0,,0,35 - 44,Professional degree,,,BlueLeft,Outcome,No-Side,Line,None,4
+313,Blue,,0,,50,50,0,,0,0,,0,,18 - 24,Professional degree,,,GreenLeft,Outcome,No-Side,Line,None,3
+314,Blue,,25,,100,0,0,,14,16,,16,,25 - 34,4 year degree,,,GreenLeft,Outcome,No-Side,Line,None,1
+315,,Green,,15,30,60,10,5,,,0,,2,25 - 34,4 year degree,,,BlueLeft,Outcome,No-Side,Line,None,1
+316,,Green,,7,42,55,3,0,,,0,,0,25 - 34,2 year degree,,,BlueLeft,Bias,No-Side,Line,None,3
+317,,Blue,,-6,42,25,33,0,,,0,,0,45 - 54,Some college,,,BlueLeft,Bias,No-Side,Line,None,2
+318,,Blue,,-25,50,30,20,0,,,0,,0,45 - 54,Some college,idk,none,BlueLeft,Outcome,No-Side,Line,None,4
+319,,Green,,16,40,50,10,0,,,0,,0,35 - 44,Doctorate,,,BlueLeft,Bias,No-Side,Line,None,1
+320,Green,,-15,,15,80,5,,0,0,,0,,55 - 64,4 year degree,,,GreenLeft,Bias,No-Side,Line,None,2
+321,Green,,-2,,30,40,30,,-5,8,,-10,,25 - 34,4 year degree,,,GreenLeft,Bias,No-Side,Line,None,2
+322,,Blue,,-7,40,30,30,-1,,,1,,-2,35 - 44,4 year degree,,,BlueLeft,Outcome,No-Side,Line,None,3
+323,Green,,-13,,15,50,35,,-12,6,,-14,,18 - 24,High school graduate,,,GreenLeft,Bias,No-Side,Line,None,2
+324,,Green,,20,10,90,0,14,,,-18,,0,25 - 34,4 year degree,,,BlueLeft,Outcome,No-Side,Line,None,4
+325,Green,,-10,,39,60,1,,0,0,,0,,25 - 34,2 year degree,,,GreenLeft,Bias,No-Side,Line,None,1
+326,Blue,,16,,65,35,0,,8,0,,0,,35 - 44,Some college,Trying to find and or detect biases in charts based on color or order presented?,none.,GreenLeft,Outcome,No-Side,Line,None,3
+327,,Blue,,-5,45,40,15,0,,,0,,0,35 - 44,Some college,,,BlueLeft,Outcome,No-Side,Line,None,1
+328,Blue,,15,,55,40,5,,25,-25,,20,,35 - 44,Some college,How participants perceive charts based on their design.,,GreenLeft,Bias,No-Side,Line,None,4
+329,,Green,,7,30,40,30,0,,,0,,0,25 - 34,4 year degree,I think this survey is about determining whether a steady pattern or a fluctuating pattern feels more likely to be successful in the long run.,,BlueLeft,Outcome,No-Side,Line,None,4
+330,Green,,-6,,50,40,10,,-7,-11,,9,,18 - 24,Some college,,,GreenLeft,Bias,No-Side,Line,None,3
+331,,Green,,17,10,65,25,8,,,-5,,4,25 - 34,Some college,,,BlueLeft,Bias,No-Side,Line,None,1
+332,Green,,-11,,40,50,10,,0,0,,0,,35 - 44,2 year degree,,,GreenLeft,Outcome,No-Side,Line,None,2
+333,,Green,,18,10,90,0,0,,,0,,0,25 - 34,4 year degree,,,BlueLeft,Outcome,No-Side,Line,None,2
+334,Blue,,25,,75,0,25,,0,0,,0,,25 - 34,High school graduate,,,GreenLeft,Outcome,No-Side,Line,None,4
+335,Blue,,10,,65,25,10,,-5,5,,-5,,55 - 64,Professional degree,I think that this survey is about how individuals visualize and process information from charts.,Thanks for the opportunity to participate and good luck with your research.,GreenLeft,Bias,No-Side,Line,None,2
+336,,Blue,,-12,25,25,50,-4,,,7,,-4,35 - 44,Professional degree,,,BlueLeft,Outcome,No-Side,Line,None,2
+337,,Green,,13,25,35,40,0,,,0,,0,35 - 44,Some college,I think the survey was about whether participants could foreshadow what was to come.,No comments.,BlueLeft,Outcome,No-Side,Line,None,4
+338,,Blue,,-11,60,10,30,0,,,0,,0,18 - 24,Some college,,,BlueLeft,Bias,No-Side,Line,None,1
+339,,Blue,,-3,20,10,70,-8,,,8,,-12,18 - 24,4 year degree,Interpreting user ability to read graphs.,Scale issues may result in differences in opinions.,BlueLeft,Outcome,No-Side,Line,None,1
+340,Green,,-1,,33,34,33,,17,-12,,9,,25 - 34,Professional degree,paying attention to graph,,GreenLeft,Bias,No-Side,Line,None,3
+341,Blue,,0,,30,30,40,,0,0,,0,,25 - 34,High school graduate,I have no idea,n/a. Thanks!,GreenLeft,Outcome,No-Side,Line,None,1
+342,,Green,,7,45,55,0,0,,,0,,-1,25 - 34,High school graduate,testing how people perceive a chart and how it relates to bias,a relative value chart between two assets has no bias :D just showing the trend of each relative to the other..,BlueLeft,Bias,No-Side,Line,None,3
+343,,Blue,,-13,60,40,0,0,,,0,,0,25 - 34,Some college,,,BlueLeft,Outcome,No-Side,Line,None,4
+344,Green,,-18,,20,60,20,,-1,-14,,-7,,55 - 64,2 year degree,How we extract information from a chart,,GreenLeft,Outcome,No-Side,Line,None,2
+345,,Green,,1,32,35,33,2,,,-2,,2,45 - 54,4 year degree, My guess is the study was designed to determine how participants evaluate how biased statistical information is based on the context in which it is presented.,Everything worked well. Thank you!,BlueLeft,Outcome,No-Side,Line,None,3
+346,Green,,-13,,40,50,10,,1,1,,-1,,55 - 64,2 year degree,,,GreenLeft,Outcome,No-Side,Line,None,4
+347,,Green,,13,49,51,0,0,,,1,,0,65 - 74,Professional degree,,,BlueLeft,Bias,No-Side,Line,None,3
+348,,Blue,,-10,50,20,30,0,,,0,,0,18 - 24,4 year degree,,,BlueLeft,Bias,No-Side,Line,None,1
+349,Blue,,20,,60,30,10,,20,-15,,25,,18 - 24,Some college,,,GreenLeft,Bias,No-Side,Line,None,3
+350,Blue,,25,,80,20,0,,18,-20,,23,,18 - 24,2 year degree,,,GreenLeft,Outcome,No-Side,Line,None,4
+351,Blue,,13,,55,45,0,,-10,7,,-16,,35 - 44,Some college,,,GreenLeft,Bias,No-Side,Line,None,3
+352,Blue,,13,,63,32,5,,-10,5,,-5,,35 - 44,Professional degree,Figuring out how people view limited data with regards to bias.,,GreenLeft,Bias,No-Side,Line,None,3
+353,Green,,-15,,35,55,10,,0,0,,0,,45 - 54,Some college,Something about bias in charts???,No,GreenLeft,Outcome,No-Side,Line,None,4
+354,Green,,13,,25,25,50,,16,-5,,-3,,45 - 54,High school graduate,,,GreenLeft,Bias,No-Side,Line,None,3
+355,,Green,,10,35,50,15,-15,,,15,,-15,18 - 24,Some college,,,BlueLeft,Bias,No-Side,Line,None,3
+356,,Blue,,-6,54,43,3,2,,,2,,1,25 - 34,4 year degree,,,BlueLeft,Bias,Low,Bar,Green,1
+357,Green,,-7,,20,45,35,,7,-6,,7,,35 - 44,Some college,,,GreenLeft,Outcome,Low,Bar,Blue,1
+358,,Blue,,-1,55,45,0,0,,,0,,0,35 - 44,,,,BlueLeft,Bias,Low,Bar,Green,4
+359,Blue,,20,,80,20,0,,15,10,,6,,18 - 24,High school graduate,,,GreenLeft,Outcome,Low,Bar,Green,3
+360,Green,,-6,,34,33,33,,0,0,,3,,18 - 24,2 year degree,,,GreenLeft,Bias,Low,Bar,Blue,4
+361,,Blue,,-9,75,25,0,0,,,0,,-3,25 - 34,4 year degree,graphs,,BlueLeft,Outcome,Low,Bar,Blue,3
+362,Green,,-9,,49,51,0,,0,0,,0,,18 - 24,Some college,,,GreenLeft,Outcome,Low,Bar,Green,2
+363,Green,,-20,,19,80,1,,-4,0,,-5,,45 - 54,4 year degree,,,GreenLeft,Bias,Low,Bar,Green,2
+364,,Blue,,-13,70,20,10,0,,,0,,0,65 - 74,4 year degree,,,BlueLeft,Outcome,Low,Bar,Blue,2
+365,,Green,,3,25,25,50,1,,,0,,0,25 - 34,4 year degree,,,BlueLeft,Bias,Low,Bar,Blue,3
+366,,Green,,1,49,51,0,0,,,0,,0,25 - 34,Some college,,,BlueLeft,Bias,Low,Bar,Green,1
+367,Green,,-12,,0,60,40,,0,0,,0,,55 - 64,4 year degree,Predicting the outcome from a chart.,,GreenLeft,Outcome,Low,Bar,Blue,1
+368,Blue,,20,,70,30,0,,9,10,,1,,18 - 24,Some college,,,GreenLeft,Outcome,Low,Bar,Green,4
+369,,Blue,,-19,85,15,0,-15,,,15,,-15,25 - 34,Professional degree,To determine if the manner in which a chart is created influences the Viewer's opinion of the presented information.,The questions and images were clear.  I experienced no problems with the study.,BlueLeft,Bias,Low,Bar,Blue,2
+370,,Blue,,-5,20,5,75,-10,,,5,,-5,25 - 34,High school graduate,,,BlueLeft,Bias,Low,Bar,Blue,4
+371,Green,,-12,,30,35,35,,-11,1,,1,,25 - 34,High school graduate,,,GreenLeft,Outcome,Low,Bar,Green,3
+372,Blue,,15,,60,40,0,,14,10,,15,,25 - 34,4 year degree,,,GreenLeft,Bias,Low,Bar,Blue,2
+373,,Green,,16,30,60,10,5,,,5,,5,35 - 44,Some college,,,BlueLeft,Outcome,Low,Bar,Green,2
+374,Green,,-12,,40,45,15,,-3,0,,-6,,18 - 24,Some college,Perhaps this survey attempts to examine how biases and manipulation can effect factual information in the form of graphs?,,GreenLeft,Outcome,Low,Bar,Green,3
+375,,Blue,,-19,75,25,0,1,,,1,,1,25 - 34,4 year degree,,,BlueLeft,Bias,Low,Bar,Blue,3
+376,Green,,-16,,25,25,50,,4,-9,,8,,35 - 44,4 year degree,,,GreenLeft,Outcome,Low,Bar,Blue,1
+377,Blue,,8,,60,35,5,,0,0,,0,,35 - 44,Doctorate,,,GreenLeft,Outcome,Low,Bar,Blue,1
+378,Blue,,13,,80,10,10,,0,0,,2,,25 - 34,Professional degree,How tiny details on how information is presented may show the bias of someone,,GreenLeft,Bias,Low,Bar,Blue,3
+379,,Blue,,-12,75,25,0,-5,,,6,,-6,18 - 24,Some college,,,BlueLeft,Bias,Low,Bar,Green,2
+380,,Green,,16,25,45,30,18,,,-18,,18,25 - 34,High school graduate,,Thank you for the opportunity!,BlueLeft,Bias,Low,Bar,Green,4
+381,,Green,,11,35,60,5,1,,,-1,,0,35 - 44,Professional degree,,,BlueLeft,Bias,Low,Bar,Green,3
+382,Green,,-13,,10,30,60,,0,0,,0,,45 - 54,4 year degree,,,GreenLeft,Outcome,Low,Bar,Blue,2
+383,,Blue,,-17,60,40,0,-4,,,-1,,-1,35 - 44,High school graduate,School Elections,Political,BlueLeft,Outcome,Low,Bar,Blue,4
+384,Blue,,10,,50,30,20,,4,0,,-10,,45 - 54,4 year degree,,,GreenLeft,Bias,Low,Bar,Green,1
+385,Blue,,20,,50,30,20,,0,0,,0,,25 - 34,Professional degree,,,GreenLeft,Outcome,Low,Bar,Green,1
+386,,Green,,14,45,55,0,5,,,5,,6,18 - 24,2 year degree,,,BlueLeft,Outcome,Low,Bar,Green,4
+387,Blue,,13,,85,15,0,,0,0,,0,,18 - 24,Some college,,,GreenLeft,Outcome,Low,Bar,Blue,3
+388,Blue,,25,,75,25,0,,2,0,,0,,25 - 34,High school graduate,,,GreenLeft,Outcome,Low,Bar,Green,1
+389,,Green,,13,35,65,0,4,,,-5,,13,45 - 54,2 year degree,,,BlueLeft,Bias,Low,Bar,Blue,4
+390,,Blue,,-20,90,10,0,-16,,,20,,-13,35 - 44,Some college,,,BlueLeft,Bias,Low,Bar,Blue,4
+391,,Blue,,-24,90,5,5,0,,,0,,0,25 - 34,Less than high school,,,BlueLeft,Bias,Low,Bar,Blue,1
+392,,Green,,13,30,40,30,0,,,0,,0,25 - 34,4 year degree,,,BlueLeft,Bias,Low,Bar,Green,3
+393,Green,,-17,,40,60,0,,-3,-3,,0,,35 - 44,4 year degree,,,GreenLeft,Outcome,Low,Bar,Blue,2
+394,Green,,-13,,45,55,0,,-4,-6,,-6,,35 - 44,4 year degree,if graphs and charts are unbiased and factual,thank you and good luck,GreenLeft,Outcome,Low,Bar,Green,4
+395,Blue,,20,,100,0,0,,-1,1,,1,,35 - 44,High school graduate,,,GreenLeft,Bias,Low,Bar,Blue,2
+396,,Green,,5,30,30,40,7,,,8,,10,25 - 34,4 year degree,,,BlueLeft,Outcome,Low,Bar,Green,2
+397,,Green,,13,30,40,30,-6,,,0,,0,25 - 34,Some college,,,BlueLeft,Outcome,Low,Bar,Green,4
+398,,Blue,,-23,65,35,0,0,,,0,,0,35 - 44,Professional degree,People's perceptions of chart data,,BlueLeft,Outcome,Low,Bar,Blue,4
+399,Green,,-18,,20,60,20,,0,0,,0,,25 - 34,4 year degree,,,GreenLeft,Bias,Low,Bar,Green,3
+400,,Blue,,-13,60,38,2,0,,,1,,0,25 - 34,4 year degree,Perceived probability,,BlueLeft,Outcome,Low,Bar,Green,2
+401,,Blue,,-3,50,48,2,-3,,,2,,-2,35 - 44,4 year degree,,,BlueLeft,Outcome,Low,Bar,Green,1
+402,Green,,-13,,50,50,0,,-2,2,,-4,,25 - 34,Professional degree,,,GreenLeft,Bias,Low,Bar,Green,3
+403,Blue,,13,,50,40,10,,0,0,,0,,25 - 34,Professional degree,,,GreenLeft,Bias,Low,Bar,Blue,1
+404,Green,,-12,,25,25,50,,-7,-5,,-6,,25 - 34,Some college,,,GreenLeft,Outcome,Low,Bar,Green,2
+405,Green,,-5,,40,60,0,,-3,6,,-3,,35 - 44,4 year degree,,,GreenLeft,Bias,Low,Bar,Green,3
+406,Green,,-12,,40,40,20,,0,0,,15,,25 - 34,Professional degree,is there any bias in the chart that was shown.,no,GreenLeft,Outcome,Low,Bar,Green,2
+407,Blue,,25,,70,30,0,,10,15,,0,,25 - 34,Some college,,,GreenLeft,Bias,Low,Bar,Blue,3
+408,,Green,,5,35,65,0,-4,,,-4,,-11,35 - 44,Professional degree,How people interpret charts and whether we can identify bias in them,,BlueLeft,Outcome,Low,Bar,Blue,1
+409,Blue,,0,,0,0,100,,0,0,,0,,45 - 54,Some college,,,GreenLeft,Bias,Low,Bar,Blue,2
+410,,Blue,,12,50,25,25,0,,,0,,5,65 - 74,High school graduate,No idea,No,BlueLeft,Outcome,Low,Bar,Green,4
+411,,Blue,,-2,50,45,5,0,,,0,,0,25 - 34,4 year degree,,,BlueLeft,Bias,Low,Bar,Green,4
+412,Blue,,16,,85,13,2,,22,-18,,-17,,25 - 34,Some college,,,GreenLeft,Outcome,Low,Bar,Blue,4
+413,,Blue,,-7,45,35,20,-4,,,4,,-3,18 - 24,Some college,,,BlueLeft,Bias,Low,Bar,Green,1
+414,,Blue,,-11,70,20,10,-8,,,5,,-4,45 - 54,Professional degree,,,BlueLeft,Outcome,Low,Bar,Blue,1
+415,,Blue,,-6,40,55,5,1,,,0,,3,35 - 44,Professional degree,Bias in graph,,BlueLeft,Bias,Low,Bar,Blue,4
+416,,Blue,,-10,75,25,0,-10,,,11,,-10,18 - 24,High school graduate,,,BlueLeft,Bias,Low,Bar,Blue,4
+417,Green,,-13,,25,25,50,,-2,0,,-3,,25 - 34,Professional degree,,,GreenLeft,Bias,Low,Bar,Green,3
+418,,Green,,3,45,55,0,1,,,0,,0,35 - 44,Doctorate,,,BlueLeft,Outcome,Low,Bar,Blue,1
+419,,Blue,,-12,50,25,25,1,,,1,,-1,45 - 54,4 year degree,,,BlueLeft,Bias,Low,Bar,Blue,2
+420,Blue,,25,,90,10,0,,1,-1,,1,,25 - 34,High school graduate,Viewing charts,Nope ,GreenLeft,Outcome,Low,Bar,Blue,3
+421,,Green,,13,45,53,2,0,,,0,,0,35 - 44,4 year degree,,,BlueLeft,Outcome,Low,Bar,Green,1
+422,Green,,0,,52,48,0,,0,0,,0,,25 - 34,2 year degree,,,GreenLeft,Bias,Low,Bar,Blue,4
+423,,Blue,,13,50,25,25,0,,,0,,0,45 - 54,Some college,,,BlueLeft,Bias,Low,Bar,Green,4
+424,Blue,,3,,30,20,50,,1,0,,0,,25 - 34,4 year degree,,,GreenLeft,Outcome,Low,Bar,Green,1
+425,Blue,,13,,60,35,5,,0,0,,0,,25 - 34,4 year degree,,,GreenLeft,Outcome,Low,Bar,Green,3
+426,Blue,,13,,50,15,35,,-9,10,,-7,,25 - 34,4 year degree,,,GreenLeft,Outcome,Low,Bar,Blue,3
+427,Green,,-1,,39,40,21,,1,-1,,1,,35 - 44,4 year degree,If we perceive biasness in charts based off results we want or objective reasoning.,,GreenLeft,Outcome,Low,Bar,Blue,2
+428,Green,,-13,,45,55,0,,0,0,,2,,45 - 54,High school graduate,,,GreenLeft,Outcome,Low,Bar,Blue,2
+429,,Green,,16,40,60,0,6,,,-2,,10,45 - 54,Doctorate,,,BlueLeft,Bias,Low,Bar,Green,2
+430,Blue,,15,,38,27,35,,0,0,,0,,35 - 44,Some college,How people interpret charts and the indications of those readings.,Thanks and I hope my participation helps with your research!,GreenLeft,Bias,Low,Bar,Blue,1
+431,,Green,,13,35,40,25,-5,,,5,,-3,25 - 34,Some college,Guessing an outcome? or possibly seeing bias in charts?,,BlueLeft,Bias,Low,Bar,Green,1
+432,,Green,,1,33,34,33,-1,,,1,,0,25 - 34,High school graduate,,,BlueLeft,Bias,Low,Bar,Blue,3
+433,Green,,-18,,20,40,40,,0,0,,-5,,55 - 64,Some college,bias,,GreenLeft,Outcome,Low,Bar,Green,4
+434,,Blue,,-20,80,20,0,-5,,,-4,,-4,45 - 54,4 year degree,Assessing bias in charts?,,BlueLeft,Bias,Low,Bar,Blue,3
+435,,Green,,20,46,54,0,0,,,10,,-25,25 - 34,High school graduate,,,BlueLeft,Bias,Low,Bar,Green,2
+436,Blue,,13,,50,40,10,,0,0,,0,,35 - 44,4 year degree,,,GreenLeft,Bias,Low,Bar,Blue,4
+437,,Green,,5,40,60,0,12,,,-6,,14,35 - 44,Professional degree,Chart analysis and biases,,BlueLeft,Outcome,Low,Bar,Green,4
+438,,Green,,14,40,60,0,5,,,1,,1,25 - 34,Professional degree,,,BlueLeft,Outcome,Low,Bar,Green,2
+439,Blue,,24,,80,20,0,,14,-13,,14,,45 - 54,4 year degree,,,GreenLeft,Bias,Low,Bar,Blue,3
+440,Blue,,20,,80,20,0,,1,1,,0,,25 - 34,High school graduate,,,GreenLeft,Bias,Low,Bar,Blue,3
+441,,Green,,2,45,50,5,0,,,0,,3,25 - 34,4 year degree,,,BlueLeft,Outcome,Low,Bar,Green,4
+442,Blue,,6,,30,20,50,,0,0,,0,,35 - 44,4 year degree,,,GreenLeft,Bias,Low,Bar,Green,1
+443,Blue,,13,,55,40,5,,0,1,,1,,25 - 34,Professional degree,,,GreenLeft,Bias,Low,Bar,Green,2
+444,Green,,-13,,25,50,25,,1,1,,14,,25 - 34,High school graduate,,,GreenLeft,Outcome,Low,Bar,Blue,2
+445,Green,,-6,,20,55,25,,0,0,,0,,25 - 34,Some college,,,GreenLeft,Bias,Low,Bar,Green,2
+446,Green,,-4,,40,50,10,,-8,-6,,-5,,18 - 24,Professional degree,,,GreenLeft,Bias,Low,Bar,Green,4
+447,,Blue,,-17,50,30,20,-16,,,0,,0,35 - 44,2 year degree,,,BlueLeft,Bias,Low,Bar,Green,3
+448,Blue,,18,,60,40,0,,0,0,,0,,25 - 34,4 year degree,How data can influence our decisions/impressions,,GreenLeft,Outcome,Low,Bar,Blue,1
+449,Blue,,19,,50,20,30,,0,0,,0,,18 - 24,4 year degree,,,GreenLeft,Outcome,Low,Bar,Blue,2
+450,,Blue,,13,70,10,20,-25,,,-25,,0,35 - 44,Some college,,,BlueLeft,Outcome,Low,Bar,Green,2
+451,Green,,-3,,48,52,0,,0,0,,0,,35 - 44,Professional degree,,,GreenLeft,Bias,Low,Bar,Blue,2
+452,Blue,,13,,60,30,10,,10,-10,,6,,18 - 24,Some college,,,GreenLeft,Bias,Low,Bar,Blue,2
+453,,Blue,,-7,60,40,0,1,,,3,,0,25 - 34,Some college,,,BlueLeft,Bias,Low,Bar,Green,3
+454,,Blue,,-25,80,20,0,0,,,0,,0,35 - 44,High school graduate,,,BlueLeft,Bias,Low,Bar,Green,1
+455,,Blue,,-3,45,40,15,0,,,0,,0,25 - 34,High school graduate,,,BlueLeft,Outcome,Low,Bar,Blue,3
+456,,Blue,,-16,75,15,10,1,,,-1,,-3,45 - 54,Some college,,,BlueLeft,Outcome,Low,Bar,Blue,4
+457,,Green,,16,40,60,0,-1,,,1,,2,55 - 64,Some college,Am  not sure honestly.,,BlueLeft,Outcome,Low,Bar,Blue,1
+458,,Green,,6,20,45,35,4,,,-4,,4,35 - 44,4 year degree,"The shifting tides in a ""school election"" though that could also resonate with the national political landscape within many countries. Look at what is currently happening in the US and what's happening in Italy for the extremes that are apparently being reached.",,BlueLeft,Outcome,Low,Bar,Green,1
+459,,Blue,,-25,99,1,0,-13,,,12,,-5,45 - 54,4 year degree,The survey was testing a theory on whether people thought the graph was biased towards the winner of the group ie the blue group. Even with the factual data presented people can be infer that the maker of the graph is biased. ,,BlueLeft,Outcome,Low,Bar,Blue,1
+460,,Green,,14,40,30,30,0,,,0,,4,25 - 34,Some college,,,BlueLeft,Outcome,Low,Bar,Blue,3
+461,,Blue,,-5,60,30,10,5,,,-2,,5,25 - 34,4 year degree,,,BlueLeft,Outcome,Low,Bar,Green,3
+462,Blue,,25,,60,15,25,,0,0,,1,,65 - 74,4 year degree,How we interpret charts,Thanks,GreenLeft,Bias,Low,Bar,Blue,4
+463,Green,,-13,,40,55,5,,0,0,,0,,35 - 44,Doctorate,,,GreenLeft,Bias,Low,Bar,Blue,1
+464,,Blue,,-16,60,25,15,14,,,-7,,25,35 - 44,2 year degree,,,BlueLeft,Outcome,Low,Bar,Green,2
+465,Green,,-19,,20,40,40,,-11,17,,-11,,25 - 34,4 year degree,Just trying to determine bias based on the commentary on a chart,,GreenLeft,Bias,Low,Bar,Blue,4
+466,,Blue,,11,60,40,0,4,,,1,,-14,25 - 34,Some college,,,BlueLeft,Outcome,Low,Bar,Blue,4
+467,,Green,,5,45,55,0,0,,,0,,0,35 - 44,Professional degree,,,BlueLeft,Outcome,Low,Bar,Green,4
+468,,Blue,,-13,40,30,30,0,,,0,,0,25 - 34,Professional degree,Biases in data presentation,,BlueLeft,Outcome,Low,Bar,Green,4
+469,Blue,,2,,50,45,5,,0,0,,0,,35 - 44,4 year degree,,,GreenLeft,Bias,Low,Bar,Green,4
+470,,Green,,0,50,50,0,4,,,-3,,3,35 - 44,Doctorate,,,BlueLeft,Outcome,Low,Bar,Green,3
+471,Green,,-17,,40,60,0,,8,-4,,1,,25 - 34,4 year degree,,,GreenLeft,Bias,Low,Bar,Green,1
+472,Green,,-13,,25,25,50,,15,0,,0,,25 - 34,4 year degree,,,GreenLeft,Outcome,Low,Bar,Blue,4
+473,,Green,,5,40,50,10,0,,,0,,0,25 - 34,4 year degree,I think the survey was about whether or not there were any biases when looking at a chart.,N/A,BlueLeft,Bias,Low,Bar,Blue,3
+474,Green,,-13,,30,45,25,,-6,4,,1,,25 - 34,4 year degree,Making educated guesses based on trends,,GreenLeft,Outcome,Low,Line,Green,1
+475,,Blue,,-4,66,33,1,15,,,-3,,15,35 - 44,Professional degree,,,BlueLeft,Bias,Low,Line,Green,2
+476,Green,,-13,,42,55,3,,0,0,,0,,75 - 84,Professional degree,,,GreenLeft,Outcome,Low,Line,Blue,4
+477,,Blue,,-14,70,30,0,1,,,1,,1,25 - 34,2 year degree,,,BlueLeft,Bias,Low,Line,Green,3
+478,,Green,,10,40,60,0,0,,,0,,0,25 - 34,4 year degree,,,BlueLeft,Bias,Low,Line,Green,3
+479,,Green,,13,25,75,0,0,,,0,,0,18 - 24,Some college,,,BlueLeft,Outcome,Low,Line,Blue,4
+480,Blue,,14,,15,5,80,,7,-6,,7,,25 - 34,4 year degree,,,GreenLeft,Outcome,Low,Line,Blue,1
+481,Green,,-19,,40,60,0,,-15,11,,-8,,25 - 34,Professional degree,,,GreenLeft,Bias,Low,Line,Green,2
+482,Green,,-12,,35,55,10,,-11,10,,-6,,35 - 44,4 year degree,,,GreenLeft,Bias,Low,Line,Green,4
+483,,Blue,,-13,50,25,25,0,,,0,,0,25 - 34,Professional degree,,,BlueLeft,Outcome,Low,Line,Blue,2
+484,Green,,-6,,33,34,33,,-6,6,,-2,,25 - 34,4 year degree,,,GreenLeft,Bias,Low,Line,Blue,3
+485,,Green,,14,43,55,2,0,,,0,,0,25 - 34,Some college,,,BlueLeft,Outcome,Low,Line,Green,1
+486,,Blue,,-11,65,25,10,-1,,,-1,,1,25 - 34,4 year degree,,,BlueLeft,Outcome,Low,Line,Green,4
+487,Blue,,-22,,10,90,0,,13,-16,,15,,25 - 34,4 year degree,,,GreenLeft,Bias,Low,Line,Green,2
+488,Green,,-13,,25,75,0,,-10,-5,,-5,,18 - 24,High school graduate,,,GreenLeft,Bias,Low,Line,Green,3
+489,,Green,,8,35,60,5,-7,,,8,,-10,25 - 34,Professional degree,To see how people read graphs,,BlueLeft,Outcome,Low,Line,Blue,2
+490,Blue,,22,,10,80,10,,0,0,,4,,55 - 64,Some college,Interpretation of chart results,N/A,GreenLeft,Outcome,Low,Line,Blue,1
+491,,Blue,,-13,40,50,10,0,,,0,,0,35 - 44,Professional degree,,,BlueLeft,Outcome,Low,Line,Blue,4
+492,,Blue,,-1,52,48,0,0,,,0,,0,45 - 54,High school graduate,,,BlueLeft,Bias,Low,Line,Blue,3
+493,,Green,,14,20,80,0,6,,,-7,,6,25 - 34,4 year degree,,,BlueLeft,Outcome,Low,Line,Green,2
+494,,Green,,13,40,60,0,14,,,14,,13,18 - 24,4 year degree,,,BlueLeft,Outcome,Low,Line,Green,1
+495,Blue,,22,,70,10,20,,20,-15,,20,,18 - 24,Some college,,,GreenLeft,Bias,Low,Line,Blue,4
+496,Green,,-15,,50,50,0,,-19,7,,-14,,65 - 74,Professional degree,chart perception,na,GreenLeft,Bias,Low,Line,Green,1
+497,Green,,-4,,40,60,0,,1,1,,6,,35 - 44,Professional degree,How things are presented and how they influence people,Thanks,GreenLeft,Bias,Low,Line,Green,4
+498,Green,,-13,,10,65,25,,-5,0,,-10,,25 - 34,Some college,,,GreenLeft,Bias,Low,Line,Green,3
+499,Blue,,25,,85,10,5,,0,0,,0,,18 - 24,Some college,,,GreenLeft,Outcome,Low,Line,Blue,1
+500,,Blue,,-25,60,15,25,0,,,0,,0,55 - 64,Some college,How people perceive info in charts,,BlueLeft,Outcome,Low,Line,Blue,2
+501,,Green,,8,40,60,0,7,,,-11,,10,25 - 34,4 year degree,,,BlueLeft,Outcome,Low,Line,Green,2
+502,Blue,,13,,60,40,0,,0,0,,2,,25 - 34,2 year degree,,,GreenLeft,Bias,Low,Line,Blue,4
+503,Blue,,13,,50,25,25,,0,0,,0,,35 - 44,Some college,,,GreenLeft,Bias,Low,Line,Blue,2
+504,,Green,,5,45,50,5,2,,,-2,,2,25 - 34,Some college,How people judge steady growth in graphs vs more erratic growth,"More info about how the data points were being averaged might have helped, some times data that is really very erratic looks a lot smoother when averaged out over longer periods",BlueLeft,Bias,Low,Line,Blue,3
+505,,Green,,18,30,50,20,0,,,0,,0,25 - 34,4 year degree,,,BlueLeft,Bias,Low,Line,Green,1
+506,,Green,,7,50,40,10,9,,,-3,,4,18 - 24,High school graduate,,,BlueLeft,Bias,Low,Line,Green,3
+507,,Blue,,-25,50,50,0,0,,,0,,0,25 - 34,Professional degree,,,BlueLeft,Bias,Low,Line,Blue,1
+508,Blue,,25,,70,20,10,,0,0,,0,,25 - 34,4 year degree,,,GreenLeft,Outcome,Low,Line,Blue,3
+509,Green,,-7,,30,40,30,,0,0,,-10,,35 - 44,4 year degree,Predicting odds.,,GreenLeft,Outcome,Low,Line,Green,4
+510,,Green,,12,23,27,50,-15,,,10,,-12,18 - 24,4 year degree,,,BlueLeft,Outcome,Low,Line,Blue,1
+511,Blue,,8,,40,25,35,,15,-15,,10,,25 - 34,Some college,,,GreenLeft,Outcome,Low,Line,Blue,3
+512,Blue,,13,,60,40,0,,25,-24,,24,,25 - 34,4 year degree,It is about making decisions between two groups,No,GreenLeft,Outcome,Low,Line,Green,1
+513,,Green,,13,40,60,0,-1,,,-1,,1,25 - 34,4 year degree,,,BlueLeft,Bias,Low,Line,Blue,4
+514,,Green,,13,50,0,50,25,,,8,,-16,18 - 24,2 year degree,,,BlueLeft,Outcome,Low,Line,Blue,2
+515,,Blue,,-13,50,40,10,-21,,,10,,-18,18 - 24,Some college,,,BlueLeft,Bias,Low,Line,Green,2
+516,Green,,0,,33,34,33,,0,0,,0,,45 - 54,4 year degree,,,GreenLeft,Bias,Low,Line,Green,4
+517,,Blue,,-3,55,45,0,0,,,0,,1,25 - 34,High school graduate,,,BlueLeft,Bias,Low,Line,Green,3
+518,,Green,,2,40,40,20,0,,,0,,0,25 - 34,4 year degree,,,BlueLeft,Outcome,Low,Line,Green,3
+519,Green,,-12,,30,60,10,,-5,9,,-4,,18 - 24,4 year degree,,,GreenLeft,Outcome,Low,Line,Green,4
+520,,Green,,11,15,25,60,0,,,0,,0,25 - 34,4 year degree,,,BlueLeft,Bias,Low,Line,Green,4
+521,Blue,,3,,45,35,20,,0,0,,0,,65 - 74,Professional degree,,,GreenLeft,Outcome,Low,Line,Blue,1
+522,,Blue,,-13,65,35,0,-3,,,2,,-2,25 - 34,2 year degree,,,BlueLeft,Bias,Low,Line,Blue,4
+523,,Green,,18,35,45,20,0,,,0,,0,75 - 84,Some college,reading charts,none,BlueLeft,Outcome,Low,Line,Blue,2
+524,Blue,,13,,65,35,0,,0,0,,0,,25 - 34,Some college,graphs,,GreenLeft,Bias,Low,Line,Green,2
+525,,Green,,17,22,78,0,11,,,-13,,16,25 - 34,High school graduate,,,BlueLeft,Bias,Low,Line,Green,2
+526,,Green,,17,50,50,0,4,,,7,,6,25 - 34,High school graduate,,,BlueLeft,Outcome,Low,Line,Blue,2
+527,Green,,-13,,20,50,30,,0,0,,0,,25 - 34,4 year degree,,,GreenLeft,Bias,Low,Line,Blue,2
+528,Blue,,0,,50,50,0,,0,0,,0,,18 - 24,Some college,,,GreenLeft,Outcome,Low,Line,Blue,3
+529,Green,,13,,25,50,25,,15,-12,,8,,18 - 24,,,no questions ,GreenLeft,Outcome,Low,Line,Blue,1
+530,Green,,-10,,40,40,20,,0,0,,0,,35 - 44,4 year degree,,,GreenLeft,Outcome,Low,Line,Blue,3
+531,Green,,-20,,25,75,0,,0,0,,-10,,45 - 54,4 year degree,,,GreenLeft,Outcome,Low,Line,Green,3
+532,,Blue,,-12,90,10,0,-16,,,-2,,-3,35 - 44,High school graduate,,,BlueLeft,Outcome,Low,Line,Green,1
+533,,Green,,13,45,50,5,-14,,,14,,-20,18 - 24,Some college,,,BlueLeft,Bias,Low,Line,Blue,3
+534,Blue,,24,,20,80,0,,18,-14,,25,,55 - 64,4 year degree,,,GreenLeft,Bias,Low,Line,Blue,1
+535,,Blue,,-12,50,40,10,11,,,10,,11,25 - 34,,,,BlueLeft,Bias,Low,Line,Green,1
+536,Green,,-13,,15,45,40,,8,-4,,3,,25 - 34,4 year degree,,,GreenLeft,Bias,Low,Line,Green,4
+537,,Blue,,-25,100,0,0,0,,,0,,0,18 - 24,High school graduate,,,BlueLeft,Outcome,Low,Line,Green,3
+538,,Blue,,-25,80,20,0,0,,,0,,1,55 - 64,Some college,,,BlueLeft,Outcome,Low,Line,Green,4
+539,Blue,,17,,65,35,0,,0,0,,0,,45 - 54,4 year degree,estimation of potential rates based on the graph,,GreenLeft,Bias,Low,Line,Blue,2
+540,,Green,,14,30,60,10,15,,,11,,15,45 - 54,Some college,,,BlueLeft,Bias,Low,Line,Blue,4
+541,Green,,-6,,30,40,30,,4,-2,,-1,,18 - 24,4 year degree,,,GreenLeft,Outcome,Low,Line,Blue,1
+542,Green,,-13,,50,50,0,,0,0,,0,,45 - 54,Some college,,,GreenLeft,Bias,Low,Line,Green,2
+543,Green,,-13,,20,55,25,,15,-13,,11,,18 - 24,2 year degree,I think this survey was about our perceptions of charts and how our biases can affect how we form them.,"it was a quick but thoughtful survey, thank you for the opportunity!",GreenLeft,Outcome,Low,Line,Blue,4
+544,Green,,-13,,30,50,20,,0,0,,-5,,55 - 64,Some college,If people understand what they are seeing on charts.,Not at this time. ,GreenLeft,Outcome,Low,Line,Green,1
+545,,Green,,14,25,50,25,4,,,-5,,5,18 - 24,Some college,,,BlueLeft,Outcome,Low,Line,Blue,2
+546,,Green,,16,25,75,0,3,,,3,,6,45 - 54,Professional degree,not sure,,BlueLeft,Bias,Low,Line,Green,1
+547,Green,,-15,,20,50,30,,0,0,,0,,25 - 34,Some college,,,GreenLeft,Outcome,Low,Line,Blue,3
+548,Blue,,13,,60,40,0,,-5,5,,-5,,25 - 34,Some college,,,GreenLeft,Bias,Low,Line,Green,2
+549,,Green,,14,45,55,0,1,,,1,,1,85 or older,4 year degree,reading graphs and the outcomes,n/a,BlueLeft,Bias,Low,Line,Blue,3
+550,,Blue,,-12,75,24,1,0,,,0,,0,35 - 44,4 year degree,,,BlueLeft,Outcome,Low,Line,Blue,1
+551,Blue,,13,,60,20,20,,0,0,,0,,45 - 54,4 year degree,,,GreenLeft,Bias,Low,Line,Green,3
+552,Blue,,13,,56,44,0,,7,-5,,0,,35 - 44,4 year degree,,,GreenLeft,Outcome,Low,Line,Green,4
+553,,Green,,13,19,69,12,-2,,,-3,,-5,35 - 44,4 year degree,,,BlueLeft,Bias,Low,Line,Blue,4
+554,,Blue,,-21,70,30,0,-1,,,2,,-2,35 - 44,Professional degree,,,BlueLeft,Bias,Low,Line,Green,1
+555,Green,,-15,,40,60,0,,1,1,,-11,,45 - 54,2 year degree,,,GreenLeft,Bias,Low,Line,Green,2
+556,,Blue,,-13,85,5,10,-21,,,16,,-11,35 - 44,4 year degree,,,BlueLeft,Outcome,Low,Line,Blue,4
+557,,Green,,8,45,55,0,-7,,,0,,-3,25 - 34,Professional degree,,Master's degree wasn't an option in education level,BlueLeft,Outcome,Low,Line,Blue,2
+558,Blue,,13,,70,30,0,,-12,11,,-10,,35 - 44,4 year degree,,,GreenLeft,Outcome,Low,Line,Blue,1
+559,,Blue,,-12,60,40,0,-14,,,8,,-11,55 - 64,Some college,,,BlueLeft,Outcome,Low,Line,Blue,2
+560,Green,,-17,,10,89,1,,-18,12,,-15,,25 - 34,,,,GreenLeft,Outcome,Low,Line,Green,4
+561,,Blue,,-19,10,65,25,-13,,,13,,-11,35 - 44,4 year degree,,,BlueLeft,Bias,Low,Line,Blue,4
+562,,Green,,11,30,70,0,10,,,-14,,14,18 - 24,Some college,No idea,,BlueLeft,Bias,Low,Line,Blue,3
+563,Green,,2,,50,45,5,,0,2,,-1,,35 - 44,4 year degree,,,GreenLeft,Bias,Low,Line,Blue,3
+564,Green,,-15,,30,60,10,,-6,6,,-3,,35 - 44,2 year degree,,,GreenLeft,Bias,Low,Line,Green,3
+565,Blue,,14,,70,30,0,,14,-15,,-2,,25 - 34,Doctorate,,,GreenLeft,Bias,Low,Line,Green,3
+566,Green,,-18,,10,70,20,,0,0,,0,,18 - 24,Some college,,,GreenLeft,Outcome,Low,Line,Green,4
+567,,Blue,,-17,60,30,10,-12,,,-11,,-12,25 - 34,2 year degree,,,BlueLeft,Bias,Low,Line,Blue,2
+568,Blue,,10,,55,35,10,,-13,0,,-15,,18 - 24,Some college,,,GreenLeft,Outcome,Low,Line,Green,2
+569,Blue,,20,,80,20,0,,6,-10,,10,,25 - 34,4 year degree,how we see a graph,good survey,GreenLeft,Outcome,Low,Line,Green,1
+570,,Green,,13,35,65,0,-25,,,22,,-25,25 - 34,4 year degree,How people interpret information that is presented to them with a bias,,BlueLeft,Outcome,Low,Line,Blue,1
+571,Green,,-17,,39,46,15,,-8,6,,-7,,25 - 34,4 year degree,,,GreenLeft,Outcome,Low,Line,Green,1
+572,,Blue,,-25,75,25,0,-25,,,18,,-25,18 - 24,Some college,,,BlueLeft,Bias,Low,Line,Green,4
+573,,Green,,12,35,50,15,10,,,-10,,5,45 - 54,Some college,,,BlueLeft,Bias,Low,Line,Green,3
+574,,Blue,,-17,44,55,1,0,,,0,,2,65 - 74,4 year degree,How we respond to trends.  ,,BlueLeft,Outcome,Low,Line,Blue,4
+575,Blue,,10,,55,44,1,,-2,1,,0,,55 - 64,2 year degree,prediction based on a visual bias to the trend line,thank you,GreenLeft,Outcome,Low,Line,Green,2
+576,Blue,,19,,25,25,50,,-12,17,,-20,,25 - 34,High school graduate,seeing if someone could read charts and predict the outcome,great survey,GreenLeft,Outcome,Low,Line,Green,1
+577,,Blue,,-20,60,20,20,1,,,-2,,-10,18 - 24,Some college,,,BlueLeft,Outcome,Low,Line,Green,2
+578,,Blue,,-23,50,20,30,-11,,,18,,-14,55 - 64,Some college,How we read charts.,Green was platooning and probably had almost reached its peak.,BlueLeft,Bias,Low,Line,Blue,2
+579,Blue,,25,,75,10,15,,0,0,,0,,35 - 44,2 year degree,,,GreenLeft,Bias,Low,Line,Blue,3
+580,,Blue,,-5,55,45,0,0,,,0,,0,25 - 34,4 year degree,,,BlueLeft,Bias,Low,Line,Green,3
+581,Green,,-25,,30,60,10,,0,0,,0,,55 - 64,4 year degree,,,GreenLeft,Outcome,Low,Line,Blue,1
+582,,Blue,,-14,60,30,10,-13,,,-6,,-25,35 - 44,4 year degree,,,BlueLeft,Bias,Low,Line,Green,4
+583,Green,,-12,,35,60,5,,0,0,,0,,45 - 54,4 year degree,Predicting outcome based off of graph data.,,GreenLeft,Bias,Low,Line,Blue,3
+584,,Blue,,-25,100,0,0,-1,,,-1,,-1,25 - 34,4 year degree,market share fairness,n/a,BlueLeft,Outcome,Low,Line,Blue,4
+585,Green,,-13,,25,50,25,,-12,-10,,-6,,55 - 64,Professional degree,,,GreenLeft,Bias,Low,Line,Blue,2
+586,Green,,-10,,40,60,0,,1,1,,1,,45 - 54,4 year degree,,,GreenLeft,Outcome,Low,Line,Blue,1
+587,Blue,,22,,80,19,1,,0,0,,0,,25 - 34,High school graduate,,,GreenLeft,Outcome,Low,Line,Blue,4
+588,Blue,,5,,51,45,4,,6,6,,6,,35 - 44,4 year degree,,,GreenLeft,Bias,Low,Line,Blue,1
+589,Green,,-13,,30,70,0,,10,5,,5,,35 - 44,4 year degree,,,GreenLeft,Outcome,Low,Line,Green,3
+590,,Blue,,-25,90,10,0,0,,,0,,0,65 - 74,4 year degree,,,BlueLeft,Bias,Low,Line,Blue,1
+591,,Green,,13,25,40,35,0,,,0,,0,45 - 54,Professional degree,not sure,,BlueLeft,Bias,Low,Line,Blue,1
+592,,Blue,,-10,65,34,1,0,,,0,,0,25 - 34,4 year degree,,,BlueLeft,Bias,Low,Line,Blue,4
+593,,Green,,13,45,55,0,0,,,0,,0,65 - 74,Professional degree,,,BlueLeft,Outcome,Low,Line,Green,3
+594,,Blue,,-8,65,25,10,25,,,-10,,24,35 - 44,Professional degree,,,BlueLeft,Outcome,High,Bar,Green,2
+595,Green,,-6,,30,40,30,,-7,8,,-11,,25 - 34,Doctorate,,,GreenLeft,Outcome,High,Bar,Green,4
+596,,Blue,,-20,90,10,0,-10,,,5,,-25,35 - 44,2 year degree,,,BlueLeft,Bias,High,Bar,Blue,2
+597,Blue,,8,,34,33,33,,0,0,,0,,18 - 24,4 year degree,,,GreenLeft,Outcome,High,Bar,Blue,1
+598,,Blue,,-17,60,20,20,-16,,,9,,-17,25 - 34,Professional degree,,thank you!,BlueLeft,Bias,High,Bar,Blue,2
+599,Blue,,15,,75,25,0,,0,0,,0,,18 - 24,Some college,,,GreenLeft,Bias,High,Bar,Green,4
+600,,Blue,,-18,67,28,5,20,,,-15,,20,18 - 24,4 year degree,,,BlueLeft,Outcome,High,Bar,Green,3
+601,,Blue,,-25,50,25,25,-3,,,0,,1,18 - 24,High school graduate,,,BlueLeft,Outcome,High,Bar,Blue,3
+602,Green,,-5,,31,36,33,,-5,1,,-5,,45 - 54,Some college,Understanding of charts and viewpoints of bias results,None,GreenLeft,Bias,High,Bar,Green,2
+603,Blue,,13,,75,20,5,,-16,11,,-14,,25 - 34,Professional degree,,,GreenLeft,Outcome,High,Bar,Green,1
+604,,Green,,3,30,40,30,0,,,0,,0,45 - 54,Doctorate,,,BlueLeft,Bias,High,Bar,Blue,4
+605,Blue,,13,,55,39,6,,1,1,,1,,55 - 64,2 year degree,,,GreenLeft,Outcome,High,Bar,Green,1
+606,,Green,,18,10,70,20,-20,,,-20,,-20,25 - 34,4 year degree,,,BlueLeft,Bias,High,Bar,Blue,2
+607,Blue,,3,,55,44,1,,15,0,,5,,25 - 34,Professional degree,,,GreenLeft,Outcome,High,Bar,Blue,3
+608,,Blue,,-20,60,40,0,15,,,-10,,14,18 - 24,Some college,,,BlueLeft,Bias,High,Bar,Green,2
+609,,Blue,,-2,55,45,0,8,,,-4,,10,45 - 54,4 year degree,If we could see that the scale of the bars for the various groups wasn't consistent throughout the chart,,BlueLeft,Outcome,High,Bar,Green,3
+610,Blue,,3,,53,47,0,,2,-3,,2,,55 - 64,Professional degree,,,GreenLeft,Bias,High,Bar,Blue,1
+611,,Blue,,-7,55,45,0,3,,,0,,-2,25 - 34,Professional degree,,,BlueLeft,Bias,High,Bar,Green,4
+612,,Blue,,-2,48,44,8,5,,,-2,,10,35 - 44,4 year degree,,,BlueLeft,Outcome,High,Bar,Green,1
+613,,Blue,,-20,60,30,10,0,,,0,,-15,35 - 44,Some college,,,BlueLeft,Outcome,High,Bar,Blue,4
+614,Blue,,13,,75,5,20,,0,0,,25,,18 - 24,Some college,,,GreenLeft,Bias,High,Bar,Green,3
+615,Blue,,17,,25,70,5,,-5,0,,-4,,25 - 34,4 year degree,,,GreenLeft,Bias,High,Bar,Green,4
+616,,Blue,,-16,75,10,15,-23,,,4,,-21,25 - 34,4 year degree,,,BlueLeft,Bias,High,Bar,Blue,2
+617,Blue,,5,,56,40,4,,-6,-2,,5,,25 - 34,4 year degree,,,GreenLeft,Bias,High,Bar,Blue,3
+618,,Blue,,-13,55,44,1,25,,,-25,,25,55 - 64,4 year degree,,,BlueLeft,Outcome,High,Bar,Green,2
+619,Green,,-1,,50,40,10,,-2,4,,0,,18 - 24,High school graduate,,,GreenLeft,Bias,High,Bar,Green,3
+620,Blue,,25,,60,10,30,,21,21,,21,,25 - 34,Less than high school,,,GreenLeft,Outcome,High,Bar,Blue,4
+621,Green,,-12,,43,47,10,,13,-3,,8,,25 - 34,Professional degree,,,GreenLeft,Outcome,High,Bar,Blue,3
+622,Green,,-12,,48,51,1,,7,-6,,10,,35 - 44,2 year degree,,,GreenLeft,Outcome,High,Bar,Blue,1
+623,,Green,,13,34,65,1,25,,,-20,,25,25 - 34,Some college,,,BlueLeft,Outcome,High,Bar,Green,1
+624,,Green,,12,25,25,50,1,,,-4,,-7,25 - 34,Some college,election results,,BlueLeft,Outcome,High,Bar,Green,4
+625,,Blue,,-11,55,45,0,-9,,,-10,,-9,55 - 64,4 year degree,Visual bias?,,BlueLeft,Bias,High,Bar,Blue,1
+626,Green,,-18,,30,40,30,,-11,3,,-21,,25 - 34,4 year degree,,,GreenLeft,Bias,High,Bar,Green,1
+627,,Green,,14,30,55,15,0,,,0,,-20,55 - 64,Professional degree,,,BlueLeft,Outcome,High,Bar,Blue,3
+628,,Blue,,-5,55,45,0,0,,,0,,0,45 - 54,Professional degree,,,BlueLeft,Bias,High,Bar,Blue,2
+629,Blue,,0,,20,20,60,,0,0,,0,,25 - 34,4 year degree,,,GreenLeft,Bias,High,Bar,Blue,4
+630,Blue,,13,,75,25,0,,-25,-6,,-25,,18 - 24,2 year degree,How people interpret bias in data presentation,,GreenLeft,Bias,High,Bar,Green,3
+631,Green,,-16,,45,50,5,,5,-3,,9,,25 - 34,High school graduate,,,GreenLeft,Outcome,High,Bar,Blue,4
+632,,Blue,,-13,80,20,0,-8,,,7,,5,25 - 34,2 year degree,,,BlueLeft,Bias,High,Bar,Blue,1
+633,Blue,,12,,58,38,4,,-13,13,,-23,,45 - 54,4 year degree,,,GreenLeft,Outcome,High,Bar,Green,2
+634,Blue,,-2,,45,55,0,,13,-16,,8,,25 - 34,Some college,,,GreenLeft,Bias,High,Bar,Blue,3
+635,Blue,,1,,45,42,13,,-2,1,,1,,45 - 54,4 year degree,,,GreenLeft,Outcome,High,Bar,Blue,4
+636,,Blue,,-10,75,20,5,1,,,0,,15,45 - 54,4 year degree,,,BlueLeft,Bias,High,Bar,Green,1
+637,Blue,,9,,30,15,55,,0,0,,-9,,18 - 24,Some college,,,GreenLeft,Bias,High,Bar,Green,3
+638,,Green,,13,45,0,55,-15,,,20,,-20,35 - 44,Professional degree,,,BlueLeft,Bias,High,Bar,Blue,1
+639,Green,,-7,,45,55,0,,4,-3,,2,,35 - 44,Some college,,,GreenLeft,Outcome,High,Bar,Green,4
+640,,Green,,13,45,50,5,25,,,-25,,25,18 - 24,4 year degree,This was a study about perception and biases. ,,BlueLeft,Outcome,High,Bar,Green,2
+641,Blue,,19,,96,4,0,,3,-1,,8,,25 - 34,4 year degree,"I'm unsure, but it may have something to do with whether or not the phrase ""Blue will double down and win again!"" (paraphrased) has an effect on our answers.",thank you for this opportunity!,GreenLeft,Outcome,High,Bar,Blue,1
+642,,Blue,,-14,75,20,5,25,,,-10,,25,18 - 24,4 year degree,,,BlueLeft,Outcome,High,Bar,Green,3
+643,Blue,,13,,70,20,10,,8,-8,,-6,,25 - 34,2 year degree,,,GreenLeft,Outcome,High,Bar,Blue,3
+644,,Blue,,-5,35,30,35,5,,,-5,,20,35 - 44,Some college,,,BlueLeft,Outcome,High,Bar,Green,2
+645,Blue,,13,,60,35,5,,0,0,,0,,25 - 34,4 year degree,,,GreenLeft,Outcome,High,Bar,Blue,3
+646,Blue,,5,,52,45,3,,0,0,,0,,35 - 44,4 year degree,,,GreenLeft,Outcome,High,Bar,Blue,4
+647,,Blue,,-25,80,15,5,16,,,-16,,14,25 - 34,4 year degree,,,BlueLeft,Bias,High,Bar,Green,1
+648,Green,,-10,,30,20,50,,-24,6,,-23,,45 - 54,4 year degree,,Good luck with your study!,GreenLeft,Bias,High,Bar,Green,4
+649,,Blue,,-10,60,40,0,1,,,1,,-13,35 - 44,Some college,reading graphs,,BlueLeft,Bias,High,Bar,Blue,1
+650,,Green,,12,10,50,40,0,,,0,,-13,25 - 34,Some college,,,BlueLeft,Outcome,High,Bar,Blue,2
+651,,Blue,,-14,50,45,5,4,,,0,,20,25 - 34,Professional degree,,,BlueLeft,Bias,High,Bar,Green,2
+652,,Blue,,-22,10,70,20,-6,,,7,,5,18 - 24,Some college,,,BlueLeft,Outcome,High,Bar,Green,4
+653,Blue,,25,,45,25,30,,1,0,,0,,25 - 34,4 year degree,,,GreenLeft,Outcome,High,Bar,Green,3
+654,,Green,,13,40,60,0,-25,,,25,,-25,25 - 34,4 year degree,,,BlueLeft,Bias,High,Bar,Blue,2
+655,Blue,,8,,70,10,20,,4,-3,,4,,25 - 34,4 year degree,,,GreenLeft,Bias,High,Bar,Blue,4
+656,,Green,,13,65,35,0,18,,,1,,15,18 - 24,Some college,,,BlueLeft,Outcome,High,Bar,Green,2
+657,Blue,,25,,60,40,0,,22,0,,12,,18 - 24,High school graduate,,,GreenLeft,Bias,High,Bar,Green,4
+658,Blue,,10,,70,25,5,,-10,10,,-10,,25 - 34,4 year degree,I think this survey was about determining if a chart with some extraneous text on it would bias the viewer towards one point of view over another.,N/A,GreenLeft,Outcome,High,Bar,Green,1
+659,Blue,,13,,70,30,0,,9,0,,4,,18 - 24,2 year degree,our perception of charts ,,GreenLeft,Outcome,High,Bar,Blue,2
+660,,Blue,,-13,75,25,0,-5,,,-1,,-1,Prefer not to answer,Prefer not to answer,,,BlueLeft,Bias,High,Bar,Blue,4
+661,,Green,,0,15,15,70,2,,,1,,1,Prefer not to answer,Prefer not to answer,,,BlueLeft,Bias,High,Bar,Blue,1
+662,Blue,,6,,35,33,32,,-22,22,,-25,,25 - 34,Less than high school,,,GreenLeft,Outcome,High,Bar,Green,1
+663,Blue,,16,,50,40,10,,-15,14,,-15,,45 - 54,Some college,,,GreenLeft,Outcome,High,Bar,Green,3
+664,,Blue,,-3,55,45,0,25,,,-21,,25,25 - 34,4 year degree,,,BlueLeft,Bias,High,Bar,Green,1
+665,Green,,-12,,30,55,15,,0,0,,0,,35 - 44,High school graduate,,,GreenLeft,Outcome,High,Bar,Blue,4
+666,,Green,,14,35,60,5,24,,,-13,,23,25 - 34,Some college,,,BlueLeft,Outcome,High,Bar,Green,2
+667,Blue,,17,,50,40,10,,10,-11,,25,,45 - 54,Some college,Bias,I hope your study goes well.,GreenLeft,Bias,High,Bar,Blue,2
+668,,Blue,,-9,40,30,30,8,,,-8,,7,18 - 24,2 year degree,,,BlueLeft,Bias,High,Bar,Green,4
+669,,Green,,13,60,35,5,-18,,,13,,-25,35 - 44,4 year degree,,,BlueLeft,Outcome,High,Bar,Blue,1
+670,Blue,,20,,75,20,5,,10,-11,,15,,18 - 24,2 year degree,,,GreenLeft,Bias,High,Bar,Blue,3
+671,Blue,,12,,40,55,5,,1,1,,1,,45 - 54,4 year degree,,,GreenLeft,Outcome,High,Bar,Green,3
+672,,Blue,,-3,60,30,10,0,,,0,,0,35 - 44,Some college,,,BlueLeft,Outcome,High,Bar,Blue,1
+673,,Blue,,-20,0,80,20,-5,,,10,,20,35 - 44,2 year degree,,no,BlueLeft,Bias,High,Bar,Blue,3
+674,,Green,,13,40,40,20,-15,,,0,,-12,18 - 24,Some college,,,BlueLeft,Bias,High,Bar,Blue,2
+675,Blue,,-7,,20,30,50,,1,0,,0,,25 - 34,4 year degree,,,GreenLeft,Bias,High,Bar,Blue,3
+676,,Green,,13,35,60,5,25,,,-25,,25,18 - 24,4 year degree,,,BlueLeft,Bias,High,Bar,Green,3
+677,Blue,,12,,50,40,10,,5,5,,6,,25 - 34,4 year degree,,,GreenLeft,Outcome,High,Bar,Green,4
+678,Blue,,13,,55,45,0,,-10,12,,-25,,55 - 64,Doctorate,,,GreenLeft,Outcome,High,Bar,Green,1
+679,,Blue,,-25,85,10,5,-25,,,25,,-25,25 - 34,High school graduate,,,BlueLeft,Bias,High,Bar,Blue,2
+680,Blue,,15,,35,33,32,,-25,10,,-25,,45 - 54,Professional degree,"Interpreting/extrapolating data on a chart, and whether or not it was biased",,GreenLeft,Bias,High,Bar,Green,2
+681,,Green,,13,30,65,5,-8,,,1,,-2,18 - 24,4 year degree,,,BlueLeft,Bias,High,Bar,Blue,2
+682,,Blue,,-9,65,35,0,-19,,,12,,-15,18 - 24,Some college,,,BlueLeft,Bias,High,Bar,Blue,3
+683,,Blue,,-19,90,10,0,0,,,0,,0,55 - 64,2 year degree,not sure,no,BlueLeft,Bias,High,Bar,Blue,4
+684,Green,,-20,,35,65,0,,-25,25,,-25,,18 - 24,Some college,How well people can read charts and their predictions. ,,GreenLeft,Outcome,High,Bar,Green,1
+685,Blue,,6,,40,30,30,,0,0,,-19,,18 - 24,Some college,,,GreenLeft,Bias,High,Bar,Green,2
+686,Green,,-20,,20,50,30,,21,-15,,13,,25 - 34,Some college,,,GreenLeft,Outcome,High,Bar,Blue,3
+687,Green,,-10,,20,70,10,,-10,5,,10,,35 - 44,Some college,I think that this was about being able to predict statistics.,,GreenLeft,Bias,High,Bar,Blue,2
+688,Green,,-11,,40,40,20,,1,-1,,1,,25 - 34,4 year degree,guessing or predicting the fututre growth of a group,no,GreenLeft,Outcome,High,Bar,Green,4
+689,,Blue,,-17,0,60,40,-3,,,-1,,-1,35 - 44,4 year degree,,,BlueLeft,Bias,High,Bar,Green,4
+690,,Green,,12,30,35,35,-11,,,8,,-12,25 - 34,4 year degree,,,BlueLeft,Outcome,High,Bar,Blue,2
+691,Blue,,14,,45,55,0,,25,-25,,25,,25 - 34,High school graduate,,,GreenLeft,Outcome,High,Bar,Blue,1
+692,,Green,,20,0,54,46,0,,,0,,14,55 - 64,Some college,To see how viewers extract information.,,BlueLeft,Bias,High,Bar,Blue,1
+693,Blue,,3,,55,40,5,,-7,2,,-6,,35 - 44,2 year degree,,,GreenLeft,Bias,High,Bar,Green,1
+694,,Blue,,-12,55,40,5,25,,,-25,,25,35 - 44,4 year degree,,,BlueLeft,Bias,High,Bar,Green,3
+695,,Green,,13,40,55,5,20,,,-20,,25,25 - 34,4 year degree,,,BlueLeft,Bias,High,Bar,Green,1
+696,,Green,,15,40,60,0,1,,,1,,-2,35 - 44,4 year degree,,,BlueLeft,Outcome,High,Bar,Blue,4
+697,,Blue,,-5,50,40,10,20,,,-3,,15,35 - 44,Professional degree,,,BlueLeft,Outcome,High,Bar,Green,2
+698,,Blue,,-5,55,42,3,21,,,22,,21,25 - 34,4 year degree,,,BlueLeft,Bias,High,Bar,Green,2
+699,Blue,,13,,80,15,5,,0,1,,-25,,55 - 64,Doctorate,Whether the biased text in the chart changes the predictions for year four?,"The student population grew, so wonder if the new students share some characteristics that improved their representation. ",GreenLeft,Outcome,High,Bar,Green,3
+700,Green,,-13,,30,50,20,,0,0,,0,,65 - 74,2 year degree,interpretation of charts,,GreenLeft,Outcome,High,Bar,Green,3
+701,,Green,,7,45,55,0,-7,,,5,,-16,35 - 44,Some college,,,BlueLeft,Outcome,High,Bar,Blue,3
+702,Blue,,10,,60,40,0,,-7,0,,-4,,25 - 34,4 year degree,,,GreenLeft,Bias,High,Bar,Green,4
+703,,Blue,,-19,90,10,0,0,,,0,,0,55 - 64,High school graduate,,,BlueLeft,Bias,High,Bar,Blue,1
+704,Blue,,13,,60,40,0,,0,0,,0,,25 - 34,4 year degree,,,GreenLeft,Bias,High,Bar,Green,4
+705,,Blue,,-4,53,42,5,-25,,,10,,-25,18 - 24,4 year degree,,,BlueLeft,Outcome,High,Bar,Blue,3
+706,Blue,,10,,34,33,33,,25,-25,,25,,18 - 24,High school graduate,If people think green will win because of pattern recognition or if blue will win because of past performance,,GreenLeft,Outcome,High,Bar,Blue,1
+707,Green,,-4,,60,30,10,,24,-25,,23,,18 - 24,4 year degree,chart bias interpretation,,GreenLeft,Outcome,High,Bar,Blue,1
+708,Green,,-12,,40,60,0,,-6,7,,-6,,18 - 24,Some college,,,GreenLeft,Bias,High,Bar,Green,3
+709,Blue,,25,,90,10,0,,0,0,,0,,45 - 54,High school graduate,,,GreenLeft,Bias,High,Bar,Blue,3
+710,,Blue,,13,25,25,50,25,,,-25,,25,25 - 34,4 year degree,,,BlueLeft,Bias,High,Bar,Green,3
+711,,Blue,,-1,25,25,50,0,,,-1,,0,45 - 54,2 year degree,How I perceive outcomes by viewing a graph,no,BlueLeft,Outcome,High,Bar,Blue,4
+712,Green,,-18,,30,70,0,,-15,10,,-20,,25 - 34,High school graduate,,,GreenLeft,Bias,High,Bar,Green,4
+713,,Blue,,-20,90,5,5,-10,,,-10,,-10,45 - 54,2 year degree,,,BlueLeft,Bias,High,Bar,Blue,3
+714,,Blue,,-13,70,30,0,0,,,0,,-10,35 - 44,4 year degree,Seeing if people will follow the trend of the Green group going up in participation based on gender. ,Thank you. ,BlueLeft,Outcome,High,Bar,Blue,4
+715,Green,,-15,,46,53,1,,-20,20,,-25,,45 - 54,High school graduate,Whether positive comments are only biased towards the group they are for or if they are also viewed as biased against the other group.,,GreenLeft,Bias,High,Bar,Green,4
+716,Blue,,10,,60,30,10,,0,0,,5,,25 - 34,High school graduate,to see peoples views on charts and there assumptions.,,GreenLeft,Outcome,High,Bar,Blue,1
+717,Green,,-16,,40,60,0,,-12,10,,-16,,18 - 24,Some college,,,GreenLeft,Outcome,High,Bar,Green,2
+718,,Green,,13,40,50,10,0,,,0,,0,18 - 24,Less than high school,,,BlueLeft,Bias,High,Bar,Green,4

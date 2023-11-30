@@ -1,0 +1,215 @@
+---
+title: "Replicability Stamp Script"
+author: "CS"
+date: '2022-07-27'
+output: html_document
+---
+
+This file contains a script to process this data and replicate one of the figures/tables shown in the paper.
+
+```{r data cleaning, echo=FALSE}
+
+library(tidyverse)
+
+theme_set(theme_minimal())
+
+# read in raw data
+df <- read.csv('data.csv')
+
+# combining columns to account for response order counterbalancing (GreenLeft & BlueLeft)
+df$chosen_outcome <- 
+  str_remove_all(
+    paste0(df$winning_party, df$winning_party.1),
+    "NA") # combining chosen outcome columns
+df$outcome_confidence <- 
+  as.numeric(
+    str_remove_all(
+      paste0(df$winning_scale_1, df$winning_scale_1.1),
+      "NA")
+  ) # combining outcome confidence columns
+df$biasToward <- 
+  as.numeric(
+    str_remove_all(
+      paste0(df$biasToward_1, df$biasToward_1.1),
+      "NA")
+  ) # combining bias toward columns
+df$biasAgainst <- 
+  as.numeric(
+    str_remove_all(
+      paste0(df$biasAgainst_1, df$biasAgainst_1.1),
+      "NA")
+  ) # combining bias against columns
+df$personalView <- 
+  as.numeric(
+    str_remove_all(
+      paste0(df$personalView_1, df$personalView_1.1),
+      "NA")
+  ) # combining personal view column
+
+# calculating categories
+
+df$pct_chosen <- 
+  ifelse(
+    df$chosen_outcome == "Blue", # if they selected Blue
+    df$pct.chances_blue, # fill with Blue's chances
+    df$pct.chances_green # else fill with Green
+  ) # create column for the percent chance of the chosen outcome
+
+df$pct_unchosen <- 
+  ifelse(df$chosen_outcome == "Blue", 
+         df$pct.chances_green, 
+         df$pct.chances_blue 
+  ) # create column for the percent chance of the unchosen outcome
+
+# transform data to account for Order counterbalancing
+df$outcome_confidence <- ifelse(
+  df$Order == 'GreenLeft', # if the Green responses were on the left (and Blue on the right)
+  df$outcome_confidence * -1, # move the Green responses to the right (and Blue to the left)
+  df$outcome_confidence # else stay the same
+)
+
+df$biasToward <- ifelse(
+  df$Order == 'GreenLeft', 
+  df$biasToward * -1,
+  df$biasToward
+)
+
+df$biasAgainst <- ifelse(
+  df$Order == 'GreenLeft',
+  df$biasAgainst * -1,
+  df$biasAgainst
+)
+
+df$personalView <- ifelse(
+  df$Order == 'GreenLeft',
+  df$personalView * -1,
+  df$personalView
+)
+
+
+df$biasAgainst_reversed <- -1 * df$biasAgainst
+
+df$author_confidence <- rowMeans(df %>% select(biasToward, biasAgainst_reversed, personalView))
+
+df$chosen_author <- ifelse(df$author_confidence < 0,  
+                           'Blue', # negative values indicate blue
+                           ifelse(df$author_confidence > 0, # positive values indicate green
+                                  'Green', 
+                                  'Neutral' # else neutral
+                           )) # create single column for the estimated author, based on the bias rating provided by participants indicating the likelihood of author leaning
+
+# create column indicating whether the chosen outcome was aligned with the slant of the text displayed
+df$outcome_aligned <- ifelse(df$Slant != 'None', # control conditions cannot be aligned or unaligned
+                             ifelse(df$chosen_outcome == 'Blue', # examine the responses which selected Blue
+                                    ifelse(df$Slant == 'Blue', # if the slant was Blue, then aligned ("Aligned"), else not aligned ("Unaligned")
+                                           "Aligned", "Unaligned"), 
+                                    ifelse(df$Slant == 'Green', # else condition examines the responses which selected Green 
+                                           "Aligned", "Unaligned")), # if the slant was Green, then aligned ("Aligned"), else not aligned ("Unaligned")
+                             'No-Side') # no-side conditions
+
+# create column indicating whether the chosen author was aligned with the slant of the text displayed
+df$author_aligned <- ifelse(df$Slant != 'None', # control conditions cannot be aligned or unaligned
+                            ifelse(df$chosen_author == 'Blue', # examine the responses which selected Blue
+                                   ifelse(df$Slant == 'Blue', # if the slant was Blue, then aligned ("Aligned"), else not aligned ("Unaligned")
+                                          "Aligned", "Unaligned"), 
+                                   ifelse(df$Slant == 'Green', # else condition examines the responses which selected Green 
+                                          "Aligned", "Unaligned")), # if the slant was Green, then aligned ("Aligned"), else not aligned ("Unaligned")
+                            'No-Side') # no-side conditions
+
+# create column with the absolute value of the confidence rating for outcome
+df$outcome_confidence_abs <- abs(df$outcome_confidence)
+
+# create column with the absolute value of the confidence rating for author
+df$author_confidence_abs <- abs(df$author_confidence)
+
+# make categorical column to indicate the treatment or control groups
+df$treatment <- ifelse(df$Strength == 'No-Side', 'Control', 'Treatment')
+
+# make categorical column to indicate the position comparisons
+df$full_condition <- paste(df$ChartType, df$Strength)
+
+# update factor ordering of Prime
+df$Prime <- factor(df$Prime, levels = c("Bias", "Outcome"))
+
+# exclude responses which do not demonstrate internal consistency (the chosen outcome in the binary choice and the scale response)
+df$Exclude <- 0
+df$Exclude <- ifelse(df$Exclude != 1, # only look at participants not already excluded 
+                     ifelse(df$chosen_outcome == 'Blue', # test for internal consistency for those who said Blue
+                            ifelse(df$outcome_confidence > 0, 1, 0), # Blue should be negative or 0, assign 1 if this is not true, else assign 0
+                            ifelse(df$outcome_confidence < 0, 1, 0) # Green should be positive or 0, assign 1 if this is not true, else assign 0
+                     ),
+                     df$Exclude) # if participant already excluded, do not change the value
+# same test for the percent chances - 
+df$Exclude <- ifelse(df$Exclude != 1, # only look at participants not already excluded 
+                     ifelse(df$pct_chosen < df$pct_unchosen, 1, 0), # if the percent likelihood of the chosen group is less than the likelihood of the other, exclude
+                     df$Exclude) # if participant already excluded, do not change the value
+# exclude the responses
+df <- subset(df, Exclude == 0)
+
+# select the columns of interest
+df <- select(df, 
+             pt,
+             age,
+             education,
+             Order, 
+             Prime,
+             Strength, 
+             ChartType,
+             Slant,
+             Stimulus,
+             treatment,
+             full_condition,
+             chosen_outcome,
+             outcome_confidence_abs,          
+             pct_unchosen,
+             pct_chosen,
+             pct_tie,
+             outcome_aligned,
+             chosen_author,
+             author_confidence_abs,
+             author_aligned,
+             biasToward,
+             biasAgainst,
+             personalView
+)
+
+# make subsets for each chart type
+bar <- subset(df, ChartType == 'Bar')
+line <- subset(df, ChartType == 'Line')
+
+# bootstrapping variable
+B <- 10000
+
+# color variables
+a = "#8267BE"
+a1 = "#c9bce3"
+u = "#F29696"
+u1 = "#E3BDBC"
+c = "#a3acb9"
+
+```
+
+```{r judgments by bias condition and alignment}
+
+condition_vis_author <- df %>% 
+  group_by(ChartType, author_aligned, Strength) %>% 
+  summarize(
+    mean_author = mean(author_confidence_abs),
+    sd_author = sd(author_confidence_abs),
+    n_author = n(),
+    se_author = sd_author / sqrt(n_author), .groups = 'drop') %>% 
+  mutate(
+    condition = paste(author_aligned, Strength)
+  )
+ggplot(condition_vis_author, aes(x = condition, y = mean_author, color = condition))+
+  geom_point()+
+  geom_errorbar(aes(ymin = mean_author - se_author, ymax = mean_author + se_author))+
+  scale_x_discrete(limits = c("Aligned High", "Aligned Low", "No-Side No-Side", "Unaligned Low", "Unaligned High"), labels = c("Matched\nHigh", "Matched\nLow", "No-Side", "Unmatched\nLow", "Unmatched\nHigh"))+
+  scale_color_manual(values = c(a, a1, c, u, u1), labels = c("Matched High", "Matched Low", "No-Side", "Unmatched Low", "Unmatched High"))+
+  labs(color = "Appraisal Match &\nBias Level",
+       y = "Appraisal Response", x = "\nAppraisal Match & Bias Level")+
+  facet_grid(ChartType ~ .)
+
+```
+
+
