@@ -10,7 +10,9 @@ This repository contains supplementary materials for _The Role of Text in Visual
 
 Each study folder contains at least an analysis foler, a stimuli images folder, and a survey materials folder.
 
+- **[TVCG_2023_Stokes.pdf](TVCG_2023_Stokes.pdf)**: pdf file containing the accepted version of this work to the IEEE TVCG journal. 
 - **[tables.pdf](tables.pdf)**: pdf file containing comparisons of baseline and fully saturated mixed effect models. Captions describe which study each table corresponds to. 
+
 - **[study 1/](study%201/)**: folder containing all files pertaining to Study 1
   - **[analysis/](study%201/analysis/)**: folder containing all analysis files for Study 1
     - *[study 1 data.csv](study%201/analysis/study%201%20data.csv)*: survey output for Study 1 participants
