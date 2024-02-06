@@ -5,6 +5,6 @@ Finally, download RStudio Desktop from https://www.rstudio.com/products/rstudio/
 
 When the programs are downloaded, open and run script.Rmd in RStudio Desktop. 
 If you are using Ubuntu, Debian, Fedora, Redhat, CentOS, openSUSE, or other Linux OS, check https://www.rdocumentation.org/packages/PMCMRplus/versions/1.9.6 for further instructions on intalling the package PMCMRplus, such as commands to run prior to installation. 
-After installing RStudio Desktop and implementing any additional commands required for the PMCMRplus package, you are now ready to run the script. 
-In the upper right corner of the "Source" pane (located by default in the upper left pane in the view), select the dropdown arrow on the right of the "Run" button. Select "Run All" at the bottom of the dropdown menu.
+After installing RStudio Desktop, you are now ready to run the script. 
+In the upper right corner of the "Source" pane (located by default in the upper left pane in the view), select the dropdown arrow on the right of the "Run" button. Select "Run All" at the bottom of the dropdown menu. You may also run the script by clicking on the 'knitr' button in RStudio. 
 The script will automatically check for packages and download those which are required, which will be compiled by Rtools or may need permission for MacOS users. Grant permission or enter password when prompted. 

@@ -1,6 +1,8 @@
 ---
 title: "study1 vis"
-output: pdf_document
+output:
+  pdf_document: default
+  html_document: default
 date: "2023-02-06"
 ---
 
@@ -12,7 +14,10 @@ Language in this file may differ from that in the paper.
 
 ```{r setup, echo = FALSE}
 
-knitr::opts_chunk$set(echo=FALSE)
+
+packages = c("tidyverse", "ggpubr", "lme4", "car", "FSA", "rstatix", "pwr", "rmarkdown", "ggdist")
+
+install.packages(setdiff(packages, rownames(installed.packages())), dependencies = TRUE)
 
 library(tidyverse)
 library(ggpubr)
@@ -21,6 +26,7 @@ library(car)
 library(FSA)
 library(rstatix)
 library(pwr)
+library(ggdist)
 
 theme_set(theme_minimal())
 set.seed(6062)
@@ -756,7 +762,7 @@ In these charts, we use a subset of the overall data to examine only the treatme
 
 ```{r outcome_counts}
 
-study1 <- ggplot(subset(df, treatment == "Treatment"), aes(x = outcome_aligned, y = after_stat(count), fill = outcome_aligned))+
+ggplot(subset(df, treatment == "Treatment"), aes(x = outcome_aligned, y = after_stat(count), fill = outcome_aligned))+
   geom_bar()+
   scale_fill_manual(values = c(a, u, c))+
   labs(
@@ -768,7 +774,6 @@ study1 <- ggplot(subset(df, treatment == "Treatment"), aes(x = outcome_aligned, 
   theme(legend.position = 'none',
   panel.grid.major = element_line(color = "grey85", size = 0.1),  # Lighten and thin major gridlines
   panel.grid.minor = element_line(color = "grey85", size = 0.05))  # Lighten and thin minor gridlines
-ggsave("study1.png", study1, height = 5, width = 7, dpi = 320)
 
 df %>% 
   group_by(ChartType, outcome_aligned) %>% 
@@ -794,7 +799,7 @@ We now go on to conduct these same tests for the author leaning response. We're 
 
 ```{r author_counts}
 
-study1 <- ggplot(subset(df, treatment == "Treatment"), aes(x = author_aligned, y = after_stat(count), fill = author_aligned))+
+ggplot(subset(df, treatment == "Treatment"), aes(x = author_aligned, y = after_stat(count), fill = author_aligned))+
   geom_bar()+
   scale_fill_manual(values = c(a, u, c), labels= c("Matched", "Unmatched"))+
   labs(
@@ -806,7 +811,6 @@ study1 <- ggplot(subset(df, treatment == "Treatment"), aes(x = author_aligned, y
   theme(legend.position = 'none',
   panel.grid.major = element_line(color = "grey85", size = 0.1),  # Lighten and thin major gridlines
   panel.grid.minor = element_line(color = "grey85", size = 0.05))  # Lighten and thin minor gridlines
-ggsave("study1.png", study1, height = 5, width = 7, dpi = 320)
 
 df %>% 
   group_by(ChartType, author_aligned) %>% 
@@ -1040,7 +1044,7 @@ If this were the case, we would expect to see:
 
 ```{r author_and_outcome}
 
-study1 <- ggplot(subset(df, treatment == "Treatment"), aes(x = outcome_aligned, y = author_confidence_abs, fill = outcome_aligned, color = outcome_aligned))+
+ggplot(subset(df, treatment == "Treatment"), aes(x = outcome_aligned, y = author_confidence_abs, fill = outcome_aligned, color = outcome_aligned))+
   stat_halfeye(size = 2)+
   scale_fill_manual(values = c(a1, u1))+
   scale_color_manual(values = c(a, u))+
@@ -1054,7 +1058,6 @@ study1 <- ggplot(subset(df, treatment == "Treatment"), aes(x = outcome_aligned, 
   theme(legend.position = 'none',
   panel.grid.major = element_line(color = "grey85", size = 0.1),  # Lighten and thin major gridlines
   panel.grid.minor = element_line(color = "grey85", size = 0.05))  # Lighten and thin minor gridlines
-ggsave("study1.png", study1, height = 5, width = 7, dpi = 320)
 
 
 

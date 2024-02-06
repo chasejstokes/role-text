@@ -1,22 +1,27 @@
 ---
 title: "Study 2 Prep"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 date: "2023-02-16"
 ---
 
 ```{r setup, include = FALSE}
 
-knitr::opts_chunk$set(echo=FALSE)
 
-library(ggplot2)
+packages = c("tidyverse", "ggpubr", "gridExtra", "lme4", "car", "transport", "FSA", "rcompanion", "rmarkdown")
+
+install.packages(setdiff(packages, rownames(installed.packages())), dependencies = TRUE)
+
+library(tidyverse)
 library(ggpubr)
 library(gridExtra)
 library(lme4)
 library(car)
 library(transport)
-library(dplyr)
 library(FSA)
 library(rcompanion)
+
 
 theme_set(theme_minimal())
 set.seed(6062)
@@ -24,7 +29,7 @@ set.seed(6062)
 #### import_and_clean_raw_data ####
 
 # read in raw data
-df <- read.csv('VG_e1.csv')
+df <- read.csv('study 1 data.csv')
 # sanity check the column names
 colnames(df)
 # sanity check the first set of values
@@ -188,9 +193,7 @@ df$treatment <- ifelse(df$Level == 'Control', 'Control', 'Treatment')
 df$full_condition <- paste(df$Position, df$treatment)
 
 # exclude responses which do not demonstrate internal consistency (the chosen outcome in the binary choice and the scale response)
-df$Exclude <- ifelse(df$Exclude != 1,
-                   # only look at participants not already excluded 
-                   ifelse(df$chosen_outcome == 'Blue',
+df$Exclude <- ifelse(df$chosen_outcome == 'Blue',
                           # test for internal consistency for those who said Blue
                           ifelse(df$outcome_confidence > 0, 1, 0),
                           # Blue should be negative or 0
@@ -198,9 +201,7 @@ df$Exclude <- ifelse(df$Exclude != 1,
                           ifelse(df$outcome_confidence < 0, 1, 0)
                           # Green should be positive or 0
                           # assign 1 if this is not true, else assign 0
-                   ),
-                   df$Exclude)
-# if participant already excluded, do not change the value
+                   )
 
 
 #### make_data_exclusions ####

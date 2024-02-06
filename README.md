@@ -31,7 +31,7 @@ Each study folder contains at least an analysis foler, a stimuli images folder, 
     - *[study 2 data.csv](study%202/analysis/study%202%20data.csv)*: survey output for Study 2 participants
     - *[study-2-response-visualizations.pdf](study%202/analysis/study-2-response-visualizations.pdf)*: streamlined file displaying visualizations of the  response count and spread
     - *[full study 2 analysis.Rmd](study%202/analysis/full%20study%202%20analysis.Rmd)*: analysis script for all of Study 2, including exploratory analysis
-    - *[full-study-2-analysis.pdf](study%202/analysis/full-study-2-analysis.pdf)*: knit Rmd file containing all of Study 1 analysis
+    - *[full-study-2-analysis.pdf](study%202/analysis/full-study-2-analysis.pdf)*: knit Rmd file containing all of Study 2 analysis
   - **[stimuli images/](study%202/stimuli%20images/)**: folder containing all stimuli images for Study 2. split into bar and line chart folders, each containing blue and green subfolders for high, low, and no-side bias
   - *[study 2 example.pdf](study%202/study%202%20example.pdf)*: example survey for Study 2, displaying a Green High Bias bar chart as the potential stimulus
   - **[annotation collection/](study%202/annotation%20collection/)**

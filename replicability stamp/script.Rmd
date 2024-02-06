@@ -7,7 +7,12 @@ output: html_document
 
 This file contains a script to process this data and replicate one of the figures/tables shown in the paper.
 
-```{r data cleaning, echo=FALSE}
+```{r data cleaning, include=FALSE}
+
+
+packages = c("tidyverse")
+
+install.packages(setdiff(packages, rownames(installed.packages())), dependencies = TRUE)
 
 library(tidyverse)
 
@@ -189,7 +194,9 @@ c = "#a3acb9"
 
 ```
 
-```{r judgments by bias condition and alignment}
+Specifically, this script recreates Figure 7.
+
+```{r figure recreation, echo = FALSE}
 
 condition_vis_author <- df %>% 
   group_by(ChartType, author_aligned, Strength) %>% 

@@ -1,10 +1,17 @@
 ---
 title: "study 2 analysis"
-output: pdf_document
+output:
+  pdf_document: default
+  html_document: default
 date: "2023-03-08"
 ---
 
 ```{r data cleaning, echo=FALSE}
+
+
+packages = c("reshape2", "FSA", "lme4", "tidyverse", "rstatix", "pwr", "ggpubr", "ggdist", "rmarkdown")
+
+install.packages(setdiff(packages, rownames(installed.packages())), dependencies = TRUE)
 
 library(reshape2)
 library(FSA)
@@ -12,6 +19,8 @@ library(lme4)
 library(tidyverse)
 library(rstatix)
 library(pwr)
+library(ggpubr)
+library(ggdist)
 
 theme_set(theme_minimal())
 set.seed(6062)
@@ -343,7 +352,7 @@ ggplot(df, aes(y = author_confidence_abs, x = Prime))+
 
 ```{r chi squared testing outcome}
 
-study2 <- ggplot(subset(df, treatment == "Treatment"), aes(x = outcome_aligned, y = after_stat(count), fill = outcome_aligned))+
+ggplot(subset(df, treatment == "Treatment"), aes(x = outcome_aligned, y = after_stat(count), fill = outcome_aligned))+
   geom_bar()+
   scale_fill_manual(values = c(a, u, c))+
   labs(
@@ -356,7 +365,6 @@ study2 <- ggplot(subset(df, treatment == "Treatment"), aes(x = outcome_aligned, 
   theme(legend.position = 'none',
   panel.grid.major = element_line(color = "grey85", size = 0.1),  # Lighten and thin major gridlines
   panel.grid.minor = element_line(color = "grey85", size = 0.05))  # Lighten and thin minor gridlines
-ggsave("study2.png", study2, height = 5, width = 7, dpi = 320)
 
 
 
@@ -379,7 +387,7 @@ p.outcome.line <- t.outcome.line / sum(t.outcome.line)
 dimnames(p.outcome.line) <- NULL
 ES.h(p.outcome.line[1], p.outcome.line[2])
 
-study2 <- ggplot(subset(df, treatment == "Treatment"), aes(x = author_aligned, y = after_stat(count), fill = author_aligned))+
+ggplot(subset(df, treatment == "Treatment"), aes(x = author_aligned, y = after_stat(count), fill = author_aligned))+
   geom_bar()+
   scale_fill_manual(values = c(a, u, c), labels= c("Matched", "Unmatched"))+
   labs(
@@ -391,7 +399,6 @@ study2 <- ggplot(subset(df, treatment == "Treatment"), aes(x = author_aligned, y
   theme(legend.position = 'none',
   panel.grid.major = element_line(color = "grey85", size = 0.1),  # Lighten and thin major gridlines
   panel.grid.minor = element_line(color = "grey85", size = 0.05))  # Lighten and thin minor gridlines
-ggsave("study2.png", study2, height = 5, width = 7, dpi = 320)
 
 
 t.author.bar <- table(subset(bar, treatment == "Treatment" & Strength == "High")$author_aligned)
@@ -673,7 +680,7 @@ condition_vis_outcome <- df %>%
     condition = paste(outcome_aligned, Strength)
   )
 
-study2 <- ggplot(condition_vis_outcome, aes(x = condition, y = mean_outcome, color = condition))+
+ggplot(condition_vis_outcome, aes(x = condition, y = mean_outcome, color = condition))+
   geom_point(size = 2)+
   geom_errorbar(aes(ymin = mean_outcome - se_outcome, ymax = mean_outcome + se_outcome), size = 1)+
   scale_x_discrete(limits = c("Aligned High", "Aligned Low", "No-Side No-Side", "Unaligned Low", "Unaligned High"), labels = c("Aligned\nHigh", "Aligned\nLow", "No-Side", "Unaligned\nLow", "Unaligned\nHigh"))+
@@ -685,7 +692,6 @@ study2 <- ggplot(condition_vis_outcome, aes(x = condition, y = mean_outcome, col
         panel.spacing = unit(2, "lines"),
   panel.grid.major = element_line(color = "grey85", size = 0.1),  # Lighten and thin major gridlines
   panel.grid.minor = element_line(color = "grey85", size = 0.05))  # Lighten and thin minor gridlines
-ggsave("study2.png", study2, height = 5, width = 7.5, dpi = 320)
 
 
 condition_vis_author <- df %>% 
@@ -699,7 +705,7 @@ condition_vis_author <- df %>%
   mutate(
     condition = paste(author_aligned, Strength)
   )
-study2 <- ggplot(condition_vis_author, aes(x = condition, y = mean_author, color = condition))+
+ggplot(condition_vis_author, aes(x = condition, y = mean_author, color = condition))+
   geom_point(size = 2)+
   geom_errorbar(aes(ymin = mean_author - se_author, ymax = mean_author + se_author), size =1)+
   scale_x_discrete(limits = c("Aligned High", "Aligned Low", "No-Side No-Side", "Unaligned Low", "Unaligned High"), labels = c("Matched\nHigh", "Matched\nLow", "No-Side", "Unmatched\nLow", "Unmatched\nHigh"))+
@@ -711,7 +717,6 @@ study2 <- ggplot(condition_vis_author, aes(x = condition, y = mean_author, color
         panel.spacing = unit(2, "lines"),
   panel.grid.major = element_line(color = "grey85", size = 0.1),  # Lighten and thin major gridlines
   panel.grid.minor = element_line(color = "grey85", size = 0.05))  # Lighten and thin minor gridlines
-ggsave("study2.png", study2, height = 5, width = 7.5, dpi = 320)
 
 ```
 
@@ -730,7 +735,7 @@ ggplot(subset(df, treatment == "Treatment"), aes(x = outcome_aligned, y = author
   )+
   facet_grid(ChartType ~ Strength)
 
-study2 <- ggplot(subset(df, treatment == "Treatment"), aes(x = outcome_aligned, y = author_confidence_abs, fill = outcome_aligned, color = outcome_aligned))+
+ggplot(subset(df, treatment == "Treatment"), aes(x = outcome_aligned, y = author_confidence_abs, fill = outcome_aligned, color = outcome_aligned))+
   stat_halfeye(size = 2)+
   scale_fill_manual(values = c(a1, u1))+
   scale_color_manual(values = c(a, u))+
@@ -744,7 +749,6 @@ study2 <- ggplot(subset(df, treatment == "Treatment"), aes(x = outcome_aligned, 
   theme(legend.position = 'none',
   panel.grid.major = element_line(color = "grey85", size = 0.1),  # Lighten and thin major gridlines
   panel.grid.minor = element_line(color = "grey85", size = 0.05))  # Lighten and thin minor gridlines
-ggsave("study2.png", study2, height = 5, width = 7, dpi = 320)
 
 
 kruskal.test(author_confidence_abs ~ outcome_aligned, data = subset(bar, Strength == "High"))
@@ -999,7 +1003,14 @@ condition_vis1 <- df1 %>%
     study
   )
 
-condition_vis2 <- condition_vis %>% 
+condition_vis2 <- df %>%
+  group_by(ChartType, outcome_aligned, Strength) %>%
+  summarize(
+    mean_outcome = mean(outcome_confidence_abs),
+    sd_outcome = sd(outcome_confidence_abs),
+    n_outcome = n(),
+    se_outcome = sd_outcome / sqrt(n_outcome)
+  ) %>%
   mutate(
     condition = Strength,
     study = 2

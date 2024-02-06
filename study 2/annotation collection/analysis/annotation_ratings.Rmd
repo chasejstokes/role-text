@@ -1,10 +1,15 @@
 ---
 title: "Pilot Ratings"
-output: pdf_document
+output: html_document
 date: "2023-03-08"
 ---
 
 ```{r load data, include=FALSE}
+
+
+packages = c("tidyverse", "FSA", "rmarkdown")
+
+install.packages(setdiff(packages, rownames(installed.packages())), dependencies = TRUE)
 
 library(tidyverse)
 library(FSA)
